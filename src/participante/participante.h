@@ -8,12 +8,18 @@
 #ifndef PARTICIPANTE_PARTICIPANTE_H_
 #define PARTICIPANTE_PARTICIPANTE_H_
 
-#include "usuario.h"
+#include "../usuario/usuario.h"
 
 class participante: public usuario {
 public:
-	participante();
+	participante(std::string nombre="empty",
+            std::string apellidos= "empty",
+            std::string dni="empty",
+            std::string correo= "empty",
+            std::string contraseña="empty",
+            std::string nom_usuario="empty"):usuario(nombre, apellidos, dni, correo, contraseña, nom_usuario){}
 	virtual ~participante();
+
 };
 
 #endif /* PARTICIPANTE_PARTICIPANTE_H_ */

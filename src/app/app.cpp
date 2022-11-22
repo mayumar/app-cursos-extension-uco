@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 int main(){
 
 	int opt;
@@ -7,7 +8,7 @@ int main(){
 	do{
 		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion"<<std::endl;
-		std::cout<<"1. Opcion 1"<<std::endl;
+		std::cout<<"1. Opcion 1: Ver lista de los cursos actuales"<<std::endl;
 		std::cout<<"2. Opcion 2"<<std::endl;
 		std::cout<<"3. Opcion 3"<<std::endl;
 		std::cout<<"4. Opcion 4"<<std::endl;
@@ -22,7 +23,8 @@ int main(){
 
 		switch(opt){
 			case 1:
-				std::cout<<"Opcion 1"<<std::endl;
+				std::cout<<"Lista de los cursos:"<<std::endl;
+
 			break;
 
 			case 2:

@@ -30,8 +30,8 @@ public:
 	             std::string apellidos= "empty",
 	             std::string dni="empty",
 	             std::string correo= "empty",
-	             std::string cntraseña="empty",
-	             std::string usuario="empty");
+	             std::string contraseña="empty",
+	             std::string nom_usuario="empty");
 
 	    inline std::string get_nombre(){return nombre_;}
 	    inline std::string get_apellidos(){return apellidos_;}
@@ -47,6 +47,7 @@ public:
 	    inline void set_town (std::string contraseña) {contraseña_=contraseña;}
 	    inline void set_province (std::string usuario) {usuario_=usuario;}
 
+	    void ver_lista_de_cursos();
 
 };
 
