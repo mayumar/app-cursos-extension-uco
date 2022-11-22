@@ -7,7 +7,5 @@
 
 #include "adminrecursos.h"
 
-admin_recursos::~admin_recursos() {
-	// TODO Auto-generated destructor stub
-}
+
 

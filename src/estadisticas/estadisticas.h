@@ -3,6 +3,7 @@
  *
  *  Created on: 21 nov. 2022
  *      Author: noeliacc
+ *      Modified by: mayumar
  */
 
 #ifndef ESTADISTICAS_ESTADISTICAS_H_
@@ -10,34 +11,32 @@
 
 #include <string>
 
-class estadisticas {
+class Estadisticas {
 
-private:
+	private:
 
-    std::string id_;
-    std::string curso_;
-    float valoracion_;
-    std::string comentario_;
+		std::string id_;
+		std::string curso_;
+		float valoracion_;
+		std::string comentario_;
 
-public:
+	public:
 
-	estadisticas();
-	virtual ~estadisticas();
+		inline Estadisticas (std::string id="empty",
+							 std::string curso= "empty",
+							 float valoracion=0 ,
+							 std::string comentario="empty"):id_(id), curso_(curso),
+															 valoracion_(valoracion),
+															 comentario_(comentario){}
+		inline ~Estadisticas(){}
 
-	estadisticas (std::string id="empty",
-	              	  std::string curso= "empty",
-					  float valoracion=0 ,
-					  std::string comentario="empty");
-
-	    inline std::string get_id(){return id_;}
-	    inline std::string get_curso(){return curso_;}
-	    inline float valoracion(){return valoracion_;}
-	    inline std::string get_cometario(){return comentario_;}
+	    inline std::string get_id() const {return id_;}
+	    inline std::string get_curso() const {return curso_;}
+	    inline float get_valoracion() const {return valoracion_;}
+	    inline std::string get_cometario() const {return comentario_;}
 
 	    inline void set_id (std::string id) {id_=id;}
 	    inline void set_curso (std::string curso) {curso_=curso;}
-	    float valoracion (float valoracion);
-	    inline void set_comentario (std::string comentario) {comentario_=comentario;}
 
 };
 

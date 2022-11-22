@@ -7,12 +7,3 @@
 
 #include "estadisticas.h"
 
-estadisticas::estadisticas() {
-	// TODO Auto-generated constructor stub
-
-}
-
-estadisticas::~estadisticas() {
-	// TODO Auto-generated destructor stub
-}
-

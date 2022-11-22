@@ -8,7 +8,5 @@
 #include "admincursos.h"
 
 
-admin_cursos::~admin_cursos() {
-	// TODO Auto-generated destructor stub
-}
+
 

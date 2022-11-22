@@ -10,20 +10,11 @@
 #include <iostream>
 #include <string>
 
-usuario::usuario() {
-	// TODO Auto-generated constructor stub
-
-}
-
-usuario::~usuario() {
-	// TODO Auto-generated destructor stub
-}
-
 /* Funcion que muestra una lista de cursos
  * created on: 22 nov.2022
  * 	Author: Fatiicn
  */
-void usuario:: ver_lista_de_cursos(){
+void Usuario:: ver_lista_de_cursos(){
 	std::ifstream fichero;
 	std::string texto;
 	fichero.open("cursos.txt", std::fstream::in); //abre el fichero en modo lectura

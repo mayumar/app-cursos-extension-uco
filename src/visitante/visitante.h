@@ -10,22 +10,21 @@
 
 #include <string>
 
-class visitante {
+class Visitante {
 
-private:
+	private:
 
-    std::string ip_;
+		std::string ip_;
 
-public:
+	public:
 
-	visitante();
-	virtual ~visitante();
+		Visitante (std::string ip="empty"): ip_(ip){}
 
-	visitante (std::string ip="empty");
+		inline ~Visitante(){}
 
-	    inline std::string get_ip(){return ip_;}
+		inline std::string get_ip() const {return ip_;}
 
-	    inline void set_ip (std::string ip) {ip_=ip;}
+		inline void set_ip (std::string ip) {ip_=ip;}
 };
 
 #endif /* VISITANTE_VISITANTE_H_ */

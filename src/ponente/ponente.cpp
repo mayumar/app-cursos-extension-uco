@@ -7,12 +7,4 @@
 
 #include "ponente.h"
 
-ponente::ponente() {
-	// TODO Auto-generated constructor stub
-
-}
-
-ponente::~ponente() {
-	// TODO Auto-generated destructor stub
-}
 

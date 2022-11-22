@@ -7,7 +7,4 @@
 
 #include "participante.h"
 
-participante::~participante() {
-	// TODO Auto-generated destructor stub
-}
 

@@ -7,12 +7,3 @@
 
 #include "visitante.h"
 
-visitante::visitante() {
-	// TODO Auto-generated constructor stub
-
-}
-
-visitante::~visitante() {
-	// TODO Auto-generated destructor stub
-}
-

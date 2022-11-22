@@ -7,12 +7,4 @@
 
 #include "recursos.h"
 
-recursos::recursos() {
-	// TODO Auto-generated constructor stub
-
-}
-
-recursos::~recursos() {
-	// TODO Auto-generated destructor stub
-}
 

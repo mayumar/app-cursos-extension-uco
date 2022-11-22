@@ -7,12 +7,3 @@
 
 #include "curso.h"
 
-curso::curso() {
-	// TODO Auto-generated constructor stub
-
-}
-
-curso::~curso() {
-	// TODO Auto-generated destructor stub
-}
-
