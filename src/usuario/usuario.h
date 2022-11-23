@@ -11,6 +11,8 @@
 
 #include <string>
 
+enum class Rol {Participante, Admin_Cursos, Admin_Recursos, Ponente};
+
 class Usuario {
 
 	private:
@@ -21,17 +23,20 @@ class Usuario {
 		std::string correo_;
 		std::string contraseña_;
 		std::string usuario_;
+		Rol rol_;
 
 	public:
 
 		inline Usuario (std::string nombre="empty",
-					 std::string apellidos= "empty",
-					 std::string dni="empty",
-					 std::string correo= "empty",
-					 std::string contraseña="empty",
-					 std::string usuario="empty"): nombre_(nombre), apellidos_(apellidos),
-												   dni_(dni), correo_(correo),
-												   contraseña_(contraseña), usuario_(usuario){}
+					 	std::string apellidos= "empty",
+						std::string dni="empty",
+						std::string correo= "empty",
+						std::string contraseña="empty",
+						std::string usuario="empty",
+						Rol rol=Rol::Participante): nombre_(nombre), apellidos_(apellidos),
+												 dni_(dni), correo_(correo),
+												 contraseña_(contraseña), usuario_(usuario),
+												 rol_(rol){}
 		inline ~Usuario(){}
 
 		inline std::string get_nombre() const {return nombre_;}
