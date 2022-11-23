@@ -10,7 +10,7 @@ int main(){
 		std::cout<<"Introduzca una opcion"<<std::endl;
 		std::cout<<"1. Opcion 1: Ver lista de los cursos actuales"<<std::endl;
 		std::cout<<"2. Opcion 2"<<std::endl;
-		std::cout<<"3. Opcion 3"<<std::endl;
+		std::cout<<"3. Opcion 3: Inscribirse a un curso"<<std::endl;
 		std::cout<<"4. Opcion 4"<<std::endl;
 		std::cout<<"5. Opcion 5"<<std::endl;
 		std::cout<<"6. Salir"<<std::endl;
