@@ -1,16 +1,19 @@
 #include <iostream>
+#include "../participante/participante.h"
 
 
 int main(){
 
 	int opt;
+	std::string id_curso;
+	Participante participante("Juanito", "Perez Perez", "DNI1");
 
 	do{
 		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion"<<std::endl;
 		std::cout<<"1. Opcion 1: Ver lista de los cursos actuales"<<std::endl;
-		std::cout<<"2. Opcion 2"<<std::endl;
-		std::cout<<"3. Opcion 3: Inscribirse a un curso"<<std::endl;
+		std::cout<<"2. Opcion 2: Inscribirsse en un curso"<<std::endl;
+		std::cout<<"3. Opcion 3"<<std::endl;
 		std::cout<<"4. Opcion 4"<<std::endl;
 		std::cout<<"5. Opcion 5"<<std::endl;
 		std::cout<<"6. Salir"<<std::endl;
@@ -28,7 +31,12 @@ int main(){
 			break;
 
 			case 2:
-				std::cout<<"Opcion 2"<<std::endl;
+				std::cout<<"Introduzca el id del curso al que desea inscribirse:"<<std::endl;
+				std::cin>>id_curso;
+
+				participante.inscribirse(id_curso);
+
+
 			break;
 
 			case 3:
