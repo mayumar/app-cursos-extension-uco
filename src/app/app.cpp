@@ -12,7 +12,7 @@ int main(){
 		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion"<<std::endl;
 		std::cout<<"1. Opcion 1: Ver lista de los cursos actuales"<<std::endl;
-		std::cout<<"2. Opcion 2: Inscribirsse en un curso"<<std::endl;
+		std::cout<<"2. Opcion 2: Inscribirse en un curso"<<std::endl;
 		std::cout<<"3. Opcion 3"<<std::endl;
 		std::cout<<"4. Opcion 4"<<std::endl;
 		std::cout<<"5. Opcion 5"<<std::endl;
@@ -34,7 +34,11 @@ int main(){
 				std::cout<<"Introduzca el id del curso al que desea inscribirse:"<<std::endl;
 				std::cin>>id_curso;
 
-				participante.inscribirse(id_curso);
+				if(!participante.inscribirse(id_curso)){
+					std::cout<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
+				}else{
+					std::cout<<"La inscripcion se ha realizado con éxito"<<std::endl;
+				}
 
 
 			break;

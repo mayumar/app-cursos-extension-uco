@@ -41,6 +41,7 @@ bool Participante::inscribirse(std::string id_curso){
 
 	if(!encontrado){
 		std::cout<<"Error, no se ha encontrado el curso"<<std::endl;
+		return false;
 	}
 
 	file_i.open("src/bd/inscripciones.txt", std::fstream::app);
@@ -49,7 +50,8 @@ bool Participante::inscribirse(std::string id_curso){
 		return false;
 	}
 
-	file_i<<id_curso<<", "<<get_dni()<<std::endl;
+	file_i<<id_curso<<std::endl;
+	file_i<<get_dni()<<std::endl;
 	file_i.close();
 	file_c.close();
 	return true;

@@ -6,7 +6,6 @@
  */
 
 #include "curso.h"
-#include <iostream>
 
 std::istream &operator>>(std::istream &stream, Curso &c){
 	stream>>c.id_;
