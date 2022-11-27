@@ -56,7 +56,10 @@ class Curso {
 		inline void set_plazasCubiertas (int plazasCubiertas) {plazasCubiertas_=plazasCubiertas;}
 		inline void set_plazasMax (int plazasMax) {plazasMax_=plazasMax;}
 
+		Curso operator=(Curso &c);
+
 		friend std::istream &operator>>(std::istream &stream, Curso &c);
+		friend std::ostream &operator<<(std::ostream &stream, Curso &c);
 
 };
 
