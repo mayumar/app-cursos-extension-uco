@@ -1,7 +1,10 @@
 #include <iostream>
+#include "../admin_cursos/admincursos.h"
 
 
 int main(){
+
+	Admin_Cursos admin_c("nombre", "apellidos", "dni", "correo", "contraseña", "usuario");
 
 	int opt;
 
@@ -9,7 +12,7 @@ int main(){
 		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion"<<std::endl;
 		std::cout<<"1. Opcion 1: Ver lista de los cursos actuales"<<std::endl;
-		std::cout<<"2. Opcion 2"<<std::endl;
+		std::cout<<"2. Opcion 2: Añadir un curso nuevo a la lista de los cursos actuales"<<std::endl;
 		std::cout<<"3. Opcion 3"<<std::endl;
 		std::cout<<"4. Opcion 4"<<std::endl;
 		std::cout<<"5. Opcion 5"<<std::endl;
@@ -21,6 +24,15 @@ int main(){
 			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
 		}
 
+		std::string curso_id;
+		std::string curso_descripcion;
+		std::string curso_nombre;
+		std::string curso_fechaInicio;
+		std::string curso_fechaFinal;
+		std::string curso_alcance;
+		std::string curso_plazasCubiertas;
+		std::string curso_plazasMax;
+
 		switch(opt){
 			case 1:
 				std::cout<<"Lista de los cursos:"<<std::endl;
@@ -28,19 +40,74 @@ int main(){
 			break;
 
 			case 2:
-				std::cout<<"Opcion 2"<<std::endl;
-			break;
-
-			case 3:
 				std::cout<<"Opcion 3"<<std::endl;
 			break;
 
+			case 3:
+				std::cout<<"Introduzca el id del del curso a añadir"<<std::endl;
+				std::cin>>curso_id;
+				std::cout<<"Introduzca la descripción del curso a añadir "<<std::endl;
+				std::cin>>curso_descripcion;
+				std::cout<<"Introduzca el nombre del curso a añadir"<<std::endl;
+				std::cin>>curso_nombre;
+				std::cout<<"Introduzca la fecha de inicio del curso a añadir"<<std::endl;
+				std::cin>>curso_fechaInicio;
+				std::cout<<"Introduzca la fecha de finalización del curso a añadir"<<std::endl;
+				std::cin>>curso_fechaFinal;
+				std::cout<<"Introduzca el alcance del curso a añadir"<<std::endl;
+				std::cin>>curso_alcance;
+				std::cout<<"Introduzca el número de plazas cubiertas del curso a añadir"<<std::endl;
+				std::cin>>curso_plazasCubiertas;
+				std::cout<<"Introduzca el número máximo de plazas del curso a añadir"<<std::endl;
+				std::cin>>curso_plazasMax;
+			break;
+
 			case 4:
-				std::cout<<"Opcion 4"<<std::endl;
+
+				Curso curso_modif;
+				std::string id_curso;
+				std::cout<<"Introduzca el id del curso que quiere modificar"<<std::endl;
+				curso_modif.set_id(id_curso);
+				std::cout<<"Introduzca el id del del curso a modificar"<<std::endl;
+				std::cin>>curso_id;
+				std::cout<<"Introduzca la descripción del curso a modificar"<<std::endl;
+				std::cin>>curso_descripcion;
+				std::cout<<"Introduzca el nombre del curso a modificar"<<std::endl;
+				std::cin>>curso_nombre;
+				std::cout<<"Introduzca la fecha de inicio del curso a amodificar"<<std::endl;
+				std::cin>>curso_fechaInicio;
+				std::cout<<"Introduzca la fecha de finalización del curso a modificar"<<std::endl;
+				std::cin>>curso_fechaFinal;
+				std::cout<<"Introduzca el alcance del curso a modificar"<<std::endl;
+				std::cin>>curso_alcance;
+				std::cout<<"Introduzca el número de plazas cubiertas del curso a modificar"<<std::endl;
+				std::cin>>curso_plazasCubiertas;
+				std::cout<<"Introduzca el número máximo de plazas del curso a modificar"<<std::endl;
+				std::cin>>curso_plazasMax;
+
 			break;
 
 			case 5:
-				std::cout<<"Opcion 5"<<std::endl;
+				Curso curso_modif;
+				std::string id_curso;
+				std::cout<<"Introduzca el id del curso que quiere eliminar"<<std::endl;
+				curso_modif.set_id(id_curso);
+				std::cout<<"Introduzca el id del del curso a eliminar"<<std::endl;
+				std::cin>>curso_id;
+				std::cout<<"Introduzca la descripción del curso a eliminar"<<std::endl;
+				std::cin>>curso_descripcion;
+				std::cout<<"Introduzca el nombre del curso a eliminar"<<std::endl;
+				std::cin>>curso_nombre;
+				std::cout<<"Introduzca la fecha de inicio del curso a eliminar"<<std::endl;
+				std::cin>>curso_fechaInicio;
+				std::cout<<"Introduzca la fecha de finalización del curso a eliminar"<<std::endl;
+				std::cin>>curso_fechaFinal;
+				std::cout<<"Introduzca el alcance del curso a eliminar"<<std::endl;
+				std::cin>>curso_alcance
+				std::cout<<"Introduzca el número de plazas cubiertas del curso a eliminar"<<std::endl;
+				std::cin>>curso_plazasCubiertas;
+				std::cout<<"Introduzca el número máximo de plazas del curso a eliminar"<<std::endl;
+				std::cin>>curso_plazasMax;
 			break;
 		}
 
