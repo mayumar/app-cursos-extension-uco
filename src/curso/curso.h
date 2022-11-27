@@ -10,6 +10,7 @@
 #define CURSO_CURSO_H_
 
 #include <string>
+#include <fstream>
 
 class Curso {
 
@@ -31,11 +32,10 @@ class Curso {
 					 std::string nombre="empty",
 					 std::string fechaInicio= "empty",
 					 std::string fechaFinal="empty",
-					 float alcance=0.0,
 					 int plazasCubiertas=0,
 					 int plazasMax=0):id_(id), descripcion_(descripcion), nombre_(nombre),
 									  fechaInicio_(fechaInicio), fechaFinal_(fechaFinal),
-									  alcance_(alcance), plazasCubiertas_(plazasCubiertas),
+									  alcance_(0.0), plazasCubiertas_(plazasCubiertas),
 									  plazasMax_(plazasMax){}
 		inline ~Curso(){}
 
@@ -55,6 +55,11 @@ class Curso {
 		inline void set_province (std::string fechaFinal) {fechaFinal_=fechaFinal;}
 		inline void set_plazasCubiertas (int plazasCubiertas) {plazasCubiertas_=plazasCubiertas;}
 		inline void set_plazasMax (int plazasMax) {plazasMax_=plazasMax;}
+
+		Curso operator=(Curso &c);
+
+		friend std::istream &operator>>(std::istream &stream, Curso &c);
+		friend std::ostream &operator<<(std::ostream &stream, Curso &c);
 
 };
 

@@ -24,6 +24,8 @@ class Participante: public Usuario {
 														  correo, contraseña, usuario){}
 		virtual ~Participante(){}
 
+		bool inscribirse(std::string id_curso);
+
 };
 
 #endif /* PARTICIPANTE_PARTICIPANTE_H_ */
