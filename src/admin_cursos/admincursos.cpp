@@ -43,7 +43,7 @@ bool Admin_Cursos::mod_curso(Curso curso_modif){
 	  if(!fs || !fstemp){
 
 	    std::cout << "Error al abrir el archivo" << std::endl;
-	    false;
+	    return false;
 	  }
 
 	  while(fs>> curso){
@@ -71,7 +71,7 @@ bool Admin_Cursos::del_curso(Curso curso_modif){
 	  if(!fs || !fstemp){
 
 	    std::cout << "Error al abrir el archivo" << std::endl;
-	    false;
+	    return false;
 	  }
 
 	  while(fs>> curso){
