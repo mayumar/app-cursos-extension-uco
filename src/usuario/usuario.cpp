@@ -8,7 +8,6 @@
 #include "usuario.h"
 #include <fstream>
 #include <iostream>
-#include <string>
 #include "../curso/curso.h"
 
 /* Funcion que muestra una lista de cursos

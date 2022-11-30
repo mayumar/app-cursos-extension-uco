@@ -25,6 +25,8 @@ class Visitante {
 		inline std::string get_ip() const {return ip_;}
 
 		inline void set_ip (std::string ip) {ip_=ip;}
+
+		void ver_lista_de_cursos();
 };
 
 #endif /* VISITANTE_VISITANTE_H_ */

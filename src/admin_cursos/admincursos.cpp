@@ -21,14 +21,7 @@ bool Admin_Cursos::add_curso(Curso curso){
 			return false;
 		}
 
-		file_c<<curso.get_id()<<std::endl;
-		file_c<<curso.get_descripcion()<<std::endl;
-		file_c<<curso.get_nombre()<<std::endl;
-		file_c<<curso.get_fechaInicio()<<std::endl;
-		file_c<<curso.get_fechaFinal()<<std::endl;
-		file_c<<curso.get_alcance()<<std::endl;
-		file_c<<curso.get_plazasCubiertas()<<std::endl;
-		file_c<<curso.get_plazasMax()<<std::endl;
+		file_c<<curso;
 
 		file_c.close();
 		return true;
@@ -38,8 +31,8 @@ bool Admin_Cursos::add_curso(Curso curso){
 bool Admin_Cursos::mod_curso(Curso curso_modif){
 
 	  Curso curso;
-	  std::ifstream fs("cursos.txt");
-	  std::ofstream fstemp("cursostemp.txt");
+	  std::ifstream fs("src/bd/cursos.txt");
+	  std::ofstream fstemp("src/bd/cursostemp.txt");
 	  if(!fs || !fstemp){
 
 	    std::cout << "Error al abrir el archivo" << std::endl;
@@ -55,19 +48,19 @@ bool Admin_Cursos::mod_curso(Curso curso_modif){
 
 	  fs.close();
 	  fstemp.close();
-	  remove("cursos.txt");
-	  rename("cursostemp.txt", "cursos.txt");
+	  remove("src/bd/cursos.txt");
+	  rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
 	  return true;
 	}
 
 
 
-bool Admin_Cursos::del_curso(Curso curso_modif){
+bool Admin_Cursos::del_curso(std::string id){
 
 
 	  Curso curso;
-	  std::ifstream fs("cursos.txt");
-	  std::ofstream fstemp("cursostemp.txt");
+	  std::ifstream fs("src/bd/cursos.txt");
+	  std::ofstream fstemp("src/bd/cursostemp.txt");
 	  if(!fs || !fstemp){
 
 	    std::cout << "Error al abrir el archivo" << std::endl;
@@ -75,14 +68,14 @@ bool Admin_Cursos::del_curso(Curso curso_modif){
 	  }
 
 	  while(fs>> curso){
-		  if(curso.get_id()!=curso_modif.get_id()){
-			  fstemp<<curso;;
+		  if(curso.get_id()!=id){
+			  fstemp<<curso;
 		  }
 	  }
 
 	  fs.close();
 	  fstemp.close();
-	  remove("cursos.txt");
-	  rename("cursostemp.txt", "cursos.txt");
+	  remove("src/bd/cursos.txt");
+	  rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
 	  return true;
 	}
