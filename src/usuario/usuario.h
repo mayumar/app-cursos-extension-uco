@@ -55,6 +55,12 @@ class Usuario {
 
 		void ver_lista_de_cursos();
 
+		friend std::istream &operator>>(std::istream &stream, Usuario &u);
+		friend std::istream &operator-(std::istream &stream, Usuario &u);
+		friend std::ostream &operator<<(std::ostream &stream, Usuario &u);
+
+		Usuario operator=(Usuario &u);
+
 };
 
 #endif /* USUARIO_USUARIO_H_ */

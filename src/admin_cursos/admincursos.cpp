@@ -39,7 +39,7 @@ bool Admin_Cursos::mod_curso(Curso curso_modif){
 	    return false;
 	  }
 
-	  while(fs>> curso){
+	  while(fs-curso){
 		  if(curso.get_id()==curso_modif.get_id()){
 			  curso= curso_modif;
 		  }
@@ -67,7 +67,7 @@ bool Admin_Cursos::del_curso(std::string id){
 	    return false;
 	  }
 
-	  while(fs>> curso){
+	  while(fs-curso){
 		  if(curso.get_id()!=id){
 			  fstemp<<curso;
 		  }

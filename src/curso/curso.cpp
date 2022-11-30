@@ -22,6 +22,29 @@ Curso Curso::operator=(Curso &c){
 }
 
 std::istream &operator>>(std::istream &stream, Curso &c){
+
+	std::cout<<"Id: ";
+	stream>>c.id_;
+	stream.get();
+	std::cout<<"Nombre: ";
+	getline(stream, c.nombre_);
+	std::cout<<"Descripcion: ";
+	getline(stream, c.descripcion_);
+	std::cout<<"Fecha de Inicio: ";
+	stream>>c.fechaInicio_;
+	std::cout<<"Fecha de Finalización: ";
+	stream>>c.fechaFinal_;
+	std::cout<<"Plazas cubiertas: ";
+	stream>>c.plazasCubiertas_;
+	std::cout<<"Plazas máximas: ";
+	stream>>c.plazasMax_;
+	stream.get();
+	c.get_alcance();
+
+	return stream;
+}
+
+std::istream &operator-(std::istream &stream, Curso &c){
 	stream>>c.id_;
 	stream.get();
 	getline(stream, c.nombre_);
