@@ -1,6 +1,6 @@
 C1
-nombre1_con_muchos_espacios
-descripcion1_muy_larga
+nombre1 con muchos espacios
+descripcion1 muy larga
 fechaInicio1
 fechaFinal1
 1

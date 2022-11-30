@@ -6,6 +6,7 @@
  */
 
 #include "curso.h"
+#include <iostream>
 
 Curso Curso::operator=(Curso &c){
 	id_=c.id_;
@@ -22,13 +23,15 @@ Curso Curso::operator=(Curso &c){
 
 std::istream &operator>>(std::istream &stream, Curso &c){
 	stream>>c.id_;
-	stream>>c.nombre_;
-	stream>>c.descripcion_;
+	stream.get();
+	getline(stream, c.nombre_);
+	getline(stream, c.descripcion_);
 	stream>>c.fechaInicio_;
 	stream>>c.fechaFinal_;
 	stream>>c.plazasCubiertas_;
 	stream>>c.plazasMax_;
 	stream>>c.alcance_;
+	stream.get();
 
 	return stream;
 }
