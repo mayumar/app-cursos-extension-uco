@@ -30,3 +30,11 @@ ds
 6
 7
 0.857143
+C6
+nombre6
+descripcion larga
+lsdgjkd
+fdgd
+3
+88
+0.0340909

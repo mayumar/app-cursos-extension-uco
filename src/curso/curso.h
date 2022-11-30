@@ -59,6 +59,7 @@ class Curso {
 		Curso operator=(Curso &c);
 
 		friend std::istream &operator>>(std::istream &stream, Curso &c);
+		friend std::istream &operator-(std::istream &stream, Curso &c);
 		friend std::ostream &operator<<(std::ostream &stream, Curso &c);
 
 };

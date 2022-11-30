@@ -33,7 +33,7 @@ bool Participante::inscribirse(std::string id_curso){
 
 
 	while(!file_c.eof() && !encontrado){
-		file_c>>curso;
+		file_c-curso;
 		if(curso.get_id()==id_curso){
 			encontrado=true;
 		}

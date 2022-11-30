@@ -23,7 +23,7 @@ void Usuario:: ver_lista_de_cursos(){
 		exit(-1);
 	}
 
-	while(fichero>>curso){ //lee cada uno de los registros
+	while(fichero-curso){ //lee cada uno de los registros
 
 		std::cout<<curso.get_nombre()<<" ("<<curso.get_id()<<")"<<std::endl;
 		std::cout<<curso.get_descripcion()<<std::endl;
@@ -35,3 +35,47 @@ void Usuario:: ver_lista_de_cursos(){
 	fichero.close(); //Cerramos el fichero
 
 }
+
+Usuario Usuario::operator=(Usuario &u){
+	nombre_=u.nombre_;
+	apellidos_=u.apellidos_;
+	dni_=u.dni_;
+	correo_=u.correo_;
+	contraseña_=u.contraseña_;
+	usuario_=u.usuario_;
+	rol_=u.rol_;
+
+	return *this;
+}
+
+std::istream &operator-(std::istream &stream, Usuario &u){
+
+	stream>>u.dni_;
+	stream>>u.correo_;
+	stream.get();
+	getline(stream, u.nombre_);
+	getline(stream, u.apellidos_);
+	stream>>u.usuario_;
+	stream>>u.rol_;
+
+	return stream;
+}
+
+std::ostream &operator<<(std::ostream &stream, Usuario &u){
+	stream<<u.dni_<<std::endl;
+	stream<<u.correo_<<std::endl;
+	stream<<u.nombre_<<std::endl;
+	stream<<u.apellidos_<<std::endl;
+	stream<<u.usuario_<<std::endl;
+	stream<<u.rol_<<std::endl;
+
+	return stream;
+}
+
+
+
+
+
+
+
+

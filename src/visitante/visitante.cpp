@@ -19,7 +19,7 @@ void Visitante:: ver_lista_de_cursos(){
 		exit(-1);
 	}
 
-	while(fichero>>curso){ //lee cada uno de los registros
+	while(fichero-curso){ //lee cada uno de los registros
 
 		std::cout<<curso.get_nombre()<<" ("<<curso.get_id()<<")"<<std::endl;
 		std::cout<<curso.get_descripcion()<<std::endl;

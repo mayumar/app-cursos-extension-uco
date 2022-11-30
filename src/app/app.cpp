@@ -36,6 +36,7 @@ int main(){
 			break;
 
 			case 3:
+				//std::cout<<"Registrarse"<<std::endl;
 				adminCursosMenu(admin_c);
 			break;
 		}
@@ -95,15 +96,7 @@ void participanteMenu(Participante participante){
 void adminCursosMenu(Admin_Cursos admin){
 	int opt;
 	Curso curso;
-
 	std::string curso_id;
-	std::string curso_descripcion;
-	std::string curso_nombre;
-	std::string curso_fechaInicio;
-	std::string curso_fechaFinal;
-	std::string curso_alcance;
-	int curso_plazasCubiertas;
-	int curso_plazasMax;
 
 	do{
 		std::cout<<std::endl;
@@ -136,58 +129,14 @@ void adminCursosMenu(Admin_Cursos admin){
 			break;
 
 			case 4:
-				std::cout<<"Introduzca el id del curso a añadir"<<std::endl;
-				std::cin>>curso_id;
-				std::cin.get();
-				curso.set_id(curso_id);
-				std::cout<<"Introduzca la descripción del curso a añadir "<<std::endl;
-				getline(std::cin, curso_descripcion);
-				curso.set_descripcion(curso_descripcion);
-				std::cout<<"Introduzca el nombre del curso a añadir"<<std::endl;
-				getline(std::cin, curso_nombre);
-				curso.set_nombre(curso_nombre);
-				std::cout<<"Introduzca la fecha de inicio del curso a añadir"<<std::endl;
-				std::cin>>curso_fechaInicio;
-				curso.set_fechaInicio(curso_fechaInicio);
-				std::cout<<"Introduzca la fecha de finalización del curso a añadir"<<std::endl;
-				std::cin>>curso_fechaFinal;
-				curso.set_fechaFinal(curso_fechaFinal);
-				std::cout<<"Introduzca el número de plazas cubiertas del curso a añadir"<<std::endl;
-				std::cin>>curso_plazasCubiertas;
-				curso.set_plazasCubiertas(curso_plazasCubiertas);
-				std::cout<<"Introduzca el número máximo de plazas del curso a añadir"<<std::endl;
-				std::cin>>curso_plazasMax;
-				std::cin.get();
-				curso.set_plazasMax(curso_plazasMax);
-				curso.get_alcance();
+				std::cout<<"Introduzca los datos del curso a añadir: "<<std::endl;
+				std::cin>>curso;
 				admin.add_curso(curso);
 			break;
 
 			case 5:
-				std::cout<<"Introduzca el id del curso a modificar"<<std::endl;
-				std::cin>>curso_id;
-				std::cin.get();
-				curso.set_id(curso_id);
-				std::cout<<"Introduzca la descripción del curso a modificar "<<std::endl;
-				getline(std::cin, curso_descripcion);
-				curso.set_descripcion(curso_descripcion);
-				std::cout<<"Introduzca el nombre del curso a modificar"<<std::endl;
-				getline(std::cin, curso_nombre);
-				curso.set_nombre(curso_nombre);
-				std::cout<<"Introduzca la fecha de inicio del curso a modificar"<<std::endl;
-				std::cin>>curso_fechaInicio;
-				curso.set_fechaInicio(curso_fechaInicio);
-				std::cout<<"Introduzca la fecha de finalización del curso a modificar"<<std::endl;
-				std::cin>>curso_fechaFinal;
-				curso.set_fechaFinal(curso_fechaFinal);
-				std::cout<<"Introduzca el número de plazas cubiertas del curso a modificar"<<std::endl;
-				std::cin>>curso_plazasCubiertas;
-				curso.set_plazasCubiertas(curso_plazasCubiertas);
-				std::cout<<"Introduzca el número máximo de plazas del curso a modificar"<<std::endl;
-				std::cin>>curso_plazasMax;
-				std::cin.get();
-				curso.set_plazasMax(curso_plazasMax);
-				curso.get_alcance();
+				std::cout<<"Introduzca el id del curso a modificar y los datos modificados"<<std::endl;
+				std::cin>>curso;
 				admin.mod_curso(curso);
 			break;
 
