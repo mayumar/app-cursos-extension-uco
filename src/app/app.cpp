@@ -1,9 +1,10 @@
 #include <iostream>
 #include "app.h"
+#include "../usuario/usuario.h"
 
 int main(){
 	int opt;
-
+	Usuario usuario;
 
 	do{
 		std::cout<<std::endl;
@@ -23,6 +24,7 @@ int main(){
 		switch(opt){
 			case 1:
 				std::cout<<"Cursos activos"<<std::endl;
+				usuario.ver_lista_de_cursos();
 			break;
 
 			case 2:

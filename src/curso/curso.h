@@ -19,8 +19,8 @@ class Curso {
 		std::string id_;
 		std::string descripcion_;
 		std::string nombre_;
-		std::string fechaInicio_;
-		std::string fechaFinal_;
+		std::string fechaInicio_; //DD/MM/YY
+		std::string fechaFinal_; //DD/MM/YY
 		float alcance_;
 		int plazasCubiertas_;
 		int plazasMax_;
