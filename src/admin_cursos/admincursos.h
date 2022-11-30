@@ -27,7 +27,7 @@ class Admin_Cursos: public Usuario {
 
 		bool add_curso(Curso curso);
 		bool mod_curso(Curso curso_modif);
-		bool del_curso(Curso curso_modif);
+		bool del_curso(std::string id);
 };
 
 #endif /* ADMIN_CURSOS_ADMINCURSOS_H_ */
