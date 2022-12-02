@@ -9,12 +9,15 @@
 #define VISITANTE_VISITANTE_H_
 
 #include <string>
+#include "../usuario/usuario.h"
+
 
 class Visitante {
 
 	private:
 
 		std::string ip_;
+
 
 	public:
 
@@ -27,6 +30,8 @@ class Visitante {
 		inline void set_ip (std::string ip) {ip_=ip;}
 
 		void ver_lista_de_cursos();
+
+		bool registrarse(Usuario usuario);
 };
 
-#endif /* VISITANTE_VISITANTE_H_ */
+#endif

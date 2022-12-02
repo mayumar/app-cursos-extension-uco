@@ -10,6 +10,9 @@
 #include <iostream>
 #include "../curso/curso.h"
 
+
+
+
 void Visitante:: ver_lista_de_cursos(){
 	std::ifstream fichero;
 	Curso curso;
@@ -28,4 +31,20 @@ void Visitante:: ver_lista_de_cursos(){
 		std::cout<<std::endl;
 	}
 	fichero.close();
+}
+
+bool Visitante:: registrarse(Usuario usuario ){
+	std::fstream file_v;
+
+	file_v.open("src/bd/usuarios.txt", std::fstream::app);
+	if(!file_v.is_open()){
+		std::cout<<"Error, no se ha podido acceder para su registro"<<std::endl;
+		return false;
+	}
+
+
+	file_v<<usuario;
+	file_v.close();
+	return true;
+
 }
