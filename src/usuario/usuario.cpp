@@ -67,7 +67,26 @@ std::ostream &operator<<(std::ostream &stream, Usuario &u){
 	stream<<u.nombre_<<std::endl;
 	stream<<u.apellidos_<<std::endl;
 	stream<<u.usuario_<<std::endl;
-	stream<<u.rol_<<std::endl;
+	stream<<int(u.rol_)<<std::endl;
+
+	return stream;
+}
+
+std::istream &operator>>(std::istream &stream, Rol &rol){
+	int rol_i;
+	stream>>rol_i;
+
+	if(rol_i==0){
+		rol=Rol::Empty;
+	}else if(rol_i==1){
+		rol=Rol::Participante;
+	}else if(rol_i==2){
+		rol=Rol::Admin_Cursos;
+	}else if(rol_i==3){
+		rol=Rol::Admin_Recursos;
+	}else if(rol_i==4){
+		rol=Rol::Ponente;
+	}
 
 	return stream;
 }
