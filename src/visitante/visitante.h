@@ -5,8 +5,11 @@
  *      Author: noeliacc
  */
 
+#include "../usuario/usuario.h"
+
 #ifndef VISITANTE_VISITANTE_H_
 #define VISITANTE_VISITANTE_H_
+
 
 #include <string>
 

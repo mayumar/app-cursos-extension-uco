@@ -53,5 +53,5 @@ Rol Visitante::login(Usuario usuario_log){
 	            std::cout << "Intento fallido, por favor intentelo de nuevo" << std::endl;
 	        }
 	    }
-	    return -1;
+	    return Rol::Empty;
 }

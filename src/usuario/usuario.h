@@ -11,7 +11,8 @@
 
 #include <string>
 
-enum class Rol {Participante, Admin_Cursos, Admin_Recursos, Ponente};
+enum class Rol {Empty, Participante, Admin_Cursos, Admin_Recursos, Ponente};
+std::istream &operator>>(std::istream &stream, Rol &rol);
 
 class Usuario {
 
@@ -33,7 +34,7 @@ class Usuario {
 						std::string correo= "empty",
 						std::string contraseña="empty",
 						std::string usuario="empty",
-						Rol rol=Rol::Participante): nombre_(nombre), apellidos_(apellidos),
+						Rol rol=Rol::Empty): nombre_(nombre), apellidos_(apellidos),
 												 dni_(dni), correo_(correo),
 												 contraseña_(contraseña), usuario_(usuario),
 												 rol_(rol){}
