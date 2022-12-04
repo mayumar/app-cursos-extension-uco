@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include "../curso/curso.h"
+#include "../usuario/usuario.h"
 
 void Visitante:: ver_lista_de_cursos(){
 	std::ifstream fichero;
@@ -28,4 +29,29 @@ void Visitante:: ver_lista_de_cursos(){
 		std::cout<<std::endl;
 	}
 	fichero.close();
+}
+
+
+Rol Visitante::login(Usuario usuario_log){
+
+		std::ifstream fichero;
+		std::string userName;
+	    std::string userPassword;
+	    Usuario usuario;
+
+	    while (fichero-usuario){
+	        std::cout << "Por favor introduzca su usuario: "<<std::endl;
+	        std::cin >> userName;
+	        std::cout << "Por favor introduzca su contraseña: "<<std::endl;
+	        std::cin >> userPassword;
+
+	        if (usuario.get_usuario()==usuario_log.get_usuario() && usuario.get_contraseña()==usuario_log.get_contraseña()){
+	            std::cout << "Ha iniciado sesión correctamente";
+	            return usuario.get_rol();
+	        }
+	        else{
+	            std::cout << "Intento fallido, por favor intentelo de nuevo" << std::endl;
+	        }
+	    }
+	    return -1;
 }

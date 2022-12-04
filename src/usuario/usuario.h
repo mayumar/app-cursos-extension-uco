@@ -45,6 +45,7 @@ class Usuario {
 		inline std::string get_correo() const {return correo_;}
 		inline std::string get_contraseña() const {return contraseña_;}
 		inline std::string get_usuario() const {return usuario_;}
+		Rol get_rol() {return rol_;}
 
 		inline void set_nombre (std::string nombre) {nombre_=nombre;}
 		inline void set_apellidos (std::string apellidos) {apellidos_=apellidos;}
@@ -52,6 +53,7 @@ class Usuario {
 		inline void set_correo (std::string correo) {correo_=correo;}
 		inline void set_contraseña (std::string contraseña) {contraseña_=contraseña;}
 		inline void set_usuario (std::string usuario) {usuario_=usuario;}
+		void set_rol(Rol rol){rol_=rol;}
 
 		void ver_lista_de_cursos();
 

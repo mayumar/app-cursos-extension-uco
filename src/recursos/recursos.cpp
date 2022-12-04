@@ -5,6 +5,6 @@
  *      Author: noeliacc
  */
 
-#include "recursos.h"
+#include "../../recursos/recursos.h"
 
 
