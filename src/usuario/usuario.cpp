@@ -36,7 +36,7 @@ void Usuario:: ver_lista_de_cursos(){
 
 }
 
-Usuario Usuario::operator=(Usuario &u){
+Usuario Usuario::operator=(Usuario u){
 	nombre_=u.nombre_;
 	apellidos_=u.apellidos_;
 	dni_=u.dni_;
@@ -51,20 +51,13 @@ Usuario Usuario::operator=(Usuario &u){
 std::istream &operator-(std::istream &stream, Usuario &u){
 
 	stream>>u.dni_;
-	std::cout<<u.dni_<<std::endl;
 	stream>>u.correo_;
-	std::cout<<u.correo_<<std::endl;
 	stream.get();
 	getline(stream, u.nombre_);
-	std::cout<<u.nombre_<<std::endl;
 	getline(stream, u.apellidos_);
-	std::cout<<u.apellidos_<<std::endl;
 	stream>>u.usuario_;
-	std::cout<<u.usuario_<<std::endl;
 	stream>>u.contraseña_;
-	std::cout<<u.contraseña_<<std::endl;
 	stream>>u.rol_;
-	std::cout<<int(u.rol_)<<std::endl;
 	stream.get();
 
 	return stream;
@@ -126,8 +119,6 @@ std::istream &operator>>(std::istream &stream, Usuario &u){
 
 	return stream;
 }
-
-
 
 
 

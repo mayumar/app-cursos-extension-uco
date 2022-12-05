@@ -7,12 +7,16 @@ int main(){
 	int opt;
 	Visitante visitante;
 	Usuario usuario;
+	std::string userName, userPassword;
+
 	Participante participante("Juan", "Perez", "DNI1");
 	Admin_Cursos admin_c;
+	Admin_Recursos admin_r;
 
 	do{
 		std::cout<<std::endl;
-		std::cout<<"Introduzca una opcion"<<std::endl;
+		std::cout<<"Se encuentra en modo visitante, inicie sesión para más funcionalidades."<<std::endl<<std::endl;
+		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver los cursos activos"<<std::endl;
 		std::cout<<"2. Iniciar sesión"<<std::endl;
 		std::cout<<"3. Registrarse"<<std::endl;
@@ -27,12 +31,58 @@ int main(){
 		//Menú para visitantes
 		switch(opt){
 			case 1:
-				std::cout<<"Cursos activos:"<<std::endl<<std::endl;
+				std::cout<<"Lista de cursos activos:"<<std::endl<<std::endl;
 				visitante.ver_lista_de_cursos();
 			break;
 
 			case 2:
-				//std::cout<<"Iniciar sesión"<<std::endl;
+				std::cout << "Por favor introduzca su usuario: "<<std::endl;
+				std::cin >> userName;
+				std::cout << "Por favor introduzca su contraseña: "<<std::endl;
+				std::cin >> userPassword;
+
+				usuario=visitante.login(userName, userPassword);
+
+				if(usuario.get_rol()==Rol::Participante){
+
+					participante.set_nombre(usuario.get_nombre());
+					participante.set_apellidos(usuario.get_apellidos());
+					participante.set_dni(usuario.get_dni());
+					participante.set_correo(usuario.get_correo());
+					participante.set_contraseña(usuario.get_contraseña());
+					participante.set_usuario(usuario.get_usuario());
+					participante.set_rol(usuario.get_rol());
+
+					participanteMenu(participante);
+
+				}else if(usuario.get_rol()==Rol::Admin_Cursos){
+
+					admin_c.set_nombre(usuario.get_nombre());
+					admin_c.set_apellidos(usuario.get_apellidos());
+					admin_c.set_dni(usuario.get_dni());
+					admin_c.set_correo(usuario.get_correo());
+					admin_c.set_contraseña(usuario.get_contraseña());
+					admin_c.set_usuario(usuario.get_usuario());
+					admin_c.set_rol(usuario.get_rol());
+
+					adminCursosMenu(admin_c);
+
+				}else if(usuario.get_rol()==Rol::Admin_Recursos){
+
+					admin_r.set_nombre(usuario.get_nombre());
+					admin_r.set_apellidos(usuario.get_apellidos());
+					admin_r.set_dni(usuario.get_dni());
+					admin_r.set_correo(usuario.get_correo());
+					admin_r.set_contraseña(usuario.get_contraseña());
+					admin_r.set_usuario(usuario.get_usuario());
+					admin_r.set_rol(usuario.get_rol());
+
+					adminRecursosMenu(admin_r);
+
+				}else if(usuario.get_rol()==Rol::Empty){
+					std::cout<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
+				}
+
 			break;
 
 			case 3:

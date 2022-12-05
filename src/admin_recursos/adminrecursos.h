@@ -22,7 +22,7 @@ class Admin_Recursos: public Usuario {
 							  std::string contraseña="empty",
 							  std::string usuario="empty"):Usuario(nombre, apellidos, dni, correo,
 																   contraseña, usuario){}
-		inline ~Admin_Recursos();
+		inline ~Admin_Recursos(){}
 };
 
 #endif /* ADMIN_RECURSOS_ADMINRECURSOS_H_ */

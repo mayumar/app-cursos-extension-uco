@@ -62,7 +62,7 @@ class Usuario {
 		friend std::istream &operator-(std::istream &stream, Usuario &u);
 		friend std::ostream &operator<<(std::ostream &stream, Usuario &u);
 
-		Usuario operator=(Usuario &u);
+		Usuario operator=(Usuario u);
 
 };
 

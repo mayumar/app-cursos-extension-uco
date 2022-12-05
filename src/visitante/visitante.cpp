@@ -69,25 +69,26 @@ bool Visitante:: registrarse(Usuario usuario ){
 
 
 
-Rol Visitante::login(std::string user, std::string password){
+Usuario Visitante::login(std::string user, std::string password){
 
 	std::ifstream fichero;
-	Usuario usuario;
+	Usuario usuario, usuarioerror; //En caso de error se devuelve un usuario con valores por defecto
 
 	fichero.open("src/bd/usuarios.txt");
 	if(!fichero.is_open()){
 		std::cout<<"Error, no se ha podido acceder a la información del sistema"<<std::endl;
-		return Rol::Empty;
+		return usuarioerror;
 	}
 
 	while (fichero-usuario){
 		if (usuario.get_usuario()==user && usuario.get_contraseña()==password){
 			std::cout << "Ha iniciado sesión correctamente";
-			return usuario.get_rol();
+			fichero.close();
+			return usuario;
 		}
 	}
 
 	fichero.close();
-	return Rol::Empty;
+	return usuarioerror;
 
 }

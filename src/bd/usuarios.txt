@@ -11,4 +11,11 @@ nombre
 apellido
 usuario
 1234567
-1
+2
+3456678
+pepito@gmail.com
+pepito
+aboebi aboebe
+456pepe
+holaquetal
+3
