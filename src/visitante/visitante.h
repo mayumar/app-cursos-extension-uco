@@ -5,8 +5,11 @@
  *      Author: noeliacc
  */
 
+#include "../usuario/usuario.h"
+
 #ifndef VISITANTE_VISITANTE_H_
 #define VISITANTE_VISITANTE_H_
+
 
 #include <string>
 #include "../usuario/usuario.h"
@@ -31,7 +34,11 @@ class Visitante {
 
 		void ver_lista_de_cursos();
 
+
 		bool registrarse(Usuario usuario);
+
+		Rol login(Usuario usuario_log);
+
 };
 
 #endif
