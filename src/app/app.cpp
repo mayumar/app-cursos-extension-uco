@@ -6,6 +6,7 @@
 int main(){
 	int opt;
 	Visitante visitante;
+	Usuario usuario;
 	Participante participante("Juan", "Perez", "DNI1");
 	Admin_Cursos admin_c;
 
@@ -35,7 +36,14 @@ int main(){
 			break;
 
 			case 3:
-				//std::cout<<"Registrarse"<<std::endl;
+
+				std::cout<<"Introduzca los datos de la cuenta: "<<std::endl;
+				std::cin>>usuario;
+				if(!visitante.registrarse(usuario)){
+					std::cout<<"Error: no se ha podido realizar el registro"<<std::endl;
+				}else{
+					std::cout<<"El registro ha sido realizado con éxito"<<std::endl;
+				}
 
 			break;
 			//Debug mode

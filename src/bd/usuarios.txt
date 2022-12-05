@@ -1,0 +1,14 @@
+3456
+juanito@prueba.com
+Juanito
+Perez Perez
+user
+12345
+1
+12345
+correo@prueba.com
+nombre
+apellido
+usuario
+1234567
+1

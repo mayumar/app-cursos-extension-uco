@@ -51,12 +51,21 @@ Usuario Usuario::operator=(Usuario &u){
 std::istream &operator-(std::istream &stream, Usuario &u){
 
 	stream>>u.dni_;
+	std::cout<<u.dni_<<std::endl;
 	stream>>u.correo_;
+	std::cout<<u.correo_<<std::endl;
 	stream.get();
 	getline(stream, u.nombre_);
+	std::cout<<u.nombre_<<std::endl;
 	getline(stream, u.apellidos_);
+	std::cout<<u.apellidos_<<std::endl;
 	stream>>u.usuario_;
+	std::cout<<u.usuario_<<std::endl;
+	stream>>u.contraseña_;
+	std::cout<<u.contraseña_<<std::endl;
 	stream>>u.rol_;
+	std::cout<<int(u.rol_)<<std::endl;
+	stream.get();
 
 	return stream;
 }
@@ -67,30 +76,56 @@ std::ostream &operator<<(std::ostream &stream, Usuario &u){
 	stream<<u.nombre_<<std::endl;
 	stream<<u.apellidos_<<std::endl;
 	stream<<u.usuario_<<std::endl;
+	stream<<u.contraseña_<<std::endl;
 	stream<<int(u.rol_)<<std::endl;
 
 		return stream;
 	}
 
-	std::istream &operator>>(std::istream &stream, Rol &rol){
-		int rol_i;
-		stream>>rol_i;
+std::istream &operator>>(std::istream &stream, Rol &rol){
+	int rol_i;
+	stream>>rol_i;
 
-		if(rol_i==0){
-			rol=Rol::Empty;
-		}else if(rol_i==1){
-			rol=Rol::Participante;
-		}else if(rol_i==2){
-			rol=Rol::Admin_Cursos;
-		}else if(rol_i==3){
-			rol=Rol::Admin_Recursos;
-		}else if(rol_i==4){
-			rol=Rol::Ponente;
-		}
+	if(rol_i==0){
+		rol=Rol::Empty;
+	}else if(rol_i==1){
+		rol=Rol::Participante;
+	}else if(rol_i==2){
+		rol=Rol::Admin_Cursos;
+	}else if(rol_i==3){
+		rol=Rol::Admin_Recursos;
+	}else if(rol_i==4){
+		rol=Rol::Ponente;
+	}
 
 	return stream;
 }
 
+std::istream &operator>>(std::istream &stream, Usuario &u){
+
+	std::cout<<"DNI: ";
+	stream>>u.dni_;
+	std::cout<<"Correo: ";
+	stream>>u.correo_;
+	stream.get();
+	std::cout<<"Nombre: ";
+	getline(stream, u.nombre_);
+	std::cout<<"Apellidos: ";
+	getline(stream, u.apellidos_);
+	std::cout<<"Usuario: ";
+	stream>>u.usuario_;
+	std::cout<<"Contraseña: ";
+	stream>>u.contraseña_;
+	std::cout<<"Rol, Introduzca uno de los siguientes números:"<<std::endl;
+	std::cout<<"1 -> Participante"<<std::endl;
+	std::cout<<"2 -> Administrador de Cursos"<<std::endl;
+	std::cout<<"3 -> Administrador de Recursos"<<std::endl;
+	std::cout<<"4 -> Ponente"<<std::endl;
+	stream>>u.rol_;
+	stream.get();
+
+	return stream;
+}
 
 
 
