@@ -37,7 +37,7 @@ class Visitante {
 
 		bool registrarse(Usuario usuario);
 
-		Rol login(Usuario usuario_log);
+		Rol login(std::string user, std::string password);
 
 };
 
