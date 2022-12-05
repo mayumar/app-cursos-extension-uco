@@ -5,8 +5,11 @@
  *      Author: noeliacc
  */
 
+#include "../usuario/usuario.h"
+
 #ifndef VISITANTE_VISITANTE_H_
 #define VISITANTE_VISITANTE_H_
+
 
 #include <string>
 
@@ -27,6 +30,8 @@ class Visitante {
 		inline void set_ip (std::string ip) {ip_=ip;}
 
 		void ver_lista_de_cursos();
+
+		Rol login(Usuario usuario_log);
 };
 
 #endif /* VISITANTE_VISITANTE_H_ */
