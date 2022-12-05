@@ -41,10 +41,15 @@ bool Visitante:: registrarse(Usuario usuario ){
 		std::cout<<"Error, no se ha podido acceder para su registro"<<std::endl;
 		return false;
 	}
-
-
-	file_v<<usuario;
-	file_v.close();
+	while(file_v-usuario_f){
+			if(usuario.get_dni()==usuario_f.get_dni()){
+				std::cout<<"Error, ya se encuentra registrado el usuario"<<std::endl;
+			}
+			else{
+				file_v<<usuario;
+			}
+		}
+		file_v.close();
 	return true;
 
 }
