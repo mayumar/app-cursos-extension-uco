@@ -12,12 +12,15 @@
 
 
 #include <string>
+#include "../usuario/usuario.h"
+
 
 class Visitante {
 
 	private:
 
 		std::string ip_;
+
 
 	public:
 
@@ -31,7 +34,11 @@ class Visitante {
 
 		void ver_lista_de_cursos();
 
+
+		bool registrarse(Usuario usuario);
+
 		Rol login(Usuario usuario_log);
+
 };
 
-#endif /* VISITANTE_VISITANTE_H_ */
+#endif
