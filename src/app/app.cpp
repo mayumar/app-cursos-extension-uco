@@ -32,11 +32,18 @@ int main(){
 
 			case 2:
 				//std::cout<<"Iniciar sesión"<<std::endl;
-				participanteMenu(participante);
 			break;
 
 			case 3:
 				//std::cout<<"Registrarse"<<std::endl;
+
+			break;
+			//Debug mode
+			case 5:
+				participanteMenu(participante);
+			break;
+
+			case 6:
 				adminCursosMenu(admin_c);
 			break;
 		}
