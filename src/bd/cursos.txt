@@ -1,40 +1,39 @@
 C1
-nombre1 con muchos espacios
-descripcion1 muy larga
+Nombre de curso1
+Descripción del curso1
 fechaInicio1
 fechaFinal1
 1
 11
-1.1
+0.1
 C2
-nombre2
-descripcion2
+Nombre de curso2
+Descripcion del curso2
 fechaInicio2
 fechaFinal2
 2
 22
-2.2
+0.2
 C3
-nombre 3
-descripcion 3
-fecha2
-fecha3
-4
-55
+Nombre de curso3
+Descripcion del curso3
+fechaIncio3
+fechaFinal3
+3
+33
 0.0727273
+C4
+Nombre de curso4
+Descripcion del curso4
+fechaInicio4
+fechaFinal4
+4
+0.44
 C5
-dffh
-fjdklgj
-fdsh
-ds
+Nombre de curso5
+Descripcion del curso5
+fechaInicio5
+fechaFinal5
 6
 7
 0.857143
-C6
-nombre6
-descripcion larga
-lsdgjkd
-fdgd
-3
-88
-0.0340909
