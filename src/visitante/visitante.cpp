@@ -82,7 +82,7 @@ Usuario Visitante::login(std::string user, std::string password){
 
 	while (fichero-usuario){
 		if (usuario.get_usuario()==user && usuario.get_contraseña()==password){
-			std::cout << "Ha iniciado sesión correctamente";
+			std::cout << "Ha iniciado sesión correctamente"<<std::endl;
 			fichero.close();
 			return usuario;
 		}

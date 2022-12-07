@@ -28,6 +28,7 @@ Descripcion del curso4
 fechaInicio4
 fechaFinal4
 4
+44
 0.44
 C5
 Nombre de curso5
