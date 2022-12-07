@@ -26,7 +26,7 @@ class Admin_Cursos: public Usuario {
 		inline ~Admin_Cursos(){}
 
 		bool add_curso(Curso curso);
-		bool mod_curso(Curso curso_modif);
+		bool mod_curso(std::string id);
 		bool del_curso(std::string id);
 };
 

@@ -1,21 +1,28 @@
-3456
-juanito@prueba.com
-Juanito
-Perez Perez
-user
-12345
+DNI1
+user1@prueba.com
+Nombre 1
+Apellidos 1
+user1
+password1
 1
-12345
-correo@prueba.com
-nombre
-apellido
-usuario
-1234567
+DNI2
+user2@prueba.com
+Nombre 2
+Apellidos 2
+user2
+password2
 2
-3456678
-pepito@gmail.com
-pepito
-aboebi aboebe
-456pepe
-holaquetal
+DNI3
+user3@prueba.com
+Nombre 3
+Apellidos 3
+user3
+password3
 3
+DNI4
+user4@prueba.com
+Nombre 3
+Apellidos 4
+user4
+password4
+4

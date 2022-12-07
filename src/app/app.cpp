@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include "app.h"
-#include "../visitante/visitante.h"
 
 int main(){
 	int opt;
@@ -12,6 +11,7 @@ int main(){
 	Participante participante("Juan", "Perez", "DNI1");
 	Admin_Cursos admin_c;
 	Admin_Recursos admin_r;
+	Ponente ponente;
 
 	do{
 		std::cout<<std::endl;
@@ -92,7 +92,18 @@ int main(){
 					break;
 
 					case(Rol::Ponente):
-						//ponenteMenu()
+						
+						//El usuario pasa de ser tipo usuario a tipo Ponente
+						ponente.set_nombre(usuario.get_nombre());
+						ponente.set_apellidos(usuario.get_apellidos());
+						ponente.set_dni(usuario.get_dni());
+						ponente.set_correo(usuario.get_correo());
+						ponente.set_contraseña(usuario.get_contraseña());
+						ponente.set_usuario(usuario.get_usuario());
+						ponente.set_rol(usuario.get_rol());
+
+						ponenteMenu(ponente);
+
 					break;
 
 					case(Rol::Empty):
@@ -130,6 +141,10 @@ int main(){
 
 			case -3:
 				adminRecursosMenu(admin_r);
+			break;
+
+			case -4:
+				ponenteMenu(ponente);
 			break;
 		}
 
@@ -207,11 +222,12 @@ void adminCursosMenu(Admin_Cursos admin){
 		std::cout<<"5. Añadir curso al sistema"<<std::endl;
 		std::cout<<"6. Modificar curso del sistema"<<std::endl;
 		std::cout<<"7. Eliminar curso del sistema"<<std::endl;
-		std::cout<<"8. Cerrar sesion"<<std::endl;
+		std::cout<<"8. Ver lista de inscritos de algun curso"<<std::endl;
+		std::cout<<"9. Cerrar sesion"<<std::endl;
 		std::cin>>opt;
 		std::cout<<std::endl;
 
-		if(opt<1 || opt>8){
+		if(opt<1 || opt>9){
 			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
 		}
 
@@ -234,25 +250,48 @@ void adminCursosMenu(Admin_Cursos admin){
 			break;
 
 			case 5:
+
 				std::cout<<"Introduzca los datos del curso a añadir: "<<std::endl;
 				std::cin>>curso;
-				admin.add_curso(curso);
+				if(!admin.add_curso(curso)){
+					std::cout<<"Error, el curso que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El curso ha sido añadido con exito"<<std::endl;
+				}
+
 			break;
 
 			case 6:
-				std::cout<<"Introduzca el id del curso a modificar y los datos modificados"<<std::endl;
-				std::cin>>curso;
-				admin.mod_curso(curso);
+				
+				std::cout<<"Introduzca el id del curso a modificar"<<std::endl;
+				std::cin>>curso_id;
+				if(!admin.mod_curso(curso_id)){
+					std::cout<<"Error, el curso que se busca modificar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El curso ha sido modificado con exito"<<std::endl;
+				}
+
 			break;
 
 			case 7:
+
 				std::cout<<"Introduzca el id del curso a eliminar"<<std::endl;
 				std::cin>>curso_id;
-				admin.del_curso(curso_id);
+				
+				if(!admin.del_curso(curso_id)){
+					std::cout<<"Error, el curso que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El curso ha sido eliminado con exito"<<std::endl;
+				}
+
+			break;
+
+			case 8:
+				std::cout<<"Lista de inscritos"<<std::endl;
 			break;
 		}
 
-	}while(opt!=8);
+	}while(opt!=9);
 }
 
 
@@ -268,16 +307,17 @@ void adminRecursosMenu(Admin_Recursos admin){
 		std::cout<<"2. Añadir recurso al sistema"<<std::endl;
 		std::cout<<"3. Modificar recurso del sistema"<<std::endl;
 		std::cout<<"4. Eliminar recurso del sistema"<<std::endl;
-		std::cout<<"5. Cerrar sesion"<<std::endl;
+		std::cout<<"5. Ver lista de recursos de algun curso"<<std::endl;
+		std::cout<<"6. Cerrar sesion"<<std::endl;
 		std::cin>>opt;
 
-		if(opt<1 || opt>5){
+		if(opt<1 || opt>6){
 			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
 		}
 
 		switch(opt){
 			case 1:
-				std::cout<<"Listado de cursos: "<<std::endl;
+				std::cout<<std::endl<<"Listado de cursos: "<<std::endl<<std::endl;
 				admin.ver_lista_de_cursos();
 			break;
 
@@ -292,13 +332,42 @@ void adminRecursosMenu(Admin_Recursos admin){
 			case 4:
 				std::cout<<"Eliminar recurso"<<std::endl;
 			break;
+
+			case 5:
+				std::cout<<"Ver lista de recursos"<<std::endl;
+			break;
 		}
 
-	}while(opt!=5);
+	}while(opt!=6);
 
 }
 
+void ponenteMenu(Ponente ponente){
+	int opt;
 
+	do{
+		std::cout<<std::endl;
+		std::cout<<"Se encuentra en modo ponente"<<std::endl<<std::endl;
+		std::cout<<"Introduzca una opcion"<<std::endl;
+		std::cout<<"1. Ver los cursos activos"<<std::endl;
+		std::cout<<"2. Ver informacion de contacto de los administradores"<<std::endl;
+		std::cout<<"3. Cerrar sesion"<<std::endl;
+		std::cin>>opt;
 
+		if(opt<1 || opt>3){
+			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
+		}
 
+		switch(opt){
+			case 1:
+				std::cout<<std::endl<<"Lista de cursos activos: "<<std::endl<<std::endl;
+				ponente.ver_lista_de_cursos();
+			break;
 
+			case 2:
+				std::cout<<"Informacion de contacto"<<std::endl;
+			break;
+		}
+
+	}while(opt!=3);
+}
