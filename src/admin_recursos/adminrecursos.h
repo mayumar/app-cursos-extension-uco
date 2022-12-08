@@ -10,6 +10,8 @@
 #define ADMIN_RECURSOS_ADMINRECURSOS_H_
 
 #include "../usuario/usuario.h"
+#include "../recursos/recursos.h"
+#include <string>
 
 class Admin_Recursos: public Usuario {
 
@@ -23,6 +25,9 @@ class Admin_Recursos: public Usuario {
 							  std::string usuario="empty"):Usuario(nombre, apellidos, dni, correo,
 																   contraseña, usuario){}
 		inline ~Admin_Recursos(){}
+		bool add_recurso (Recursos recurso);
+		bool mod_recurso(std::string id);
+		bool del_recurso(std::string id);
 };
 
 #endif /* ADMIN_RECURSOS_ADMINRECURSOS_H_ */
