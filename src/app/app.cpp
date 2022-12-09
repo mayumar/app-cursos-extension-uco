@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "app.h"
 
 int main(){
@@ -128,7 +129,7 @@ int main(){
 			break;
 
 			case 4:
-				std::cout<<"Ver informacion de contacto"<<std::endl;
+				ver_info_contacto();
 			break;
 			//Debug mode
 			case -1:
@@ -197,15 +198,14 @@ void participanteMenu(Participante participante){
 			break;
 
 			case 4:
-				std::cout<<"Información de contacto"<<std::endl;
+				ver_info_contacto();
 			break;
 		}
 
 	}while(opt!=5);
 }
 
-
-//Menú para administrador de cursos
+//Menú para el administrador de cursos
 void adminCursosMenu(Admin_Cursos admin){
 	int opt;
 	Curso curso;
@@ -294,8 +294,7 @@ void adminCursosMenu(Admin_Cursos admin){
 	}while(opt!=9);
 }
 
-
-//Menú Administrador de recursos
+//Menú para el administrador de recursos
 void adminRecursosMenu(Admin_Recursos admin){
 	int opt;
 	Recursos recurso;
@@ -371,6 +370,7 @@ void adminRecursosMenu(Admin_Recursos admin){
 
 }
 
+//Menú para ponentes
 void ponenteMenu(Ponente ponente){
 	int opt;
 
@@ -394,9 +394,36 @@ void ponenteMenu(Ponente ponente){
 			break;
 
 			case 2:
-				std::cout<<"Informacion de contacto"<<std::endl;
+				ver_info_contacto();
 			break;
 		}
 
 	}while(opt!=3);
+}
+
+bool ver_info_contacto(){
+	Usuario usuario;
+	std::ifstream file;
+	file.open("src/bd/usuarios.txt");
+	if(!file){
+		std::cout<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		return false;
+	}
+
+	while(file-usuario){
+		if(usuario.get_rol()==Rol::Admin_Cursos){
+			std::cout<<"Administrador de Cursos:"<<std::endl;
+			std::cout<<usuario.get_nombre()<<" "<<usuario.get_apellidos()<<std::endl;
+			std::cout<<"Usuario: "<<usuario.get_usuario()<<std::endl;
+			std::cout<<"Correo: "<<usuario.get_correo()<<std::endl<<std::endl;;
+		}
+		if(usuario.get_rol()==Rol::Admin_Recursos){
+			std::cout<<"Administrador de Recursos:"<<std::endl;
+			std::cout<<usuario.get_nombre()<<" "<<usuario.get_apellidos()<<std::endl;
+			std::cout<<"Usuario: "<<usuario.get_usuario()<<std::endl;
+			std::cout<<"Correo: "<<usuario.get_correo()<<std::endl<<std::endl;;
+		}
+	}
+	file.close();
+	return true;
 }
