@@ -10,28 +10,55 @@
 #include<iostream>
 
 bool Admin_Recursos ::add_recurso(Recursos recurso){
-	std::fstream file_r;
+	std::fstream file_r, file_c;
 	Recursos r;
+	Curso c;
+	bool found=false;
+
+	//Buscamos si el recurso ya existe
 	file_r.open("src/bd/recursos.txt", std::fstream::in);
-		if(!file_r.is_open()){
-			std::cout<<"Error, no se ha podido acceder a la informacion de los recursos"<<std::endl;
+	if(!file_r.is_open()){
+		std::cout<<"Error, no se ha podido acceder a la informacion de los recursos"<<std::endl;
+		return false;
+	}
+
+	while(file_r-r){
+		if(r.get_id()==recurso.get_id()){
+			file_r.close();
 			return false;
 		}
-		while(file_r-r){
-			if(r.get_id()==recurso.get_id()){
-				file_r.close();
-				return false;
-			}
+	}
+	file_r.close();
+
+	//Buscamos si el curso que se ha introducido existe
+	file_c.open("src/bd/cursos.txt", std::fstream::in);
+	if(!file_c.is_open()){
+		std::cout<<"Error, no se ha podido acceder a la informacion de los cursos"<<std::endl;
+		return false;
+	}
+
+	while(file_c-c){
+		if(c.get_id()==recurso.get_curso()){
+			found=true;
+			std::cout<<"El curso ha sido encontrado"<<std::endl;
 		}
-		file_r.close();
-		file_r.open("src/bd/recursos.txt", std::fstream::app);
-		if(!file_r.is_open()){
-			std::cout<<"Error, no se ha podido acceder a la informacion de los recursos"<<std::endl;
-			return false;
-		}
-		 file_r<<recurso;
-		 file_r.close();
-		 return true;
+	}
+	
+	if(!found){
+		file_c.close();
+		return false;
+	}
+
+	//Añadimos recurso
+	file_r.open("src/bd/recursos.txt", std::fstream::app);
+	if(!file_r.is_open()){
+		std::cout<<"Error, no se ha podido acceder a la informacion de los recursos"<<std::endl;
+		return false;
+	}
+	file_r<<recurso;
+
+	file_r.close();
+	return true;
 }
 
 bool Admin_Recursos::mod_recurso(std::string id){

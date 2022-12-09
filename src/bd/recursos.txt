@@ -1,4 +1,12 @@
 R1
 C1
+Aforo
+56
+R2
+C5
 Aula
-34
+78
+R3
+C4
+Aula
+56

@@ -11,6 +11,7 @@
 
 #include "../usuario/usuario.h"
 #include "../recursos/recursos.h"
+#include "../curso/curso.h"
 #include <string>
 
 class Admin_Recursos: public Usuario {
