@@ -10,8 +10,9 @@
 #define RECURSOS_RECURSOS_H_
 
 #include <string>
+#include <fstream>
 
-class Recursos {
+class Recursos{
 
 	private:
 		std::string id_;
@@ -37,6 +38,12 @@ class Recursos {
 		inline void set_tipo (std::string tipo) {tipo_=tipo;}
 		inline void set_aforo (int aforo) {aforo_=aforo;}
 		inline void set_id(std::string id){id_=id;}
+
+		Recursos operator=(Recursos &r);
+
+		friend std::istream &operator>>(std::istream &stream, Recursos &r);
+		friend std::istream &operator-(std::istream &stream, Recursos &r);
+		friend std::ostream &operator<<(std::ostream &stream, Recursos &r);
 
 };
 
