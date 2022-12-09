@@ -298,6 +298,7 @@ void adminCursosMenu(Admin_Cursos admin){
 //Menú Administrador de recursos
 void adminRecursosMenu(Admin_Recursos admin){
 	int opt;
+	Recursos recurso;
 
 	do{
 		std::cout<<std::endl;
@@ -322,7 +323,14 @@ void adminRecursosMenu(Admin_Recursos admin){
 			break;
 
 			case 2:
-				std::cout<<"Añadir recurso"<<std::endl;
+				
+				std::cout<<"Introduzca los datos del curso a añadir"<<std::endl;
+				std::cin>>recurso;
+				if(!admin.add_recurso(recurso)){
+					std::cout<<"El recurso que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El recurso ha sido añadido con éxito"<<std::endl;
+				}
 			break;
 
 			case 3:

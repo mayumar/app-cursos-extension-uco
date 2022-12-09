@@ -25,7 +25,7 @@ class Recursos{
 		inline Recursos (std::string id="empty",
 						 std::string curso="empty",
 						 std::string tipo= "empty",
-						 int aforo=0): curso_(curso), tipo_(tipo), aforo_(aforo), id_(id){}
+						 int aforo=0): id_(id), curso_(curso), tipo_(tipo), aforo_(aforo){}
 
 		inline ~Recursos(){}
 

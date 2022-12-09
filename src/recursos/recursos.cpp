@@ -23,8 +23,9 @@ std::istream &operator>>(std::istream &stream, Recursos &r){
     stream>>r.id_;
     std::cout<<"ID del curso asociado: ";
     stream>>r.curso_;
+    stream.get();
     std::cout<<"Tipo de recurso: ";
-    stream>>r.tipo_;
+    getline(stream, r.tipo_);
     std::cout<<"Aforo (en caso de no ser un aula, escribir 0): ";
     stream>>r.aforo_;
 
@@ -34,17 +35,18 @@ std::istream &operator>>(std::istream &stream, Recursos &r){
 std::istream &operator-(std::istream &stream, Recursos &r){
     stream>>r.id_;
     stream>>r.curso_;
-    stream>>r.tipo_;
+    stream.get();
+    getline(stream, r.tipo_);
     stream>>r.aforo_;
 
     return stream;
 }
 
 std::ostream &operator<<(std::ostream &stream, Recursos &r){
-    stream<<r.id_;
-    stream<<r.curso_;
-    stream<<r.tipo_;
-    stream<<r.aforo_;
+    stream<<r.id_<<std::endl;
+    stream<<r.curso_<<std::endl;
+    stream<<r.tipo_<<std::endl;
+    stream<<r.aforo_<<std::endl;
 
     return stream;
 }
