@@ -68,6 +68,30 @@ bool Admin_Cursos::mod_curso(std::string id){
 		return false;
 	}
 	fs.close();
+
+	std::cout<<"Introduzca los datos modificados: "<<std::endl;
+	std::cin>>curso_modif;
+
+	//Comprobamos que el id introducido no se encuentre ya en la base de datos
+	fs.open("src/bd/cursos.txt");
+	found=false;
+	if(!fs){
+		std::cout<<"Error al acceder a la información de los cursos"<<std::endl;
+		return false;
+	}
+
+	while(fs-curso){
+		if(curso.get_id()==curso_modif.get_id()){
+			found=true;
+		}
+	}
+
+	if(!found){
+		std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+		fs.close();
+		return false;
+	}
+	fs.close();
 	
 	//Modificamos el curso
 	fs.open("src/bd/cursos.txt");
@@ -76,9 +100,6 @@ bool Admin_Cursos::mod_curso(std::string id){
 		std::cout << "Error al abrir el archivo" << std::endl;
 		return false;
 	}
-
-	std::cout<<"Introduzca los datos modificados: "<<std::endl;
-	std::cin>>curso_modif;
 
 	while(fs-curso){
 		if(curso.get_id()==id){
@@ -93,8 +114,6 @@ bool Admin_Cursos::mod_curso(std::string id){
 	rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
 	return true;
 }
-
-
 
 bool Admin_Cursos::del_curso(std::string id){
 

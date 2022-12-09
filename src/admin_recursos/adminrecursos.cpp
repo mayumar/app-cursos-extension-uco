@@ -82,7 +82,6 @@ bool Admin_Recursos::mod_recurso(std::string id){
 	}
 
 	if(!found){
-		std::cout<<"El recurso no se encuentra en el sistema"<<std::endl;
 		fs.close();
 		return false;
 	}
@@ -90,6 +89,28 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 	std::cout<<"Introduzca los datos modificados: "<<std::endl;
 	std::cin>>recurso_mod;
+
+	//Buscamos que el id introducido no esté ya en la base de datos
+	fs.open("src/bd/recursos.txt");
+	found=false;
+
+	if(!fs){
+		std::cout<<"No se ha podido acceder a la información de los recursos"<<std::endl;
+		return false;
+	}
+
+	while(fs-recurso){
+		if(recurso.get_id()==recurso_mod.get_id()){
+			found=true;
+		}
+	}
+
+	if(!found){
+		std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+		fs.close();
+		return false;
+	}
+	fs.close();
 
 	//Buscamos si el curso introducido está en la base de datos
 	fc.open("src/bd/cursos.txt");
