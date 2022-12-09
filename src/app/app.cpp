@@ -325,7 +325,7 @@ void adminRecursosMenu(Admin_Recursos admin){
 
 			case 2:
 				
-				std::cout<<"Introduzca los datos del curso a añadir"<<std::endl;
+				std::cout<<"Introduzca los datos del recurso a añadir"<<std::endl;
 				std::cin>>recurso;
 
 				if(!admin.add_recurso(recurso)){
@@ -341,7 +341,7 @@ void adminRecursosMenu(Admin_Recursos admin){
 				std::cout<<"Introduzca el id del recurso a modificar"<<std::endl;
 				std::cin>>recurso_id;
 
-				if(!admin.add_recurso(recurso_id)){
+				if(!admin.mod_recurso(recurso_id)){
 					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos"<<std::endl;
 				}else{
 					std::cout<<"El recurso se ha modificado con éxito"<<std::endl;

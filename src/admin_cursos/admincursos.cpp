@@ -47,10 +47,13 @@ bool Admin_Cursos::mod_curso(std::string id){
 
 	Curso curso, curso_modif;
 	bool found=false;
-	std::ifstream fs("src/bd/cursos.txt");
-	std::ofstream fstemp("src/bd/cursostemp.txt");
-	if(!fs || !fstemp){
-		std::cout << "Error al abrir el archivo" << std::endl;
+	std::ifstream fs;
+	std::ofstream fstemp;
+
+	//Buscamos si el curso existe
+	fs.open("src/bd/cursos.txt");
+	if(!fs){
+		std::cout<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -62,13 +65,19 @@ bool Admin_Cursos::mod_curso(std::string id){
 
 	if(!found){
 		fs.close();
-		fstemp.close();
-		remove("src/bd/cursos.txt");
-		rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
+		return false;
+	}
+	fs.close();
+	
+	//Modificamos el curso
+	fs.open("src/bd/cursos.txt");
+	fstemp.open("src/bd/cursostemp.txt");
+	if(!fs || !fstemp){
+		std::cout << "Error al abrir el archivo" << std::endl;
 		return false;
 	}
 
-	std::cout<<"Introduzca los datos a modificar: "<<std::endl;
+	std::cout<<"Introduzca los datos modificados: "<<std::endl;
 	std::cin>>curso_modif;
 
 	while(fs-curso){
@@ -107,8 +116,7 @@ bool Admin_Cursos::del_curso(std::string id){
 	if(!found){
 		fs.close();
 		fstemp.close();
-		remove("src/bd/cursos.txt");
-		rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
+		remove("src/bd/cursostemp.txt");
 		return false;
 	}
 
