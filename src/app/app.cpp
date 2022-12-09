@@ -342,7 +342,7 @@ void adminRecursosMenu(Admin_Recursos admin){
 				std::cin>>recurso_id;
 
 				if(!admin.mod_recurso(recurso_id)){
-					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
 				}else{
 					std::cout<<"El recurso se ha modificado con éxito"<<std::endl;
 				}

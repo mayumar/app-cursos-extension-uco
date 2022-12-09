@@ -100,10 +100,13 @@ bool Admin_Cursos::del_curso(std::string id){
 
 	Curso curso;
 	bool found=false;
-	std::ifstream fs("src/bd/cursos.txt");
-	std::ofstream fstemp("src/bd/cursostemp.txt");
-	if(!fs || !fstemp){
-		std::cout << "Error al abrir el archivo" << std::endl;
+	std::ifstream fs;
+	std::ofstream fstemp;
+
+	//Buscamos si existe el curso
+	fs.open("src/bd/cursos.txt");
+	if(!fs){
+		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -115,8 +118,15 @@ bool Admin_Cursos::del_curso(std::string id){
 
 	if(!found){
 		fs.close();
-		fstemp.close();
-		remove("src/bd/cursostemp.txt");
+		return false;
+	}
+	fs.close();
+
+	//Borramos el curso
+	fs.open("src/bd/cursos.txt");
+	fstemp.open("src/bd/cursostemp.txt");
+	if(!fs || !fstemp){
+		std::cout << "Error al abrir el archivo" << std::endl;
 		return false;
 	}
 

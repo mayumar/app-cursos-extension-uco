@@ -141,23 +141,37 @@ bool Admin_Recursos::mod_recurso(std::string id){
 bool Admin_Recursos::del_recurso(std::string id){
 	Recursos recurso;
 	bool found=false;
-	std::ifstream fs("src/bd/recursos.txt");
-	std::ofstream fstemp("src/bd/recursostemp.txt");
-	if(!fs || !fstemp){
-			std::cout<<"Error al abrir el archivo"<<std::endl;
-			return false;
-		}
-		while(fs-recurso){
-			if(recurso.get_id()==id){
-				found=true;
-			}
-		}
-	if(!found){
-		fs.close();
-		fstemp.close();
-		remove("src/bd/recursostemp.txt");
+	std::ifstream fs;
+	std::ofstream fstemp;
+	
+	//Comprobamos si el recurso existe en el sistema
+	fs.open("src/bd/recursos.txt");
+	if(!fs){
+		std::cout<<"Error al acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
+
+	while(fs-recurso){
+		if(recurso.get_id()==id){
+			found=true;
+		}
+	}
+
+	if(!found){
+		fs.close();
+		return false;
+	}
+	fs.close();
+	
+	//Eliminamos el recurso
+	fs.open("src/bd/recursos.txt");
+	fstemp.open("src/bd/recursostemp.txt");
+
+	if(!fs || !fstemp){
+		std::cout<<"Error al abrir el archivo"<<std::endl;
+		return false;
+	}
+		
 	while(fs-recurso){
 		if(recurso.get_id()!=id){
 			fstemp<<recurso;
@@ -165,6 +179,7 @@ bool Admin_Recursos::del_recurso(std::string id){
 	}
 	fs.close();
 	fstemp.close();
+
 	remove("src/bd/recursos.txt");
 	rename("src/bd/recursostemp.txt", "src/bd/recursos.txt");
 	return true;
