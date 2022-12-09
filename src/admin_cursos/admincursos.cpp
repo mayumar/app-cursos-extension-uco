@@ -124,3 +124,45 @@ bool Admin_Cursos::del_curso(std::string id){
 	rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
 	return true;
 }
+
+
+bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
+
+	std::ifstream inscritos;
+	std::ifstream usuarios;
+	Usuario usuario;
+	inscritos.open("src/bd/inscripciones.txt");
+	if(inscritos.fail()){
+		std::cout<< "No se pudo abrir la lista de los alumnos inscritos"<<std::endl;
+		exit(-1);
+		return false;
+	}
+
+	usuarios.open("src/bd/usuarios.txt");
+	if(usuarios.fail()){
+			std::cout<< "No se pudo abrir la lista de usuarios"<<std::endl;
+			exit(-1);
+			return false;
+	}
+
+	std::cout<< "Indique el id del curso del cual quiere ver las inscripciones"<<std::endl; //pedimos el curso del cual quiere ver las inscripciones
+	std::cin>>id;
+
+	while(inscritos>>inscripciones.id_curso){
+		  inscritos>>inscripciones.id_curso //leemos cada registro de inscripciones.txtS
+		if(curso.get_id()==id){
+			while(usuarios- usuario){
+				if(inscripciones.dni==usuario.get_dni){
+
+				}
+
+			}
+
+		}
+	}
+
+
+
+
+}
+
