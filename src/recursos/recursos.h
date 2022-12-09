@@ -14,26 +14,29 @@
 class Recursos {
 
 	private:
-
+		std::string id_;
 		std::string curso_;
 		std::string tipo_;
 		int aforo_;
 
 	public:
 
-		inline Recursos (std::string curso="empty",
+		inline Recursos (std::string id="empty",
+						 std::string curso="empty",
 						 std::string tipo= "empty",
-						 int aforo=0): curso_(curso), tipo_(tipo), aforo_(aforo){}
+						 int aforo=0): curso_(curso), tipo_(tipo), aforo_(aforo), id_(id){}
 
 		inline ~Recursos(){}
 
 		inline std::string get_curso() const {return curso_;}
 		inline std::string get_tipo() const {return tipo_;}
-		inline int set_aforo() const {return aforo_;}
+		inline int get_aforo() const {return aforo_;}
+		inline std::string get_id() const{ return id_;}
 
 		inline void set_curso (std::string curso) {curso_=curso;}
 		inline void set_tipo (std::string tipo) {tipo_=tipo;}
 		inline void set_aforo (int aforo) {aforo_=aforo;}
+		inline void set_id(std::string id){id_=id;}
 
 };
 
