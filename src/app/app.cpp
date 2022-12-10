@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "app.h"
 
 int main(){
@@ -13,6 +14,11 @@ int main(){
 	Admin_Recursos admin_r;
 	Ponente ponente;
 
+	std::cout<<"BIENVENIDO A LA PAGINA DE CURSOS DE EXTENSIÓN DE LA UNIVERDAD DE CÓRDOBA"<<std::endl;
+	std::cout<<std::endl;
+
+	std::cout<<"Estos son los cursos activos: "<<std::endl;
+	visitante.ver_lista_de_cursos();
 	do{
 		std::cout<<std::endl;
 		std::cout<<"Se encuentra en modo visitante, inicie sesión para más funcionalidades."<<std::endl<<std::endl;
@@ -128,7 +134,7 @@ int main(){
 			break;
 
 			case 4:
-				std::cout<<"Ver informacion de contacto"<<std::endl;
+				ver_info_contacto();
 			break;
 			//Debug mode
 			case -1:
@@ -197,19 +203,19 @@ void participanteMenu(Participante participante){
 			break;
 
 			case 4:
-				std::cout<<"Información de contacto"<<std::endl;
+				ver_info_contacto();
 			break;
 		}
 
 	}while(opt!=5);
 }
 
-
-//Menú para administrador de cursos
+//Menú para el administrador de cursos
 void adminCursosMenu(Admin_Cursos admin){
 	int opt;
 	Curso curso;
-	std::string curso_id;
+	Usuario usuario;
+	std::string curso_id, usuario_dni;
 
 	do{
 		std::cout<<std::endl;
@@ -238,15 +244,39 @@ void adminCursosMenu(Admin_Cursos admin){
 			break;
 
 			case 2:
-				std::cout<<"Añadir cuenta"<<std::endl;
+
+				std::cout<<"Introduzca los datos de la cuenta a añadir:"<<std::endl;
+				std::cin>>usuario;
+				if(!admin.add_usuario(usuario)){
+					std::cout<<"Error, el usuario que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El usuario ha sido añadido con exito"<<std::endl;
+				}
+
 			break;
 
 			case 3:
-				std::cout<<"Modificar cuenta"<<std::endl;
+				
+				std::cout<<"Introduzca el dni del usuario a modificar"<<std::endl;
+				std::cin>>usuario_dni;
+				if(!admin.mod_usuario(usuario_dni)){
+					std::cout<<"Error, el usuario que se busca modificar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El usuario ha sido modificado con exito"<<std::endl;
+				}
+
 			break;
 
 			case 4:
-				std::cout<<"Eliminar cuenta"<<std::endl;
+				
+				std::cout<<"Introduzca el dni del curso a eliminar"<<std::endl;
+				std::cin>>usuario_dni;
+				if(!admin.del_usuario(usuario_dni)){
+					std::cout<<"Error, el usuario que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El usuario ha sido eliminado con exito"<<std::endl;
+				}
+
 			break;
 
 			case 5:
@@ -294,8 +324,7 @@ void adminCursosMenu(Admin_Cursos admin){
 	}while(opt!=9);
 }
 
-
-//Menú Administrador de recursos
+//Menú para el administrador de recursos
 void adminRecursosMenu(Admin_Recursos admin){
 	int opt;
 	Recursos recurso;
@@ -325,7 +354,7 @@ void adminRecursosMenu(Admin_Recursos admin){
 
 			case 2:
 				
-				std::cout<<"Introduzca los datos del curso a añadir"<<std::endl;
+				std::cout<<"Introduzca los datos del recurso a añadir"<<std::endl;
 				std::cin>>recurso;
 
 				if(!admin.add_recurso(recurso)){
@@ -341,8 +370,8 @@ void adminRecursosMenu(Admin_Recursos admin){
 				std::cout<<"Introduzca el id del recurso a modificar"<<std::endl;
 				std::cin>>recurso_id;
 
-				if(!admin.add_recurso(recurso_id)){
-					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos"<<std::endl;
+				if(!admin.mod_recurso(recurso_id)){
+					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
 				}else{
 					std::cout<<"El recurso se ha modificado con éxito"<<std::endl;
 				}
@@ -371,6 +400,7 @@ void adminRecursosMenu(Admin_Recursos admin){
 
 }
 
+//Menú para ponentes
 void ponenteMenu(Ponente ponente){
 	int opt;
 
@@ -394,9 +424,36 @@ void ponenteMenu(Ponente ponente){
 			break;
 
 			case 2:
-				std::cout<<"Informacion de contacto"<<std::endl;
+				ver_info_contacto();
 			break;
 		}
 
 	}while(opt!=3);
+}
+
+bool ver_info_contacto(){
+	Usuario usuario;
+	std::ifstream file;
+	file.open("src/bd/usuarios.txt");
+	if(!file){
+		std::cout<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		return false;
+	}
+
+	while(file-usuario){
+		if(usuario.get_rol()==Rol::Admin_Cursos){
+			std::cout<<"Administrador de Cursos:"<<std::endl;
+			std::cout<<usuario.get_nombre()<<" "<<usuario.get_apellidos()<<std::endl;
+			std::cout<<"Usuario: "<<usuario.get_usuario()<<std::endl;
+			std::cout<<"Correo: "<<usuario.get_correo()<<std::endl<<std::endl;;
+		}
+		if(usuario.get_rol()==Rol::Admin_Recursos){
+			std::cout<<"Administrador de Recursos:"<<std::endl;
+			std::cout<<usuario.get_nombre()<<" "<<usuario.get_apellidos()<<std::endl;
+			std::cout<<"Usuario: "<<usuario.get_usuario()<<std::endl;
+			std::cout<<"Correo: "<<usuario.get_correo()<<std::endl<<std::endl;;
+		}
+	}
+	file.close();
+	return true;
 }

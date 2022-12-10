@@ -12,5 +12,6 @@
 	void adminRecursosMenu(Admin_Recursos admin);
 	void ponenteMenu(Ponente ponente);
 
+	bool ver_info_contacto();
 
 #endif

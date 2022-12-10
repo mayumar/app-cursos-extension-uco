@@ -9,7 +9,7 @@
 #include <fstream>
 #include<iostream>
 
-bool Admin_Recursos ::add_recurso(Recursos recurso){
+bool Admin_Recursos::add_recurso(Recursos recurso){
 	std::fstream file_r, file_c;
 	Recursos r;
 	Curso c;
@@ -63,33 +63,83 @@ bool Admin_Recursos ::add_recurso(Recursos recurso){
 
 bool Admin_Recursos::mod_recurso(std::string id){
 	Recursos recurso, recurso_mod;
+	Curso curso;
 	bool found=false;
-	std::ifstream fs("src/bd/recursos.txt");
-	std::ofstream fstemp("src/bd/recursostemp.txt");
-	if(!fs || !fstemp){
-		std::cout<<"Error al abrir el archivo"<<std::endl;
+	std::ifstream fs, fc;
+	std::ofstream fstemp;
+
+	//Buscamos si se encuentra el recurso en la base de datos
+	fs.open("src/bd/recursos.txt");
+	if(!fs){
+		std::cout<<"No se ha podido acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
+
 	while(fs-recurso){
 		if(recurso.get_id()==id){
 			found=true;
 		}
 	}
+
 	if(!found){
 		fs.close();
-		fstemp.close();
-		remove("src/bd/recursos.txt");
-		rename("src/bd/recursostemp.txt", "src/bd/recursos.txt");
 		return false;
 	}
-	std::cout<<"Introduzca los dato a modificar: "<<std::endl;
+	fs.close();
+
+	std::cout<<"Introduzca los datos modificados: "<<std::endl;
 	std::cin>>recurso_mod;
+
+	//Buscamos que el id introducido no esté ya en la base de datos
+	if(recurso_mod.get_id()==id){
+		fs.open("src/bd/recursos.txt");
+		if(!fs){
+			std::cout<<"No se ha podido acceder a la información de los recursos"<<std::endl;
+			return false;
+		}
+
+		while(fs-recurso){
+			if(recurso.get_id()==recurso_mod.get_id()){
+				std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				fs.close();
+				return false;
+			}
+		}
+		fs.close();
+	}
+
+	//Buscamos si el curso introducido está en la base de datos
+	fc.open("src/bd/cursos.txt");
+
+	if(!fc){
+		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		fc.close();
+		return false;
+	}
+
+	while(fc-curso){
+		if(curso.get_id()==recurso_mod.get_curso()){
+			fs.close();
+			return false;
+		}
+	}
+	fc.close();
+
+	//Modificamos el recurso
+	fs.open("src/bd/recursos.txt");
+	fstemp.open("src/bd/recursostemp.txt");
+	if(!fs || !fstemp){
+		std::cout<<"Error al abrir el archivo"<<std::endl;
+		return false;
+	}
+
 	while(fs-recurso){
 		if(recurso.get_id()==id){
 			recurso=recurso_mod;
 		}
 		fstemp<<recurso;
 	}
+
 	fs.close();
 	fstemp.close();
 	remove("src/bd/recursos.txt");
@@ -99,25 +149,18 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 bool Admin_Recursos::del_recurso(std::string id){
 	Recursos recurso;
-	bool found=false;
-	std::ifstream fs("src/bd/recursos.txt");
-	std::ofstream fstemp("src/bd/recursostemp.txt");
+	std::ifstream fs;
+	std::ofstream fstemp;
+	
+	//Eliminamos el recurso
+	fs.open("src/bd/recursos.txt");
+	fstemp.open("src/bd/recursostemp.txt");
+
 	if(!fs || !fstemp){
-			std::cout<<"Error al abrir el archivo"<<std::endl;
-			return false;
-		}
-		while(fs-recurso){
-			if(recurso.get_id()==id){
-				found=true;
-			}
-		}
-	if(!found){
-		fs.close();
-		fstemp.close();
-		remove("src/bd/recursos.txt");
-		rename("src/bd/recursostemp.txt", "src/bd/recursos.txt");
+		std::cout<<"Error al abrir el archivo"<<std::endl;
 		return false;
 	}
+		
 	while(fs-recurso){
 		if(recurso.get_id()!=id){
 			fstemp<<recurso;
@@ -125,6 +168,7 @@ bool Admin_Recursos::del_recurso(std::string id){
 	}
 	fs.close();
 	fstemp.close();
+
 	remove("src/bd/recursos.txt");
 	rename("src/bd/recursostemp.txt", "src/bd/recursos.txt");
 	return true;

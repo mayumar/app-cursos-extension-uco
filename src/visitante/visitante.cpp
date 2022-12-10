@@ -35,7 +35,7 @@ void Visitante:: ver_lista_de_cursos(){
 }
 
 
-bool Visitante:: registrarse(Usuario usuario ){
+bool Visitante:: registrarse(Usuario usuario){
 	std::fstream file_v;
 	Usuario usuario_f;
 
@@ -54,6 +54,44 @@ bool Visitante:: registrarse(Usuario usuario ){
 	}
 
 	file_v.close();
+
+	//Comprobamos si ya hay otro Admin de Cursos
+	if(usuario.get_rol()==Rol::Admin_Cursos){
+		file_v.open("src/bd/usuarios.txt", std::fstream::in);
+		if(!file_v){
+			std::cout<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
+			return false;
+		}
+
+		while(file_v-usuario_f){
+			if(usuario_f.get_rol()==Rol::Admin_Cursos){
+				std::cout<<"Error, ya existe otro administrador de cursos"<<std::endl;
+				file_v.close();
+				return false;
+			}
+		}
+
+		file_v.close();
+	}
+
+	//Comprobamos si ya hay otro Admin de Recursos
+	if(usuario.get_rol()==Rol::Admin_Recursos){
+		file_v.open("src/bd/usuarios.txt", std::fstream::in);
+		if(!file_v){
+			std::cout<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
+			return false;
+		}
+
+		while(file_v-usuario_f){
+			if(usuario_f.get_rol()==Rol::Admin_Recursos){
+				std::cout<<"Error, ya existe otro administrador de recursos"<<std::endl;
+				file_v.close();
+				return false;
+			}
+		}
+
+		file_v.close();
+	}
 
 	file_v.open("src/bd/usuarios.txt", std::fstream::app);
 	if(!file_v.is_open()){
