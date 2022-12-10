@@ -28,7 +28,7 @@ class Admin_Cursos: public Usuario {
 		bool add_curso(Curso curso);
 		bool mod_curso(std::string id);
 		bool del_curso(std::string id);
-		bool ver_lista_de_inscritos();
+		bool ver_lista_de_inscritos(std::string id);
 };
 
 struct inscripciones{
