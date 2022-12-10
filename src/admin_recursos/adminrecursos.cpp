@@ -91,21 +91,22 @@ bool Admin_Recursos::mod_recurso(std::string id){
 	std::cin>>recurso_mod;
 
 	//Buscamos que el id introducido no esté ya en la base de datos
-	fs.open("src/bd/recursos.txt");
-
-	if(!fs){
-		std::cout<<"No se ha podido acceder a la información de los recursos"<<std::endl;
-		return false;
-	}
-
-	while(fs-recurso){
-		if(recurso.get_id()==recurso_mod.get_id()){
-			std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
-			fs.close();
+	if(recurso_mod.get_id()==id){
+		fs.open("src/bd/recursos.txt");
+		if(!fs){
+			std::cout<<"No se ha podido acceder a la información de los recursos"<<std::endl;
 			return false;
 		}
+
+		while(fs-recurso){
+			if(recurso.get_id()==recurso_mod.get_id()){
+				std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				fs.close();
+				return false;
+			}
+		}
+		fs.close();
 	}
-	fs.close();
 
 	//Buscamos si el curso introducido está en la base de datos
 	fc.open("src/bd/cursos.txt");
@@ -151,25 +152,6 @@ bool Admin_Recursos::del_recurso(std::string id){
 	bool found=false;
 	std::ifstream fs;
 	std::ofstream fstemp;
-	
-	//Comprobamos si el recurso existe en el sistema
-	fs.open("src/bd/recursos.txt");
-	if(!fs){
-		std::cout<<"Error al acceder a la información de los recursos"<<std::endl;
-		return false;
-	}
-
-	while(fs-recurso){
-		if(recurso.get_id()==id){
-			found=true;
-		}
-	}
-
-	if(!found){
-		fs.close();
-		return false;
-	}
-	fs.close();
 	
 	//Eliminamos el recurso
 	fs.open("src/bd/recursos.txt");

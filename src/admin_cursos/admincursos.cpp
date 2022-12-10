@@ -72,21 +72,23 @@ bool Admin_Cursos::mod_curso(std::string id){
 	std::cin>>curso_modif;
 
 	//Comprobamos que el id introducido no se encuentre ya en la base de datos
-	fs.open("src/bd/cursos.txt");
-	if(!fs){
-		std::cout<<"Error al acceder a la información de los cursos"<<std::endl;
-		return false;
-	}
-
-	while(fs-curso){
-		if(curso.get_id()==curso_modif.get_id()){
-			std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
-			fs.close();
+	if(curso_modif.get_id()!=id){	
+		fs.open("src/bd/cursos.txt");
+		if(!fs){
+			std::cout<<"Error al acceder a la información de los cursos"<<std::endl;
 			return false;
 		}
+
+		while(fs-curso){
+			if(curso.get_id()==curso_modif.get_id()){
+				std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				fs.close();
+				return false;
+			}
+		}
+		fs.close();
 	}
-	fs.close();
-	
+
 	//Modificamos el curso
 	fs.open("src/bd/cursos.txt");
 	fstemp.open("src/bd/cursostemp.txt");
@@ -111,28 +113,8 @@ bool Admin_Cursos::mod_curso(std::string id){
 
 bool Admin_Cursos::del_curso(std::string id){
 	Curso curso;
-	bool found=false;
 	std::ifstream fs;
 	std::ofstream fstemp;
-
-	//Buscamos si existe el curso
-	fs.open("src/bd/cursos.txt");
-	if(!fs){
-		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
-		return false;
-	}
-
-	while(fs-curso){
-		if(curso.get_id()==id){
-			found=true;
-		}
-	}
-
-	if(!found){
-		fs.close();
-		return false;
-	}
-	fs.close();
 
 	//Borramos el curso
 	fs.open("src/bd/cursos.txt");
@@ -214,21 +196,23 @@ bool Admin_Cursos::mod_usuario(std::string dni){
 	std::cin>>usuario_mod;
 
 	//Comprobamos si el dni introducido no está se encuentra ya en el sistema
-	fu.open("src/bd/usuarios.txt");
-	found=false;
-	if(!fu){
-		std::cout<<"No se ha podido acceder a la información de contacto"<<std::endl;
-		return false;
-	}
-
-	while(fu-usuario){
-		if(usuario.get_dni()==usuario_mod.get_dni()){
-			std::cout<<"El dni que se intenta introducir ya se encuentra en la base de datos"<<std::endl;
-			fu.close();
+	if(usuario_mod.get_dni()!=dni){
+		fu.open("src/bd/usuarios.txt");
+		found=false;
+		if(!fu){
+			std::cout<<"No se ha podido acceder a la información de contacto"<<std::endl;
 			return false;
 		}
+
+		while(fu-usuario){
+			if(usuario.get_dni()==usuario_mod.get_dni()){
+				std::cout<<"El dni que se intenta introducir ya se encuentra en la base de datos"<<std::endl;
+				fu.close();
+				return false;
+			}
+		}
+		fu.close();
 	}
-	fu.close();
 
 	//Modificamos el usuario
 	fu.open("src/bd/usuarios.txt");
@@ -257,25 +241,6 @@ bool Admin_Cursos::del_usuario(std::string dni){
 	std::ofstream futemp;
 	Usuario usuario;
 	bool found=false;
-
-	//Buscamos si existe el usuario
-	fu.open("src/bd/usuarios.txt");
-	if(!fu){
-		std::cout<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
-		return false;
-	}
-
-	while(fu-usuario){
-		if(usuario.get_dni()==dni){
-			found=true;
-		}
-	}
-
-	if(!found){
-		fu.close();
-		return false;
-	}
-	fu.close();
 
 	//Eliminamos el usuario
 	fu.open("src/bd/usuarios.txt");
