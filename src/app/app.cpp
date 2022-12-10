@@ -14,6 +14,11 @@ int main(){
 	Admin_Recursos admin_r;
 	Ponente ponente;
 
+	std::cout<<"BIENVENIDO A LA PAGINA DE CURSOS DE EXTENSIÓN DE LA UNIVERDAD DE CÓRDOBA"<<std::endl;
+	std::cout<<std::endl;
+
+	std::cout<<"Estos son los cursos activos: "<<std::endl;
+	visitante.ver_lista_de_cursos();
 	do{
 		std::cout<<std::endl;
 		std::cout<<"Se encuentra en modo visitante, inicie sesión para más funcionalidades."<<std::endl<<std::endl;

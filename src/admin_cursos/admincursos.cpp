@@ -240,7 +240,6 @@ bool Admin_Cursos::del_usuario(std::string dni){
 	std::ifstream fu;
 	std::ofstream futemp;
 	Usuario usuario;
-	bool found=false;
 
 	//Eliminamos el usuario
 	fu.open("src/bd/usuarios.txt");

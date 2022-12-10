@@ -149,7 +149,6 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 bool Admin_Recursos::del_recurso(std::string id){
 	Recursos recurso;
-	bool found=false;
 	std::ifstream fs;
 	std::ofstream fstemp;
 	
