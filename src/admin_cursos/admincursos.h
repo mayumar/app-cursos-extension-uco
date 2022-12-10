@@ -28,10 +28,17 @@ class Admin_Cursos: public Usuario {
 		bool add_curso(Curso curso);
 		bool mod_curso(std::string id);
 		bool del_curso(std::string id);
-
-		bool add_usuario(Usuario usuario);
+    
+    bool add_usuario(Usuario usuario);
 		bool mod_usuario(std::string dni);
 		bool del_usuario(std::string dni);
+    
+		bool ver_lista_de_inscritos(std::string id);
+};
+
+struct inscripciones{
+	std::string id_curso;
+	std::string dni;
 };
 
 #endif /* ADMIN_CURSOS_ADMINCURSOS_H_ */

@@ -42,7 +42,7 @@ class Usuario {
 
 		inline std::string get_nombre() const {return nombre_;}
 		inline std::string get_apellidos() const {return apellidos_;}
-		inline std::string get_dni() const {return dni_;}
+		inline std::string get_dni() {return dni_;}
 		inline std::string get_correo() const {return correo_;}
 		inline std::string get_contraseña() const {return contraseña_;}
 		inline std::string get_usuario() const {return usuario_;}
