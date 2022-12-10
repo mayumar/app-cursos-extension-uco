@@ -92,7 +92,6 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 	//Buscamos que el id introducido no esté ya en la base de datos
 	fs.open("src/bd/recursos.txt");
-	found=false;
 
 	if(!fs){
 		std::cout<<"No se ha podido acceder a la información de los recursos"<<std::endl;
@@ -101,20 +100,15 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 	while(fs-recurso){
 		if(recurso.get_id()==recurso_mod.get_id()){
-			found=true;
+			std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+			fs.close();
+			return false;
 		}
-	}
-
-	if(!found){
-		std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
-		fs.close();
-		return false;
 	}
 	fs.close();
 
 	//Buscamos si el curso introducido está en la base de datos
 	fc.open("src/bd/cursos.txt");
-	found=false;
 
 	if(!fc){
 		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
@@ -124,20 +118,13 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 	while(fc-curso){
 		if(curso.get_id()==recurso_mod.get_curso()){
-			found=true;
+			fs.close();
+			return false;
 		}
-	}
-
-	if(!found){
-		fs.close();
-		fstemp.close();
-		remove("src/bd/recursostemp.txt");
-		return false;
 	}
 	fc.close();
 
 	//Modificamos el recurso
-	
 	fs.open("src/bd/recursos.txt");
 	fstemp.open("src/bd/recursostemp.txt");
 	if(!fs || !fstemp){

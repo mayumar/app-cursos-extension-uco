@@ -209,7 +209,8 @@ void participanteMenu(Participante participante){
 void adminCursosMenu(Admin_Cursos admin){
 	int opt;
 	Curso curso;
-	std::string curso_id;
+	Usuario usuario;
+	std::string curso_id, usuario_dni;
 
 	do{
 		std::cout<<std::endl;
@@ -238,15 +239,39 @@ void adminCursosMenu(Admin_Cursos admin){
 			break;
 
 			case 2:
-				std::cout<<"Añadir cuenta"<<std::endl;
+
+				std::cout<<"Introduzca los datos de la cuenta a añadir:"<<std::endl;
+				std::cin>>usuario;
+				if(!admin.add_usuario(usuario)){
+					std::cout<<"Error, el usuario que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El usuario ha sido añadido con exito"<<std::endl;
+				}
+
 			break;
 
 			case 3:
-				std::cout<<"Modificar cuenta"<<std::endl;
+				
+				std::cout<<"Introduzca el dni del usuario a modificar"<<std::endl;
+				std::cin>>usuario_dni;
+				if(!admin.mod_usuario(usuario_dni)){
+					std::cout<<"Error, el usuario que se busca modificar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El usuario ha sido modificado con exito"<<std::endl;
+				}
+
 			break;
 
 			case 4:
-				std::cout<<"Eliminar cuenta"<<std::endl;
+				
+				std::cout<<"Introduzca el dni del curso a eliminar"<<std::endl;
+				std::cin>>usuario_dni;
+				if(!admin.del_usuario(usuario_dni)){
+					std::cout<<"Error, el usuario que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El usuario ha sido eliminado con exito"<<std::endl;
+				}
+
 			break;
 
 			case 5:
