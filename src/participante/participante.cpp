@@ -20,22 +20,43 @@
  */
 
 bool Participante::inscribirse(std::string id_curso){
-	std::fstream file_i;
+	std::fstream file_i, file_c;
 	Curso curso;
 	bool encontrado=false;
+	int plazas;
+	std::list<Curso> lista_curso;
+	std::list<Curso>::iterator it;
 
-	std::ifstream file_c;
-	file_c.open("src/bd/cursos.txt");
-	if(!file_c.is_open()){
+	file_c.open("src/bd/cursos.txt", std::fstream::in);
+	if(!file_c){
 		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
+	while(file_c-curso){
+		lista_curso.push_back(curso);
+	}
+	file_c.close();
 
-	while(!file_c.eof() && !encontrado){
-		file_c-curso;
-		if(curso.get_id()==id_curso){
+	//Comprobamos si el curso al que queremos inscribirnos existe y si existe nos inscribimos
+	for(it=lista_curso.begin(); it!=lista_curso.end() && !encontrado; it++){
+		if(id_curso==it->get_id()){
+			file_i.open("src/bd/inscripciones.txt", std::fstream::app);
+			if(!file_i){
+				std::cout<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+				return false;
+			}
+
+			file_i<<id_curso<<std::endl;
+			file_i<<get_dni()<<std::endl;
+			file_i.close();
+
+			plazas=it->get_plazasCubiertas();
+			plazas++;
+			
+			it->set_plazasCubiertas(plazas);
 			encontrado=true;
+			file_i.close();
 		}
 	}
 
@@ -44,15 +65,16 @@ bool Participante::inscribirse(std::string id_curso){
 		return false;
 	}
 
-	file_i.open("src/bd/inscripciones.txt", std::fstream::app);
-	if(!file_i.is_open()){
-		std::cout<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+	//Volvemos a cargar la lista al fichero
+	file_c.open("src/bd/cursos.txt", std::fstream::out);
+	if(!file_c){
+		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
-	file_i<<id_curso<<std::endl;
-	file_i<<get_dni()<<std::endl;
-	file_i.close();
+	for(it=lista_curso.begin(); it!=lista_curso.end(); it++){
+		file_c<<*it;
+	}
 	file_c.close();
 	return true;
 }

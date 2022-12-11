@@ -19,7 +19,7 @@ Nombre de curso3
 Descripcion del curso3
 fechaIncio3
 fechaFinal3
-3
+4
 33
 0.0727273
 C4
