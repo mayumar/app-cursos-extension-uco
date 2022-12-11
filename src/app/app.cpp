@@ -181,7 +181,7 @@ void participanteMenu(Participante participante){
 			break;
 
 			case 3:
-				std::cout<<"Ver cursos inscrito"<<std::endl;
+				participante.ver_cursos_inscrito();
 			break;
 
 			case 4:
@@ -299,6 +299,9 @@ void adminCursosMenu(Admin_Cursos admin){
 			break;
 
 			case 8:
+
+				std::cout<< "Indique el id del curso del cual quiere ver las inscripciones"<<std::endl;
+				std::cin>>curso_id;
 				admin.ver_lista_de_inscritos(curso_id);
 			break;
 		}

@@ -56,3 +56,42 @@ bool Participante::inscribirse(std::string id_curso){
 	file_c.close();
 	return true;
 }
+
+bool Participante::ver_cursos_inscrito(){
+	std::ifstream inscritos;
+	std::ifstream cursos;
+	Curso curso;
+	struct inscripciones inscripcion;
+	std::list<Curso> lista_cursos;
+	std::list<Curso>::iterator it;
+
+	inscritos.open("src/bd/inscripciones.txt");
+	cursos.open("src/bd/cursos.txt");
+	if(!inscritos || !cursos){
+		std::cout<<"Error al abrir el archivo"<<std::endl;
+		return false;
+	}
+
+	//Cargamos cursos.txt en una lista
+	while(cursos-curso){
+		lista_cursos.push_back(curso);
+	}
+	cursos.close();
+
+	std::cout<<std::endl;
+	std::cout<<"Cursos a los que está inscrito:"<<std::endl;
+
+	while(inscritos>>inscripcion.id_curso){
+		  inscritos>>inscripcion.dni;
+		if(inscripcion.dni==get_dni()){
+			for(it=lista_cursos.begin(); it!=lista_cursos.end(); it++){
+				if(inscripcion.id_curso==it->get_id()){
+					std::cout<<std::endl;
+					std::cout<<it->get_nombre()<<" ("<<it->get_id()<<")"<<std::endl;
+				}
+			}
+		}
+	}
+	inscritos.close();
+	return true;
+}

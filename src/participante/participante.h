@@ -10,6 +10,7 @@
 #define PARTICIPANTE_PARTICIPANTE_H_
 
 #include "../usuario/usuario.h"
+#include "../admin_cursos/admincursos.h"
 
 class Participante: public Usuario {
 
@@ -25,6 +26,7 @@ class Participante: public Usuario {
 		virtual ~Participante(){}
 
 		bool inscribirse(std::string id_curso);
+		bool ver_cursos_inscrito();
 
 };
 

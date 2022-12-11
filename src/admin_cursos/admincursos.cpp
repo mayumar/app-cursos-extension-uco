@@ -285,10 +285,6 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 	}
 	usuarios.close();
 
-	//Pedimos el curso del cual quiere ver las inscripciones
-	std::cout<< "Indique el id del curso del cual quiere ver las inscripciones"<<std::endl;
-	std::cin>>id;
-
 	std::cout<<std::endl;
 	std::cout<<"Datos de los alumnos inscritos al curso "<<id<<":"<<std::endl;
 
