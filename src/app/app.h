@@ -10,7 +10,6 @@
 	void participanteMenu(Participante participante);
 	void adminCursosMenu(Admin_Cursos admin);
 	void adminRecursosMenu(Admin_Recursos admin);
-	void ponenteMenu(Ponente ponente);
 
 	bool ver_info_contacto();
 

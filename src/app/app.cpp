@@ -97,21 +97,6 @@ int main(){
 
 					break;
 
-					case(Rol::Ponente):
-						
-						//El usuario pasa de ser tipo usuario a tipo Ponente
-						ponente.set_nombre(usuario.get_nombre());
-						ponente.set_apellidos(usuario.get_apellidos());
-						ponente.set_dni(usuario.get_dni());
-						ponente.set_correo(usuario.get_correo());
-						ponente.set_contraseña(usuario.get_contraseña());
-						ponente.set_usuario(usuario.get_usuario());
-						ponente.set_rol(usuario.get_rol());
-
-						ponenteMenu(ponente);
-
-					break;
-
 					case(Rol::Empty):
 
 						std::cout<<std::endl<<"Usuario o contraseña incorrectos, vuelva a intentarlo"<<std::endl;
@@ -149,9 +134,6 @@ int main(){
 				adminRecursosMenu(admin_r);
 			break;
 
-			case -4:
-				ponenteMenu(ponente);
-			break;
 		}
 
 	}while(opt!=5);
@@ -398,37 +380,6 @@ void adminRecursosMenu(Admin_Recursos admin){
 
 	}while(opt!=6);
 
-}
-
-//Menú para ponentes
-void ponenteMenu(Ponente ponente){
-	int opt;
-
-	do{
-		std::cout<<std::endl;
-		std::cout<<"Se encuentra en modo ponente"<<std::endl<<std::endl;
-		std::cout<<"Introduzca una opcion"<<std::endl;
-		std::cout<<"1. Ver los cursos activos"<<std::endl;
-		std::cout<<"2. Ver informacion de contacto de los administradores"<<std::endl;
-		std::cout<<"3. Cerrar sesion"<<std::endl;
-		std::cin>>opt;
-
-		if(opt<1 || opt>3){
-			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
-		}
-
-		switch(opt){
-			case 1:
-				std::cout<<std::endl<<"Lista de cursos activos: "<<std::endl<<std::endl;
-				ponente.ver_lista_de_cursos();
-			break;
-
-			case 2:
-				ver_info_contacto();
-			break;
-		}
-
-	}while(opt!=3);
 }
 
 bool ver_info_contacto(){

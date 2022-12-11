@@ -87,8 +87,6 @@ std::istream &operator>>(std::istream &stream, Rol &rol){
 		rol=Rol::Admin_Cursos;
 	}else if(rol_i==3){
 		rol=Rol::Admin_Recursos;
-	}else if(rol_i==4){
-		rol=Rol::Ponente;
 	}
 
 	return stream;
@@ -113,7 +111,6 @@ std::istream &operator>>(std::istream &stream, Usuario &u){
 	std::cout<<"1 -> Participante"<<std::endl;
 	std::cout<<"2 -> Administrador de Cursos"<<std::endl;
 	std::cout<<"3 -> Administrador de Recursos"<<std::endl;
-	std::cout<<"4 -> Ponente"<<std::endl;
 	stream>>u.rol_;
 	stream.get();
 
