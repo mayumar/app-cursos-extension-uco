@@ -299,7 +299,7 @@ void adminCursosMenu(Admin_Cursos admin){
 			break;
 
 			case 8:
-				std::cout<<"Lista de inscritos"<<std::endl;
+				admin.ver_lista_de_inscritos(curso_id);
 			break;
 		}
 

@@ -11,6 +11,7 @@
 
 #include "../usuario/usuario.h"
 #include "../curso/curso.h"
+#include <list>
 
 class Admin_Cursos: public Usuario {
 

@@ -269,34 +269,44 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 	std::ifstream usuarios;
 	Usuario usuario;
 	struct inscripciones inscripcion;
+	std::list<Usuario> lista_usuarios;
+	std::list<Usuario>::iterator it;
+
 	inscritos.open("src/bd/inscripciones.txt");
 	usuarios.open("src/bd/usuarios.txt");
-
 	if(!inscritos || !usuarios){
 		std::cout << "Error al abrir el archivo" << std::endl;
 		return false;
 	}
 
-	std::cout<< "Indique el id del curso del cual quiere ver las inscripciones"<<std::endl; //pedimos el curso del cual quiere ver las inscripciones
+	//Cargamos usuarios.txt en una lista
+	while(usuarios-usuario){
+		lista_usuarios.push_back(usuario);
+	}
+	usuarios.close();
+
+	//Pedimos el curso del cual quiere ver las inscripciones
+	std::cout<< "Indique el id del curso del cual quiere ver las inscripciones"<<std::endl;
 	std::cin>>id;
+
+	std::cout<<std::endl;
+	std::cout<<"Datos de los alumnos inscritos al curso "<<id<<":"<<std::endl;
 
 	while(inscritos>>inscripcion.id_curso){
 		  inscritos>>inscripcion.dni; //leemos cada registro de inscripciones.txt
 		if(inscripcion.id_curso==id){
-			while(usuarios- usuario){
-				if(inscripcion.dni==usuario.get_dni()){
-					std::cout<<"Nombre: " <<usuario.get_nombre()<<std::endl;
-					std::cout<<"Apellidos: " <<usuario.get_apellidos()<<std::endl;
-					std::cout<<"Correo: " <<usuario.get_correo()<<std::endl;
-					std::cout<<"Usuario: " <<usuario.get_usuario()<<std::endl;
-
+			for(it=lista_usuarios.begin(); it!=lista_usuarios.end(); it++){
+				if(inscripcion.dni==it->get_dni()){
+					std::cout<<std::endl;
+					std::cout<<"Nombre: " <<it->get_nombre()<<std::endl;
+					std::cout<<"Apellidos: " <<it->get_apellidos()<<std::endl;
+					std::cout<<"DNI: "<<it->get_dni()<<std::endl;
+					std::cout<<"Correo: " <<it->get_correo()<<std::endl;
+					std::cout<<"Usuario: " <<it->get_usuario()<<std::endl;
 				}
-
 			}
-
 		}
 	}
 	inscritos.close();
-	usuarios.close();
 	return true;
 }
