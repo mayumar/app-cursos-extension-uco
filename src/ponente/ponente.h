@@ -10,12 +10,14 @@
 #define PONENTE_PONENTE_H_
 
 #include <string>
-#include "../usuario/usuario.h"
 
-class Ponente: public Usuario {
+class Ponente{
 
 	private:
 
+		std::string nombre_;
+		std::string apellidos_;
+		std::string dni_;
 		std::string curso_;
 
 	public:
@@ -23,17 +25,20 @@ class Ponente: public Usuario {
 		inline Ponente (std::string nombre="empty",
 						std::string apellidos="empty",
 						std::string dni="empty",
-						std::string correo="empty",
-						std::string contraseña="empty",
-						std::string usuario="empty",
-						std::string curso="empty"):Usuario(nombre, apellidos, dni,
-														   correo, contraseña,
-														   usuario), curso_(curso){}
-    inline ~Ponente(){}
+						std::string curso="empty"):nombre_(nombre), apellidos_(apellidos),
+												   dni_(dni), curso_(curso){}
 
-	inline std::string get_curso() const {return curso_;}
+		inline ~Ponente(){}
 
-	inline void set_curso (std::string curso) {curso_=curso;}
+		inline std::string get_nombre() const {return nombre_;}
+		inline std::string get_apellidos() const {return apellidos_;}
+		inline std::string get_dni() const {return dni_;}
+		inline std::string get_curso() const {return curso_;}
+
+		inline void set_nombre (std::string nombre) {nombre_=nombre;}
+		inline void set_apellidos (std::string apellidos) {apellidos_=apellidos;}
+		inline void set_dni (std::string dni) {dni_=dni;}
+		inline void set_curso (std::string curso) {curso_=curso;}
 };
 
 #endif /* PONENTE_PONENTE_H_ */
