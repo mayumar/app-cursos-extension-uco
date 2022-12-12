@@ -55,6 +55,7 @@ class Curso {
 		inline void set_fechaFinal (std::string fechaFinal) {fechaFinal_=fechaFinal;}
 		inline void set_plazasCubiertas (int plazasCubiertas) {plazasCubiertas_=plazasCubiertas;}
 		inline void set_plazasMax (int plazasMax) {plazasMax_=plazasMax;}
+		inline void actualizar_alcance () {alcance_=plazasCubiertas_/(plazasMax_*1.0);}
 
 		Curso operator=(Curso &c);
 

@@ -3,25 +3,25 @@ Nombre de curso1
 Descripción del curso1
 fechaInicio1
 fechaFinal1
-1
+2
 11
-0.1
+0.181818
 C2
 Nombre de curso2
 Descripcion del curso2
 fechaInicio2
 fechaFinal2
-2
 22
-0.2
+22
+1
 C3
 Nombre de curso3
 Descripcion del curso3
 fechaIncio3
 fechaFinal3
-4
 33
-0.0727273
+33
+1
 C4
 Nombre de curso4
 Descripcion del curso4

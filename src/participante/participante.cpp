@@ -6,9 +6,6 @@
  */
 
 #include "participante.h"
-#include "../curso/curso.h"
-#include <fstream>
-#include <iostream>
 
 /*Función que permite a un participante
  *inscribirse a un curso
@@ -20,12 +17,13 @@
  */
 
 bool Participante::inscribirse(std::string id_curso){
-	std::fstream file_i, file_c;
+	std::fstream file_i, file_c, file_l;
 	Curso curso;
 	bool encontrado=false;
 	int plazas;
 	std::list<Curso> lista_curso;
 	std::list<Curso>::iterator it;
+
 
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c){
@@ -41,20 +39,40 @@ bool Participante::inscribirse(std::string id_curso){
 	//Comprobamos si el curso al que queremos inscribirnos existe y si existe nos inscribimos
 	for(it=lista_curso.begin(); it!=lista_curso.end() && !encontrado; it++){
 		if(id_curso==it->get_id()){
-			file_i.open("src/bd/inscripciones.txt", std::fstream::app);
-			if(!file_i){
-				std::cout<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
-				return false;
-			}
-
-			file_i<<id_curso<<std::endl;
-			file_i<<get_dni()<<std::endl;
-			file_i.close();
-
+		
 			plazas=it->get_plazasCubiertas();
 			plazas++;
+
+			if(plazas>it->get_plazasMax()){
+				std::cout<<"No hay plazas libres, será enviado a una lista de espera"<<std::endl<<std::endl;
+
+				plazas=it->get_plazasMax();
+				file_l.open("src/bd/listaespera.txt", std::fstream::app);
+				if(!file_l){
+					std::cout<<"Error, no se ha podido acceder a la información de la lista de espera"<<std::endl;
+					return false;
+				}
+
+				file_l<<id_curso<<std::endl;
+				file_l<<get_dni()<<std::endl;
+				file_l.close();
+
+			}else{
+				
+				file_i.open("src/bd/inscripciones.txt", std::fstream::app);
+				if(!file_i){
+					std::cout<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+					return false;
+				}
+
+				file_i<<id_curso<<std::endl;
+				file_i<<get_dni()<<std::endl;
+				file_i.close();
+
+			}
 			
 			it->set_plazasCubiertas(plazas);
+			it->actualizar_alcance();
 			encontrado=true;
 			file_i.close();
 		}

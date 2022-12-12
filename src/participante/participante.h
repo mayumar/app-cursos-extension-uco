@@ -11,7 +11,10 @@
 
 #include "../usuario/usuario.h"
 #include "../admin_cursos/admincursos.h"
+#include "../curso/curso.h"
 #include <list>
+#include <fstream>
+#include <iostream>
 
 class Participante: public Usuario {
 
