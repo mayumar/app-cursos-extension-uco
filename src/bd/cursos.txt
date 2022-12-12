@@ -27,14 +27,14 @@ Nombre de curso4
 Descripcion del curso4
 fechaInicio4
 fechaFinal4
-4
+6
 44
-0.44
+0.136364
 C5
 Nombre de curso5
 Descripcion del curso5
 fechaInicio5
 fechaFinal5
-6
+4
 7
-0.857143
+0.571429

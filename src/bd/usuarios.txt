@@ -19,3 +19,10 @@ Apellidos 3
 user3
 password3
 3
+DNI4
+user4@prueba.com
+Nombre 4
+Apellidos 4
+user4
+password4
+1

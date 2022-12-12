@@ -13,39 +13,51 @@ int main(){
 	Admin_Cursos admin_c;
 	Admin_Recursos admin_r;
 	Ponente ponente;
-
-	std::cout<<"BIENVENIDO A LA PAGINA DE CURSOS DE EXTENSIÓN DE LA UNIVERDAD DE CÓRDOBA"<<std::endl;
+	// 《 》
 	std::cout<<std::endl;
+	std::cout<<"______________________________________________________________"<<std::endl;
+	std::cout<<std::endl;
+	std::cout<<"   PAGINA DE CURSOS DE EXTENSIÓN DE LA UNIVERDAD DE CÓRDOBA   "<<std::endl;
+	std::cout<<"______________________________________________________________"<<std::endl;
 
-	std::cout<<"Estos son los cursos activos: "<<std::endl;
+	std::cout<<std::endl<<"---------------------《 CURSOS ACTIVOS 》---------------------"<<std::endl<<std::endl;
 	visitante.ver_lista_de_cursos();
+
 	do{
 		std::cout<<std::endl;
-		std::cout<<"Se encuentra en modo visitante, inicie sesión para más funcionalidades."<<std::endl<<std::endl;
+		std::cout<<"—————————————————————《 MODO VISITANTE 》—————————————————————"<<std::endl;
+		std::cout<<"---------《 Inicie sesión para más funcionalidades 》---------"<<std::endl;
+		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver los cursos activos"<<std::endl;
 		std::cout<<"2. Iniciar sesión"<<std::endl;
 		std::cout<<"3. Registrarse"<<std::endl;
 		std::cout<<"4. Ver información de contacto de los administradores"<<std::endl;
 		std::cout<<"5. Salir"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"—————————————————————————————————————————————————————————————"<<std::endl;
+		std::cout<<"》Opcion: ";
 		std::cin>>opt;
 		std::cout<<std::endl;
 
 		if(opt<1 || opt>5){
-			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
+			std::cout<<"Error, introduzca una de las opciones disponibles"<<std::endl<<std::endl;
 		}
 
-		//Menú para visitantes
-		switch(opt){
-			case 1:
-				std::cout<<"Lista de cursos activos:"<<std::endl<<std::endl;
-				visitante.ver_lista_de_cursos();
-			break;
+		// Menú para visitantes
+		switch (opt){
+		case 1:
+			std::cout<<"---------------------《 CURSOS ACTIVOS 》---------------------"<<std::endl<<std::endl;
+			visitante.ver_lista_de_cursos();
+		break;
 
 			case 2:
-				std::cout << "Por favor introduzca su usuario: "<<std::endl;
+
+				std::cout<<"--------------------《 INICIO DE SESIÓN 》--------------------"<<std::endl<<std::endl;
+
+				std::cout << "》Por favor, introduzca su usuario: "<<std::endl;
 				std::cin >> userName;
-				std::cout << "Por favor introduzca su contraseña: "<<std::endl;
+				std::cout << "》Por favor, introduzca su contraseña: "<<std::endl;
 				std::cin >> userPassword;
 
 				usuario=visitante.login(userName, userPassword);
@@ -76,7 +88,6 @@ int main(){
 						admin_c.set_contraseña(usuario.get_contraseña());
 						admin_c.set_usuario(usuario.get_usuario());
 						admin_c.set_rol(usuario.get_rol());
-
 						
 						adminCursosMenu(admin_c);
 
@@ -99,7 +110,7 @@ int main(){
 
 					case(Rol::Empty):
 
-						std::cout<<std::endl<<"Usuario o contraseña incorrectos, vuelva a intentarlo"<<std::endl;
+						std::cout<<std::endl<<"Usuario o contraseña incorrectos, vuelva a intentarlo"<<std::endl<<std::endl;
 
 					break;
 				}
@@ -108,12 +119,14 @@ int main(){
 
 			case 3:
 
-				std::cout<<"Introduzca los datos de la cuenta a registrar: "<<std::endl;
+				std::cout<<"------------------------《 REGISTRO 》------------------------"<<std::endl<<std::endl;
+
+				std::cout<<"》Introduzca los datos de la cuenta a registrar: "<<std::endl;
 				std::cin>>usuario;
 				if(!visitante.registrarse(usuario)){
-					std::cout<<"Error: no se ha podido realizar el registro"<<std::endl;
+					std::cout<<std::endl<<"Error, no se ha podido realizar el registro"<<std::endl<<std::endl;
 				}else{
-					std::cout<<"El registro ha sido realizado con éxito"<<std::endl;
+					std::cout<<std::endl<<"El registro ha sido realizado con éxito"<<std::endl<<std::endl;
 				}
 
 			break;
@@ -147,36 +160,44 @@ void participanteMenu(Participante participante){
 	int opt;
 	std::string id_curso;
 
+	std::cout<<std::endl<< "---------------------《 CURSOS ACTIVOS 》---------------------"<<std::endl<<std::endl;
+	participante.ver_lista_de_cursos();
+
 	do{
 		std::cout<<std::endl;
-		std::cout<<"Se encuentra en modo participante"<<std::endl<<std::endl;
-		std::cout<<"Introduzca una opcion"<<std::endl;
+		std::cout<<"———————————————————《 MODO PARTICIPANTE 》———————————————————"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver los cursos activos"<<std::endl;
 		std::cout<<"2. Inscribirse en un curso"<<std::endl;
-		std::cout<<"3. Ver cursos a los que estoy inscrito"<<std::endl;
+		std::cout<<"3. Mis cursos"<<std::endl;
 		std::cout<<"4. Ver información de contacto de los administradores"<<std::endl;
-		std::cout<<"5. Cerrar sesion"<<std::endl;
+		std::cout<<"5. Cerrar sesion"<<std::endl<<std::endl;
+		std::cout<<"—————————————————————————————————————————————————————————————"<<std::endl;
+		std::cout<<"》Opcion: ";
 		std::cin>>opt;
 		std::cout<<std::endl;
 
 		if(opt<1 || opt>5){
-			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
+			std::cout<<"Error, introduzca una de las opciones disponibles"<<std::endl<<std::endl;
 		}
 
 		switch(opt){
 			case 1:
-				std::cout<<"Cursos activos:"<<std::endl<<std::endl;
+				std::cout<<"---------------------《 CURSOS ACTIVOS 》---------------------"<<std::endl<<std::endl;
 				participante.ver_lista_de_cursos();
 			break;
 
 			case 2:
-				std::cout<<"Introduzca el id del curso al que desea inscribirse:"<<std::endl;
+				std::cout<<"-----------------------《 INSCRIPCIÓN 》-----------------------"<<std::endl<<std::endl;
+
+				std::cout<<"》Introduzca el id del curso al que desea inscribirse:"<<std::endl;
 				std::cin>>id_curso;
 
 				if(!participante.inscribirse(id_curso)){
-					std::cout<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl<<std::endl;
 				}else{
-					std::cout<<"La inscripcion se ha realizado con éxito"<<std::endl;
+					std::cout<<std::endl<<"La inscripcion se ha realizado con éxito"<<std::endl<<std::endl;
 				}
 			break;
 
@@ -198,12 +219,17 @@ void adminCursosMenu(Admin_Cursos admin){
 	Curso curso;
 	Usuario usuario;
 	std::string curso_id, usuario_dni;
+	struct inscripciones inscripcion;
+
+	//＜ ＞〈 〉「 」 『 』 【 】
 
 	do{
 		std::cout<<std::endl;
-		std::cout<<"Se encuentra en modo administrador de cursos"<<std::endl<<std::endl;
-		std::cout<<"Introduzca una opcion"<<std::endl;
+		std::cout<<"———————————————————《 MODO ADMIN CURSOS 》———————————————————"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver lista de cursos"<<std::endl;
+		std::cout<<"——————————————「 Administración de cuentas 」———————————————"<<std::endl;
 		std::cout<<"2. Añadir cuenta al sistema"<<std::endl;
 		std::cout<<"3. Modificar cuenta del sistema"<<std::endl;
 		std::cout<<"4. Eliminar cuenta del sistema"<<std::endl;
@@ -211,17 +237,20 @@ void adminCursosMenu(Admin_Cursos admin){
 		std::cout<<"6. Modificar curso del sistema"<<std::endl;
 		std::cout<<"7. Eliminar curso del sistema"<<std::endl;
 		std::cout<<"8. Ver lista de inscritos de algun curso"<<std::endl;
-		std::cout<<"9. Cerrar sesion"<<std::endl;
+		std::cout<<"9. Eliminar una inscripcion"<<std::endl;
+		std::cout<<"10. Cerrar sesion"<<std::endl<<std::endl;
+		std::cout<<"—————————————————————————————————————————————————————————————"<<std::endl;
+		std::cout<<"》Opcion: ";
 		std::cin>>opt;
 		std::cout<<std::endl;
 
-		if(opt<1 || opt>9){
-			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
+		if(opt<1 || opt>10){
+			std::cout<<"Error, introduzca una de las opciones disponibles"<<std::endl<<std::endl;
 		}
 
 		switch(opt){
 			case 1:
-				std::cout<<"Listado de cursos: "<<std::endl<<std::endl;
+				std::cout<<"-------------------------《 CURSOS 》-------------------------"<<std::endl<<std::endl;
 				admin.ver_lista_de_cursos();
 			break;
 
@@ -303,86 +332,119 @@ void adminCursosMenu(Admin_Cursos admin){
 				std::cout<< "Indique el id del curso del cual quiere ver las inscripciones"<<std::endl;
 				std::cin>>curso_id;
 				admin.ver_lista_de_inscritos(curso_id);
+
 			break;
+
+			case 9:
+
+				std::cout<<"Indique el dni del estudiante del que desea borrar la inscripcion"<<std::endl;
+				std::cin >> inscripcion.dni;
+				std::cout<<"Indique el id del curso al que pertenece la inscripcion"<<std::endl;
+				std::cin >> inscripcion.id_curso;
+
+				if(!admin.del_inscripcion(inscripcion)){
+					std::cout<<"Error, la inscripcion que se buscaba borrar no ha sido encontrada"<<std::endl;
+				}
+				else{
+					std::cout<<"La inscripcion ha sido eliminada con exito"<<std::endl;
+				}
+
+			break;
+
 		}
 
-	}while(opt!=9);
+	}while(opt!=10);
 }
 
-//Menú para el administrador de recursos
-void adminRecursosMenu(Admin_Recursos admin){
+// Menú para el administrador de recursos
+void adminRecursosMenu(Admin_Recursos admin)
+{
 	int opt;
 	Recursos recurso;
 	std::string recurso_id;
 
-	do{
-		std::cout<<std::endl;
-		std::cout<<"Se encuentra en modo administrador de recursos"<<std::endl<<std::endl;
-		std::cout<<"Introduzca una opcion"<<std::endl;
-		std::cout<<"1. Ver listado de cursos"<<std::endl;
-		std::cout<<"2. Añadir recurso al sistema"<<std::endl;
-		std::cout<<"3. Modificar recurso del sistema"<<std::endl;
-		std::cout<<"4. Eliminar recurso del sistema"<<std::endl;
-		std::cout<<"5. Ver lista de recursos de algun curso"<<std::endl;
-		std::cout<<"6. Cerrar sesion"<<std::endl;
-		std::cin>>opt;
+	do
+	{
+		std::cout << std::endl;
+		std::cout << "Se encuentra en modo administrador de recursos" << std::endl
+				  << std::endl;
+		std::cout << "Introduzca una opcion" << std::endl;
+		std::cout << "1. Ver listado de cursos" << std::endl;
+		std::cout << "2. Añadir recurso al sistema" << std::endl;
+		std::cout << "3. Modificar recurso del sistema" << std::endl;
+		std::cout << "4. Eliminar recurso del sistema" << std::endl;
+		std::cout << "5. Ver lista de recursos de algun curso" << std::endl;
+		std::cout << "6. Cerrar sesion" << std::endl;
+		std::cin >> opt;
 
-		if(opt<1 || opt>6){
-			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
+		if (opt < 1 || opt > 6)
+		{
+			std::cout << "Error: introduzca una de las opciones disponibles" << std::endl;
 		}
 
-		switch(opt){
-			case 1:
-				std::cout<<std::endl<<"Listado de cursos: "<<std::endl<<std::endl;
-				admin.ver_lista_de_cursos();
+		switch (opt)
+		{
+		case 1:
+			std::cout << std::endl
+					  << "Listado de cursos: " << std::endl
+					  << std::endl;
+			admin.ver_lista_de_cursos();
 			break;
 
-			case 2:
-				
-				std::cout<<"Introduzca los datos del recurso a añadir"<<std::endl;
-				std::cin>>recurso;
+		case 2:
 
-				if(!admin.add_recurso(recurso)){
-					std::cout<<"Error, el recurso que se busca añadir ya se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
-				}else{
-					std::cout<<"El recurso ha sido añadido con éxito"<<std::endl;
-				}
+			std::cout << "Introduzca los datos del recurso a añadir" << std::endl;
+			std::cin >> recurso;
 
-			break;
-
-			case 3:
-				
-				std::cout<<"Introduzca el id del recurso a modificar"<<std::endl;
-				std::cin>>recurso_id;
-
-				if(!admin.mod_recurso(recurso_id)){
-					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
-				}else{
-					std::cout<<"El recurso se ha modificado con éxito"<<std::endl;
-				}
+			if (!admin.add_recurso(recurso))
+			{
+				std::cout << "Error, el recurso que se busca añadir ya se encuentra en la base de datos o el id del curso es incorrecto" << std::endl;
+			}
+			else
+			{
+				std::cout << "El recurso ha sido añadido con éxito" << std::endl;
+			}
 
 			break;
 
-			case 4:
-				
-				std::cout<<"Introduzca el id del recurso a eliminar"<<std::endl;
-				std::cin>>recurso_id;
+		case 3:
 
-				if(!admin.del_recurso(recurso_id)){
-					std::cout<<"Error, el recurso que se busca eliminar no se encuentra en la base de datos"<<std::endl;
-				}else{
-					std::cout<<"El recurso ha sido eliminado con éxito"<<std::endl;
-				}
+			std::cout << "Introduzca el id del recurso a modificar" << std::endl;
+			std::cin >> recurso_id;
+
+			if (!admin.mod_recurso(recurso_id))
+			{
+				std::cout << "Error, el recurso que se busca modificar no se encuentra en la base de datos o el id del curso es incorrecto" << std::endl;
+			}
+			else
+			{
+				std::cout << "El recurso se ha modificado con éxito" << std::endl;
+			}
 
 			break;
 
-			case 5:
-				std::cout<<"Ver lista de recursos"<<std::endl;
+		case 4:
+
+			std::cout << "Introduzca el id del recurso a eliminar" << std::endl;
+			std::cin >> recurso_id;
+
+			if (!admin.del_recurso(recurso_id))
+			{
+				std::cout << "Error, el recurso que se busca eliminar no se encuentra en la base de datos" << std::endl;
+			}
+			else
+			{
+				std::cout << "El recurso ha sido eliminado con éxito" << std::endl;
+			}
+
+			break;
+
+		case 5:
+			std::cout << "Ver lista de recursos" << std::endl;
 			break;
 		}
 
-	}while(opt!=6);
-
+	} while (opt != 6);
 }
 
 bool ver_info_contacto(){
@@ -393,6 +455,8 @@ bool ver_info_contacto(){
 		std::cout<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
+
+	std::cout<< "--------------------《 INFO DE CONTACTO 》--------------------"<<std::endl<<std::endl;
 
 	while(file-usuario){
 		if(usuario.get_rol()==Rol::Admin_Cursos){

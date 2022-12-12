@@ -17,6 +17,7 @@
 void Usuario:: ver_lista_de_cursos(){
 	std::ifstream fichero;
 	Curso curso;
+	float alcance;
 	fichero.open("src/bd/cursos.txt"); //abre el fichero en modo lectura
 	if(fichero.fail()){
 		std::cout<< "No se pudo abrir la lista de los cursos actuales"<<std::endl;
@@ -24,12 +25,15 @@ void Usuario:: ver_lista_de_cursos(){
 	}
 
 	while(fichero-curso){ //lee cada uno de los registros
+		alcance=curso.get_alcance();
+		alcance=alcance*100;
 
 		std::cout<<curso.get_nombre()<<" ("<<curso.get_id()<<")"<<std::endl;
 		std::cout<<curso.get_descripcion()<<std::endl;
 		std::cout<<"Fecha de Inicio: "<<curso.get_fechaInicio()<<std::endl;
 		std::cout<<"Fecha de finalizacion: "<<curso.get_fechaFinal()<<std::endl;
 		std::cout<<"Plazas cubiertas: "<<curso.get_plazasCubiertas()<<"/"<<curso.get_plazasMax()<<std::endl;
+		std::cout<<"Alcance del curso: "<<alcance<<"%"<<std::endl;
 		std::cout<<std::endl;
 	}
 	fichero.close(); //Cerramos el fichero
@@ -107,7 +111,7 @@ std::istream &operator>>(std::istream &stream, Usuario &u){
 	stream>>u.usuario_;
 	std::cout<<"Contraseña: ";
 	stream>>u.contraseña_;
-	std::cout<<"Rol, Introduzca uno de los siguientes números:"<<std::endl;
+	std::cout<<std::endl<<"Rol, Introduzca uno de los siguientes números:"<<std::endl;
 	std::cout<<"1 -> Participante"<<std::endl;
 	std::cout<<"2 -> Administrador de Cursos"<<std::endl;
 	std::cout<<"3 -> Administrador de Recursos"<<std::endl;

@@ -41,13 +41,13 @@ bool Visitante:: registrarse(Usuario usuario){
 
 	file_v.open("src/bd/usuarios.txt", std::fstream::in);
 	if(!file_v.is_open()){
-		std::cout<<"Error, no se ha podido acceder para su registro"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder para su registro"<<std::endl;
 		return false;
 	}
 
 	while(file_v-usuario_f){
 		if(usuario.get_dni()==usuario_f.get_dni()){
-			std::cout<<"Error, ya se encuentra registrado el usuario"<<std::endl;
+			std::cout<<std::endl<<"Error, ya se encuentra registrado el usuario"<<std::endl;
 			file_v.close();
 			return false;
 		}
@@ -59,13 +59,13 @@ bool Visitante:: registrarse(Usuario usuario){
 	if(usuario.get_rol()==Rol::Admin_Cursos){
 		file_v.open("src/bd/usuarios.txt", std::fstream::in);
 		if(!file_v){
-			std::cout<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
+			std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
 			return false;
 		}
 
 		while(file_v-usuario_f){
 			if(usuario_f.get_rol()==Rol::Admin_Cursos){
-				std::cout<<"Error, ya existe otro administrador de cursos"<<std::endl;
+				std::cout<<std::endl<<"Error, ya existe otro administrador de cursos"<<std::endl;
 				file_v.close();
 				return false;
 			}
@@ -78,13 +78,13 @@ bool Visitante:: registrarse(Usuario usuario){
 	if(usuario.get_rol()==Rol::Admin_Recursos){
 		file_v.open("src/bd/usuarios.txt", std::fstream::in);
 		if(!file_v){
-			std::cout<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
+			std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
 			return false;
 		}
 
 		while(file_v-usuario_f){
 			if(usuario_f.get_rol()==Rol::Admin_Recursos){
-				std::cout<<"Error, ya existe otro administrador de recursos"<<std::endl;
+				std::cout<<std::endl<<"Error, ya existe otro administrador de recursos"<<std::endl;
 				file_v.close();
 				return false;
 			}
@@ -95,7 +95,7 @@ bool Visitante:: registrarse(Usuario usuario){
 
 	file_v.open("src/bd/usuarios.txt", std::fstream::app);
 	if(!file_v.is_open()){
-		std::cout<<"Error, no se ha podido acceder para su registro"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder para su registro"<<std::endl;
 		return false;
 	}
 
@@ -114,13 +114,13 @@ Usuario Visitante::login(std::string user, std::string password){
 
 	fichero.open("src/bd/usuarios.txt");
 	if(!fichero.is_open()){
-		std::cout<<"Error, no se ha podido acceder a la información del sistema"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información del sistema"<<std::endl;
 		return usuarioerror;
 	}
 
 	while (fichero-usuario){
 		if (usuario.get_usuario()==user && usuario.get_contraseña()==password){
-			std::cout << "Ha iniciado sesión correctamente"<<std::endl;
+			std::cout<<std::endl<<"Ha iniciado sesión correctamente"<<std::endl<<std::endl;
 			fichero.close();
 			return usuario;
 		}

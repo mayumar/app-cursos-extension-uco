@@ -306,3 +306,114 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 	inscritos.close();
 	return true;
 }
+
+bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
+	std::fstream file_i, file_c, file_e;
+	struct inscripciones i;
+	Curso curso;
+	bool encontrado=false, found=false;
+	int plazas;
+	std::list<struct inscripciones> lista_inscritos;
+	std::list<Curso> lista_cursos;
+	std::list<struct inscripciones> lista_espera;
+	std::list<struct inscripciones>::iterator it_i, it_e;
+	std::list<Curso>::iterator it_c;
+
+	file_i.open("src/bd/inscripciones.txt", std::fstream::in);
+	file_c.open("src/bd/cursos.txt", std::fstream::in);
+	file_e.open("src/bd/listaespera.txt", std::fstream::in);
+	if(!file_i || !file_c || !file_e){
+		std::cout<<"Error al abrir el archivo"<<std::endl;
+		return false;
+	}
+
+	while(file_i>>i.id_curso){
+		  file_i>>i.dni;
+		  
+		lista_inscritos.push_back(i);
+	}
+	file_i.close();
+
+	while(file_c-curso){
+		lista_cursos.push_back(curso);
+	}
+	file_c.close();
+
+	while(file_e>>i.id_curso){
+		  file_e>>i.dni;
+		
+		lista_espera.push_back(i);
+	}
+	file_e.close();
+	it_e=lista_espera.begin();
+
+	/*for(it_i=lista_inscritos.begin(); it_i!=lista_inscritos.end() && !encontrado; it_i++){
+		if(it_i->dni==inscripcion.dni && it_i->id_curso==inscripcion.id_curso){
+
+			for(it_c=lista_cursos.begin(); it_c!=lista_cursos.end(); it_c++){
+				if(it_c->get_id()==inscripcion.id_curso){
+
+					if(it_c->get_plazasCubiertas()==it_c->get_plazasMax()){
+
+						for(it_e=lista_espera.begin(); it_e!=lista_espera.end(); it_e++){
+							//Busco el primer inscrito con el id de curso it_d->get_id()
+						}
+						lista_inscritos.push_back(*it_e);
+						lista_espera.erase(it_e);
+						
+						file_e.open("src/bd/listaespera.txt", std::fstream::out);
+						if(!file_e){
+							std::cout<<"Error, no se ha podido acceder a la informacion de la lista de espera"<<std::endl;
+							return false;
+						}
+
+						for(it_e=lista_espera.begin(); it_e!=lista_espera.end(); it_e++){
+							file_e<<it_e->id_curso<<std::endl;
+							file_e<<it_e->dni<<std::endl;
+						}
+						file_e.close();
+
+					}else{
+						plazas=it_c->get_plazasCubiertas();
+						plazas--;
+
+						if(plazas<0){
+							plazas=0;
+						}
+
+						it_c->set_plazasCubiertas(plazas);
+						it_c->actualizar_alcance();
+
+					}
+
+				}
+			}
+
+			encontrado=true;
+		}
+	}*/
+
+	if(!encontrado){
+		return false;
+	}
+
+	file_i.open("src/bd/inscripciones.txt", std::fstream::out);
+	file_c.open("src/bd/cursos.txt", std::fstream::out);
+	if(!file_i || !file_c){
+		std::cout<<"Error al abrir el archivo"<<std::endl;
+		return false;
+	}
+
+	for(it_i=lista_inscritos.begin(); it_i!=lista_inscritos.end(); it_i++){
+		file_i<<it_i->id_curso<<std::endl;
+		file_i<<it_i->dni<<std::endl;
+	}
+	file_i.close();
+
+	for(it_c=lista_cursos.begin(); it_c!=lista_cursos.end(); it_c++){
+		file_c<<*it_c;
+	}
+	file_c.close();
+
+	return true;
+}
