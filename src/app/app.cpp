@@ -55,10 +55,10 @@ int main(){
 
 				std::cout<<"--------------------《 INICIO DE SESIÓN 》--------------------"<<std::endl<<std::endl;
 
-				std::cout << "》Por favor, introduzca su usuario: "<<std::endl;
-				std::cin >> userName;
-				std::cout << "》Por favor, introduzca su contraseña: "<<std::endl;
-				std::cin >> userPassword;
+				std::cout<<"》Por favor, introduzca su usuario: "<<std::endl;
+				std::cin>>userName;
+				std::cout<<"》Por favor, introduzca su contraseña: "<<std::endl;
+				std::cin>>userPassword;
 
 				usuario=visitante.login(userName, userPassword);
 
@@ -338,9 +338,9 @@ void adminCursosMenu(Admin_Cursos admin){
 			case 9:
 
 				std::cout<<"Indique el dni del estudiante del que desea borrar la inscripcion"<<std::endl;
-				std::cin >> inscripcion.dni;
+				std::cin>>inscripcion.dni;
 				std::cout<<"Indique el id del curso al que pertenece la inscripcion"<<std::endl;
-				std::cin >> inscripcion.id_curso;
+				std::cin>>inscripcion.id_curso;
 
 				if(!admin.del_inscripcion(inscripcion)){
 					std::cout<<"Error, la inscripcion que se buscaba borrar no ha sido encontrada"<<std::endl;
@@ -357,94 +357,84 @@ void adminCursosMenu(Admin_Cursos admin){
 }
 
 // Menú para el administrador de recursos
-void adminRecursosMenu(Admin_Recursos admin)
-{
+void adminRecursosMenu(Admin_Recursos admin){
 	int opt;
 	Recursos recurso;
 	std::string recurso_id;
 
-	do
-	{
-		std::cout << std::endl;
-		std::cout << "Se encuentra en modo administrador de recursos" << std::endl
-				  << std::endl;
-		std::cout << "Introduzca una opcion" << std::endl;
-		std::cout << "1. Ver listado de cursos" << std::endl;
-		std::cout << "2. Añadir recurso al sistema" << std::endl;
-		std::cout << "3. Modificar recurso del sistema" << std::endl;
-		std::cout << "4. Eliminar recurso del sistema" << std::endl;
-		std::cout << "5. Ver lista de recursos de algun curso" << std::endl;
-		std::cout << "6. Cerrar sesion" << std::endl;
-		std::cin >> opt;
+	do{
 
-		if (opt < 1 || opt > 6)
-		{
-			std::cout << "Error: introduzca una de las opciones disponibles" << std::endl;
+		std::cout<<std::endl;
+		std::cout<<"Se encuentra en modo administrador de recursos"<<std::endl
+				<<std::endl;
+		std::cout<<"Introduzca una opcion"<<std::endl;
+		std::cout<<"1. Ver listado de cursos"<<std::endl;
+		std::cout<<"2. Añadir recurso al sistema"<<std::endl;
+		std::cout<<"3. Modificar recurso del sistema"<<std::endl;
+		std::cout<<"4. Eliminar recurso del sistema"<<std::endl;
+		std::cout<<"5. Ver lista de recursos de algun curso"<<std::endl;
+		std::cout<<"6. Cerrar sesion"<<std::endl;
+		std::cin>>opt;
+
+		if(opt<1 || opt>6){
+			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
 		}
 
-		switch (opt)
-		{
-		case 1:
-			std::cout << std::endl
-					  << "Listado de cursos: " << std::endl
-					  << std::endl;
-			admin.ver_lista_de_cursos();
+		switch(opt){
+			case 1:
+				std::cout<<std::endl<<"Listado de cursos: "<<std::endl<<std::endl;
+				admin.ver_lista_de_cursos();
 			break;
 
-		case 2:
+			case 2:
 
-			std::cout << "Introduzca los datos del recurso a añadir" << std::endl;
-			std::cin >> recurso;
+				std::cout<<"Introduzca los datos del recurso a añadir"<<std::endl;
+				std::cin>>recurso;
 
-			if (!admin.add_recurso(recurso))
-			{
-				std::cout << "Error, el recurso que se busca añadir ya se encuentra en la base de datos o el id del curso es incorrecto" << std::endl;
-			}
-			else
-			{
-				std::cout << "El recurso ha sido añadido con éxito" << std::endl;
-			}
+				if(!admin.add_recurso(recurso)){
+					std::cout<<"Error, el recurso que se busca añadir ya se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
+				}
+				else{
+					std::cout<<"El recurso ha sido añadido con éxito"<<std::endl;
+				}
 
 			break;
 
-		case 3:
+			case 3:
 
-			std::cout << "Introduzca el id del recurso a modificar" << std::endl;
-			std::cin >> recurso_id;
+				std::cout<<"Introduzca el id del recurso a modificar"<<std::endl;
+				std::cin>>recurso_id;
 
-			if (!admin.mod_recurso(recurso_id))
-			{
-				std::cout << "Error, el recurso que se busca modificar no se encuentra en la base de datos o el id del curso es incorrecto" << std::endl;
-			}
-			else
-			{
-				std::cout << "El recurso se ha modificado con éxito" << std::endl;
-			}
+				if(!admin.mod_recurso(recurso_id)){
+					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
+				}
+				else{
+					std::cout<<"El recurso se ha modificado con éxito"<<std::endl;
+				}
 
 			break;
 
-		case 4:
+			case 4:
 
-			std::cout << "Introduzca el id del recurso a eliminar" << std::endl;
-			std::cin >> recurso_id;
+				std::cout<<"Introduzca el id del recurso a eliminar"<<std::endl;
+				std::cin>>recurso_id;
 
-			if (!admin.del_recurso(recurso_id))
-			{
-				std::cout << "Error, el recurso que se busca eliminar no se encuentra en la base de datos" << std::endl;
-			}
-			else
-			{
-				std::cout << "El recurso ha sido eliminado con éxito" << std::endl;
-			}
+				if(!admin.del_recurso(recurso_id)){
+					std::cout<<"Error, el recurso que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+				}
+				else{
+					std::cout<<"El recurso ha sido eliminado con éxito"<<std::endl;
+				}
 
 			break;
 
-		case 5:
-			std::cout << "Ver lista de recursos" << std::endl;
+			case 5:
+				std::cout<<"Ver lista de recursos"<<std::endl;
 			break;
+
 		}
 
-	} while (opt != 6);
+	}while(opt!=6);
 }
 
 bool ver_info_contacto(){

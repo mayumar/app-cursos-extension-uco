@@ -347,32 +347,39 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 	file_e.close();
 	it_e=lista_espera.begin();
 
-	/*for(it_i=lista_inscritos.begin(); it_i!=lista_inscritos.end() && !encontrado; it_i++){
+	//Buscamos la inscripción a eliminar
+	for(it_i=lista_inscritos.begin(); it_i!=lista_inscritos.end() && !encontrado; it_i++){
 		if(it_i->dni==inscripcion.dni && it_i->id_curso==inscripcion.id_curso){
 
+			//Buscamos el curso cuya inscripción hemos borrado
 			for(it_c=lista_cursos.begin(); it_c!=lista_cursos.end(); it_c++){
 				if(it_c->get_id()==inscripcion.id_curso){
 
+					//Había usuarios en lista de espera
 					if(it_c->get_plazasCubiertas()==it_c->get_plazasMax()){
 
-						for(it_e=lista_espera.begin(); it_e!=lista_espera.end(); it_e++){
-							//Busco el primer inscrito con el id de curso it_d->get_id()
+						for(it_e=lista_espera.begin(); it_e!=lista_espera.end() && found==false; it_e++){
+							if(it_e->id_curso==inscripcion.id_curso){
+								found=true;
+
+								lista_inscritos.push_back(*it_e);
+								lista_espera.erase(it_e);
+								
+								file_e.open("src/bd/listaespera.txt", std::fstream::out);
+								if(!file_e){
+									std::cout<<"Error, no se ha podido acceder a la informacion de la lista de espera"<<std::endl;
+									return false;
+								}
+
+								for(it_e=lista_espera.begin(); it_e!=lista_espera.end(); it_e++){
+									file_e<<it_e->id_curso<<std::endl;
+									file_e<<it_e->dni<<std::endl;
+								}
+								file_e.close();
+							}
 						}
-						lista_inscritos.push_back(*it_e);
-						lista_espera.erase(it_e);
 						
-						file_e.open("src/bd/listaespera.txt", std::fstream::out);
-						if(!file_e){
-							std::cout<<"Error, no se ha podido acceder a la informacion de la lista de espera"<<std::endl;
-							return false;
-						}
-
-						for(it_e=lista_espera.begin(); it_e!=lista_espera.end(); it_e++){
-							file_e<<it_e->id_curso<<std::endl;
-							file_e<<it_e->dni<<std::endl;
-						}
-						file_e.close();
-
+					//No hay cursos en lista de espera
 					}else{
 						plazas=it_c->get_plazasCubiertas();
 						plazas--;
@@ -389,9 +396,10 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 				}
 			}
 
+			lista_inscritos.erase(it_i);
 			encontrado=true;
 		}
-	}*/
+	}
 
 	if(!encontrado){
 		return false;
