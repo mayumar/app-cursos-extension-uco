@@ -33,3 +33,10 @@ user5@prueba.com
 user5
 password5
 1
+DNI6
+Nombre 6
+Apellidos 6
+user6@prueba.com
+user6
+password6
+1

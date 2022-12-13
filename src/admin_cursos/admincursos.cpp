@@ -14,13 +14,14 @@ bool Admin_Cursos::add_curso(Curso curso){
 
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c.is_open()){
-		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
 	while(file_c-c){
 		if(c.get_id()==curso.get_id()){
 			file_c.close();
+			std::cout<<std::endl<<"Error, el curso ya se encuentra en la base de datos"<<std::endl;
 			return false;
 		}
 	}
@@ -28,7 +29,7 @@ bool Admin_Cursos::add_curso(Curso curso){
 
 	file_c.open("src/bd/cursos.txt", std::fstream::app);
 	if(!file_c.is_open()){
-		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -48,7 +49,7 @@ bool Admin_Cursos::mod_curso(std::string id){
 	//Buscamos si el curso existe
 	fs.open("src/bd/cursos.txt");
 	if(!fs){
-		std::cout<<"Error al acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -59,25 +60,26 @@ bool Admin_Cursos::mod_curso(std::string id){
 	}
 
 	if(!found){
+		std::cout<<std::endl<<"Error, el curso no se encuentra en la base de datos"<<std::endl;
 		fs.close();
 		return false;
 	}
 	fs.close();
 
-	std::cout<<"Introduzca los datos modificados: "<<std::endl;
+	std::cout<<"》Introduzca los datos modificados: "<<std::endl;
 	std::cin>>curso_modif;
 
 	//Comprobamos que el id introducido no se encuentre ya en la base de datos
 	if(curso_modif.get_id()!=id){	
 		fs.open("src/bd/cursos.txt");
 		if(!fs){
-			std::cout<<"Error al acceder a la información de los cursos"<<std::endl;
+			std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 			return false;
 		}
 
 		while(fs-curso){
 			if(curso.get_id()==curso_modif.get_id()){
-				std::cout<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				std::cout<<std::endl<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
 				fs.close();
 				return false;
 			}
@@ -89,7 +91,7 @@ bool Admin_Cursos::mod_curso(std::string id){
 	fs.open("src/bd/cursos.txt");
 	fstemp.open("src/bd/cursostemp.txt");
 	if(!fs || !fstemp){
-		std::cout << "Error al abrir el archivo" << std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -116,7 +118,7 @@ bool Admin_Cursos::del_curso(std::string id){
 	fs.open("src/bd/cursos.txt");
 	fstemp.open("src/bd/cursostemp.txt");
 	if(!fs || !fstemp){
-		std::cout << "Error al abrir el archivo" << std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -146,7 +148,7 @@ bool Admin_Cursos::add_usuario(Usuario usuario){
 
 	while(file-u){
 		if(u.get_dni()==usuario.get_dni()){
-			std::cout<<std::endl<<"Error, el usuario que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+			std::cout<<std::endl<<"Error, el usuario ya se encuentra en la base de datos"<<std::endl;
 			file.close();
 			return false;
 		}
@@ -184,7 +186,7 @@ bool Admin_Cursos::mod_usuario(std::string dni){
 	//Buscamos si el usuario existe
 	fu.open("src/bd/usuarios.txt");
 	if(!fu){
-		std::cout<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -196,25 +198,26 @@ bool Admin_Cursos::mod_usuario(std::string dni){
 
 	if(!found){
 		fu.close();
+		std::cout<<std::endl<<"Error, el usuario no se encuentra en la base de datos"<<std::endl;
 		return false;
 	}
 	fu.close();
 
-	std::cout<<"Introduzca los datos modificados: "<<std::endl;
+	std::cout<<std::endl<<"》Introduzca los datos modificados: "<<std::endl;
 	std::cin>>usuario_mod;
 
-	//Comprobamos si el dni introducido no está se encuentra ya en el sistema
+	//Comprobamos si el dni introducido se encuentra ya en el sistema
 	if(usuario_mod.get_dni()!=dni){
 		fu.open("src/bd/usuarios.txt");
 		found=false;
 		if(!fu){
-			std::cout<<"No se ha podido acceder a la información de contacto"<<std::endl;
+			std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
 			return false;
 		}
 
 		while(fu-usuario){
 			if(usuario.get_dni()==usuario_mod.get_dni()){
-				std::cout<<"El dni que se intenta introducir ya se encuentra en la base de datos"<<std::endl;
+				std::cout<<std::endl<<"El dni que se intenta introducir ya se encuentra en la base de datos"<<std::endl;
 				fu.close();
 				return false;
 			}
@@ -226,7 +229,7 @@ bool Admin_Cursos::mod_usuario(std::string dni){
 	fu.open("src/bd/usuarios.txt");
 	futemp.open("src/bd/usuariostemp.txt");
 	if(!fu || !futemp){
-		std::cout<<"Error al abrir el archivo"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -253,7 +256,7 @@ bool Admin_Cursos::del_usuario(std::string dni){
 	fu.open("src/bd/usuarios.txt");
 	futemp.open("src/bd/usuariostemp.txt");
 	if(!fu || !futemp){
-		std::cout<<"Error al abrir el archivo"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -275,11 +278,33 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 
 	std::ifstream inscritos;
 	std::ifstream usuarios;
+	std::ifstream cursos;
 	Usuario usuario;
+	Curso curso;
 	struct inscripciones inscripcion;
 	int i=0;
+	bool found=false;
 	std::list<Usuario> lista_usuarios;
 	std::list<Usuario>::iterator it;
+
+	cursos.open("src/bd/cursos.txt");
+	if(!cursos){
+		std::cout<<std::endl<<"Error, se ha podido acceder a la información de los cursos"<<std::endl;
+		return 0;
+	}
+
+	while(cursos-curso && !found){
+		if(curso.get_id()==id){
+			found=true;
+		}
+	}
+
+	if(!found){
+		std::cout<<std::endl<<"Error, el curso con id "<<id<<" no existe"<<std::endl;
+		cursos.close();
+		return false;
+	}
+	cursos.close();
 
 	inscritos.open("src/bd/inscripciones.txt");
 	usuarios.open("src/bd/usuarios.txt");
@@ -316,7 +341,7 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 	inscritos.close();
 
 	if(i==0){
-		std::cout<<"No hay inscripciones en este curso"<<std::endl;
+		std::cout<<std::endl<<"No hay inscripciones en este curso"<<std::endl;
 	}
 
 	return true;

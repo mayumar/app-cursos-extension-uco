@@ -47,7 +47,7 @@ bool Visitante:: registrarse(Usuario usuario){
 
 	while(file_v-usuario_f){
 		if(usuario.get_dni()==usuario_f.get_dni()){
-			std::cout<<std::endl<<"Error, ya se encuentra registrado el usuario"<<std::endl;
+			std::cout<<std::endl<<"Error, el usuario ya se encuentra registrado"<<std::endl;
 			file_v.close();
 			return false;
 		}

@@ -35,7 +35,7 @@ int main(){
 		std::cout<<"4. Ver información de contacto de los administradores"<<std::endl;
 		std::cout<<"5. Salir"<<std::endl;
 		std::cout<<std::endl;
-		std::cout<<"—————————————————————————————————————————————————————————————"<<std::endl;
+		std::cout<<"——————————————————————————————————————————————————————————————"<<std::endl;
 		std::cout<<"》Opcion: ";
 		std::cin>>opt;
 		std::cout<<std::endl;
@@ -174,6 +174,12 @@ int main(){
 						adminRecursosMenu(admin_r);
 
 					break;
+
+					case(Rol::Empty):
+
+						std::cout<<std::endl<<"Ha ocurrido un error, no se ha podido iniciar sesión tras el registro"<<std::endl<<std::endl;
+
+					break;
 				}
 
 			break;
@@ -212,7 +218,7 @@ void participanteMenu(Participante participante){
 
 	do{
 		std::cout<<std::endl;
-		std::cout<<"———————————————————《 MODO PARTICIPANTE 》———————————————————"<<std::endl;
+		std::cout<<"———————————————————《 MODO PARTICIPANTE 》————————————————————"<<std::endl;
 		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver los cursos activos"<<std::endl;
@@ -220,7 +226,7 @@ void participanteMenu(Participante participante){
 		std::cout<<"3. Mis cursos"<<std::endl;
 		std::cout<<"4. Ver información de contacto de los administradores"<<std::endl;
 		std::cout<<"5. Cerrar sesion"<<std::endl<<std::endl;
-		std::cout<<"—————————————————————————————————————————————————————————————"<<std::endl;
+		std::cout<<"——————————————————————————————————————————————————————————————"<<std::endl;
 		std::cout<<"》Opcion: ";
 		std::cin>>opt;
 		std::cout<<std::endl;
@@ -236,7 +242,7 @@ void participanteMenu(Participante participante){
 			break;
 
 			case 2:
-				std::cout<<"-----------------------《 INSCRIPCIÓN 》-----------------------"<<std::endl<<std::endl;
+				std::cout<<"----------------------《 INSCRIPCIÓN 》-----------------------"<<std::endl<<std::endl;
 
 				std::cout<<"》Introduzca el id del curso al que desea inscribirse:"<<std::endl;
 				std::cin>>id_curso;
@@ -273,7 +279,7 @@ void adminCursosMenu(Admin_Cursos admin){
 
 	do{
 		std::cout<<std::endl;
-		std::cout<<"———————————————————《 MODO ADMIN CURSOS 》———————————————————"<<std::endl;
+		std::cout<<"———————————————————《 MODO ADMIN CURSOS 》————————————————————"<<std::endl;
 		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver lista de cursos"<<std::endl;
@@ -290,7 +296,7 @@ void adminCursosMenu(Admin_Cursos admin){
 		std::cout<<"11. Modificar un ponente"<<std::endl;
 		std::cout<<"12. Eliminar un ponente"<<std::endl;
 		std::cout<<"13. Cerrar sesion"<<std::endl<<std::endl;
-		std::cout<<"—————————————————————————————————————————————————————————————"<<std::endl;
+		std::cout<<"——————————————————————————————————————————————————————————————"<<std::endl;
 		std::cout<<"》Opcion: ";
 		std::cin>>opt;
 		std::cout<<std::endl;
@@ -316,75 +322,94 @@ void adminCursosMenu(Admin_Cursos admin){
 				}else{
 					std::cout<<std::endl<<"El usuario ha sido añadido con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 3:
+
+				std::cout<<"--------------------《 MODIFICAR CUENTA 》--------------------"<<std::endl<<std::endl;
 				
-				std::cout<<"Introduzca el dni del usuario a modificar"<<std::endl;
+				std::cout<<"》Introduzca el dni del usuario a modificar:"<<std::endl;
 				std::cin>>usuario_dni;
 				if(!admin.mod_usuario(usuario_dni)){
-					std::cout<<"Error, el usuario que se busca modificar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El usuario ha sido modificado con exito"<<std::endl;
+					std::cout<<std::endl<<"El usuario ha sido modificado con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 4:
 				
-				std::cout<<"Introduzca el dni del curso a eliminar"<<std::endl;
+				std::cout<<"--------------------《 ELIMINAR CUENTA 》---------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el dni del curso a eliminar:"<<std::endl;
 				std::cin>>usuario_dni;
 				if(!admin.del_usuario(usuario_dni)){
-					std::cout<<"Error, el usuario que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El usuario ha sido eliminado con exito"<<std::endl;
+					std::cout<<std::endl<<"El usuario ha sido eliminado con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 5:
 
-				std::cout<<"Introduzca los datos del curso a añadir: "<<std::endl;
+				std::cout<<"----------------------《 AÑADIR CURSO 》----------------------"<<std::endl<<std::endl;
+
+				std::cout<<"》Introduzca los datos del curso a añadir: "<<std::endl;
 				std::cin>>curso;
 				if(!admin.add_curso(curso)){
-					std::cout<<"Error, el curso que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El curso ha sido añadido con exito"<<std::endl;
+					std::cout<<std::endl<<"El curso ha sido añadido con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 6:
 				
-				std::cout<<"Introduzca el id del curso a modificar"<<std::endl;
+				std::cout<<"--------------------《 MODIFICAR CURSO 》---------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el id del curso a modificar:"<<std::endl;
 				std::cin>>curso_id;
 				if(!admin.mod_curso(curso_id)){
-					std::cout<<"Error, el curso que se busca modificar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El curso ha sido modificado con exito"<<std::endl;
+					std::cout<<std::endl<<"El curso ha sido modificado con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 7:
 
-				std::cout<<"Introduzca el id del curso a eliminar"<<std::endl;
+				std::cout<<"---------------------《 ELIMINAR CURSO 》---------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el id del curso a eliminar:"<<std::endl;
 				std::cin>>curso_id;
 				
 				if(!admin.del_curso(curso_id)){
-					std::cout<<"Error, el curso que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El curso ha sido eliminado con exito"<<std::endl;
+					std::cout<<std::endl<<"El curso ha sido eliminado con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 8:
 
-				std::cout<< "Indique el id del curso del cual quiere ver las inscripciones"<<std::endl;
+				std::cout<<"-----------------------《 INSCRITOS 》------------------------"<<std::endl<<std::endl;
+
+				std::cout<<"》Indique el id del curso:"<<std::endl;
 				std::cin>>curso_id;
 				admin.ver_lista_de_inscritos(curso_id);
+				std::cout<<std::endl;
 
 			break;
 
