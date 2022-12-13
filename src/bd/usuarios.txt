@@ -26,3 +26,10 @@ user4@prueba.com
 user4
 password4
 1
+DNI5
+Nombre 5
+Apellidos 5
+user5@prueba.com
+user5
+password5
+1

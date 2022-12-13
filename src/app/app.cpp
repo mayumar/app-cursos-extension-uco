@@ -128,6 +128,53 @@ int main(){
 				}else{
 					std::cout<<std::endl<<"El registro ha sido realizado con éxito"<<std::endl<<std::endl;
 				}
+				
+				switch(usuario.get_rol()){
+					case(Rol::Participante):
+
+						//El usuario pasa de ser de tipo usuario a tipo participante
+						participante.set_nombre(usuario.get_nombre());
+						participante.set_apellidos(usuario.get_apellidos());
+						participante.set_dni(usuario.get_dni());
+						participante.set_correo(usuario.get_correo());
+						participante.set_contraseña(usuario.get_contraseña());
+						participante.set_usuario(usuario.get_usuario());
+						participante.set_rol(usuario.get_rol());
+
+						participanteMenu(participante);
+
+					break;
+
+					case(Rol::Admin_Cursos):
+
+						//El usuario pasa de ser de tipo usuario a tipo Administrador de Cursos
+						admin_c.set_nombre(usuario.get_nombre());
+						admin_c.set_apellidos(usuario.get_apellidos());
+						admin_c.set_dni(usuario.get_dni());
+						admin_c.set_correo(usuario.get_correo());
+						admin_c.set_contraseña(usuario.get_contraseña());
+						admin_c.set_usuario(usuario.get_usuario());
+						admin_c.set_rol(usuario.get_rol());
+						
+						adminCursosMenu(admin_c);
+
+					break;
+
+					case(Rol::Admin_Recursos):
+
+						//El usuario pasa de ser de tipo usuario a tipo Administrador de Recursos
+						admin_r.set_nombre(usuario.get_nombre());
+						admin_r.set_apellidos(usuario.get_apellidos());
+						admin_r.set_dni(usuario.get_dni());
+						admin_r.set_correo(usuario.get_correo());
+						admin_r.set_contraseña(usuario.get_contraseña());
+						admin_r.set_usuario(usuario.get_usuario());
+						admin_r.set_rol(usuario.get_rol());
+
+						adminRecursosMenu(admin_r);
+
+					break;
+				}
 
 			break;
 
