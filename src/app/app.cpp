@@ -218,8 +218,9 @@ void adminCursosMenu(Admin_Cursos admin){
 	int opt;
 	Curso curso;
 	Usuario usuario;
-	std::string curso_id, usuario_dni;
+	std::string curso_id, usuario_dni, ponente_dni;
 	struct inscripciones inscripcion;
+	Ponente ponente;
 
 	//＜ ＞〈 〉「 」 『 』 【 】
 
@@ -229,7 +230,7 @@ void adminCursosMenu(Admin_Cursos admin){
 		std::cout<<std::endl;
 		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver lista de cursos"<<std::endl;
-		std::cout<<"——————————————「 Administración de cuentas 」———————————————"<<std::endl;
+		//std::cout<<"——————————————「 Administración de cuentas 」———————————————"<<std::endl;
 		std::cout<<"2. Añadir cuenta al sistema"<<std::endl;
 		std::cout<<"3. Modificar cuenta del sistema"<<std::endl;
 		std::cout<<"4. Eliminar cuenta del sistema"<<std::endl;
@@ -238,13 +239,16 @@ void adminCursosMenu(Admin_Cursos admin){
 		std::cout<<"7. Eliminar curso del sistema"<<std::endl;
 		std::cout<<"8. Ver lista de inscritos de algun curso"<<std::endl;
 		std::cout<<"9. Eliminar una inscripcion"<<std::endl;
-		std::cout<<"10. Cerrar sesion"<<std::endl<<std::endl;
+		std::cout<<"10. Añadir ponente a un curso"<<std::endl;
+		std::cout<<"11. Modificar un ponente"<<std::endl;
+		std::cout<<"12. Eliminar un ponente"<<std::endl;
+		std::cout<<"13. Cerrar sesion"<<std::endl<<std::endl;
 		std::cout<<"—————————————————————————————————————————————————————————————"<<std::endl;
 		std::cout<<"》Opcion: ";
 		std::cin>>opt;
 		std::cout<<std::endl;
 
-		if(opt<1 || opt>10){
+		if(opt<1 || opt>13){
 			std::cout<<"Error, introduzca una de las opciones disponibles"<<std::endl<<std::endl;
 		}
 
@@ -256,12 +260,14 @@ void adminCursosMenu(Admin_Cursos admin){
 
 			case 2:
 
-				std::cout<<"Introduzca los datos de la cuenta a añadir:"<<std::endl;
+				std::cout<<"---------------------《 AÑADIR CUENTA 》----------------------"<<std::endl<<std::endl;
+
+				std::cout<<"》Introduzca los datos de la cuenta a añadir:"<<std::endl;
 				std::cin>>usuario;
 				if(!admin.add_usuario(usuario)){
-					std::cout<<"Error, el usuario que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El usuario ha sido añadido con exito"<<std::endl;
+					std::cout<<std::endl<<"El usuario ha sido añadido con exito"<<std::endl;
 				}
 
 			break;
@@ -351,16 +357,55 @@ void adminCursosMenu(Admin_Cursos admin){
 
 			break;
 
+			case 10:
+
+				std::cout<<"Introduzca los datos del ponente a añadir"<<std::endl;
+				std::cin>>ponente;
+
+				if(!admin.add_ponente(ponente)){
+					std::cout<<"Error, el ponente que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El ponente ha sido añadidio con exito"<<std::endl;
+				}
+
+			break;
+
+			case 11:
+
+				std::cout<<"Introduzca el dni del ponente a modificar"<<std::endl;
+				std::cin>>ponente_dni;
+
+				if(!admin.mod_ponente(ponente_dni)){
+					std::cout<<"Error, el ponente que se busca modificar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El ponente ha sido modificado con éxito"<<std::endl;
+				}
+
+			break;
+
+			case 12:
+
+				std::cout<<"Introduzca el dni del ponente a borrar"<<std::endl;
+				std::cin>>ponente_dni;
+
+				if(!admin.del_ponente(ponente_dni)){
+					std::cout<<"Error, el ponente que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+				}else{
+					std::cout<<"El ponente ha sido eliminado con exito"<<std::endl;
+				}
+
+			break;
+
 		}
 
-	}while(opt!=10);
+	}while(opt!=13);
 }
 
 // Menú para el administrador de recursos
 void adminRecursosMenu(Admin_Recursos admin){
 	int opt;
 	Recursos recurso;
-	std::string recurso_id;
+	std::string recurso_id, curso_id;
 
 	do{
 
@@ -429,7 +474,11 @@ void adminRecursosMenu(Admin_Recursos admin){
 			break;
 
 			case 5:
-				std::cout<<"Ver lista de recursos"<<std::endl;
+				std::cout<<"Introduzca el id del curso: "<<std::endl;
+				std::cin>>curso_id;
+
+				admin.ver_lista_recursos(curso_id);
+				
 			break;
 
 		}

@@ -6,23 +6,30 @@
  */
 
 #include "usuario.h"
-#include <fstream>
-#include <iostream>
-#include "../curso/curso.h"
 
 /* Funcion que muestra una lista de cursos
  * created on: 22 nov.2022
  * 	Author: Fatiicn
  */
 void Usuario:: ver_lista_de_cursos(){
-	std::ifstream fichero;
+	std::ifstream fichero, ponentes;
 	Curso curso;
+	Ponente ponente;
 	float alcance;
+	std::list<Ponente> lista_ponentes;
+	std::list<Ponente>::iterator it;
+
 	fichero.open("src/bd/cursos.txt"); //abre el fichero en modo lectura
-	if(fichero.fail()){
-		std::cout<< "No se pudo abrir la lista de los cursos actuales"<<std::endl;
+	ponentes.open("src/bd/ponentes.txt");
+	if(fichero.fail() || !ponentes){
+		std::cout<<std::endl<< "Error, no se pudo acceder a la base de datos"<<std::endl;
 		exit(-1);
 	}
+
+	while(ponentes-ponente){
+		lista_ponentes.push_back(ponente);
+	}
+	ponentes.close();
 
 	while(fichero-curso){ //lee cada uno de los registros
 		alcance=curso.get_alcance();
@@ -34,6 +41,12 @@ void Usuario:: ver_lista_de_cursos(){
 		std::cout<<"Fecha de finalizacion: "<<curso.get_fechaFinal()<<std::endl;
 		std::cout<<"Plazas cubiertas: "<<curso.get_plazasCubiertas()<<"/"<<curso.get_plazasMax()<<std::endl;
 		std::cout<<"Alcance del curso: "<<alcance<<"%"<<std::endl;
+		std::cout<<"Ponentes: "<<std::endl;
+		for(it=lista_ponentes.begin(); it!=lista_ponentes.end(); it++){
+			if(it->get_curso()==curso.get_id()){
+				std::cout<<it->get_nombre()<<" "<<it->get_apellidos()<<std::endl;
+			}
+		}
 		std::cout<<std::endl;
 	}
 	fichero.close(); //Cerramos el fichero

@@ -19,8 +19,6 @@ Ponente Ponente::operator=(Ponente &p){
 
 std::istream &operator>>(std::istream &stream, Ponente &p){
 
-    std::cout<<"ID del curso: ";
-    stream>>p.curso_;
     std::cout<<"DNI del ponente: ";
     stream>>p.dni_;
     stream.get();
@@ -28,6 +26,8 @@ std::istream &operator>>(std::istream &stream, Ponente &p){
     getline(stream, p.nombre_);
     std::cout<<"Apellidos del ponente: ";
     getline(stream, p.apellidos_);
+    std::cout<<"ID del curso al que pertenece: ";
+    stream>>p.curso_;
 
     return stream;
 }

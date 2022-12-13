@@ -37,7 +37,7 @@ bool Admin_Recursos::add_recurso(Recursos recurso){
 		return false;
 	}
 
-	while(file_c-c){
+	while(file_c-c && !found){
 		if(c.get_id()==recurso.get_curso()){
 			found=true;
 		}
@@ -74,7 +74,7 @@ bool Admin_Recursos::mod_recurso(std::string id){
 		return false;
 	}
 
-	while(fs-recurso){
+	while(fs-recurso && !found){
 		if(recurso.get_id()==id){
 			found=true;
 		}
@@ -172,4 +172,34 @@ bool Admin_Recursos::del_recurso(std::string id){
 
 }
 
+bool Admin_Recursos::ver_lista_recursos(std::string id){
+	std::ifstream recursos;
+	Recursos recurso;
+	int i=0;
 
+	recursos.open("src/bd/recursos.txt");
+	if(!recursos){
+		std::cout<<"Error, no se ha podido acceder a la información de los recursos"<<std::endl;
+		return false;
+	}
+
+	while(recursos-recurso){
+		if(recurso.get_curso()==id){
+			std::cout<<std::endl;
+			std::cout<<"ID: "<<recurso.get_id()<<std::endl;
+			std::cout<<"Tipo de recurso: "<<recurso.get_tipo()<<std::endl;
+			if(recurso.get_tipo()=="Aula" || recurso.get_tipo()=="aula"){
+				std::cout<<"Aforo: "<<recurso.get_aforo()<<std::endl;
+			}
+			i++;
+		}
+	}
+
+	recursos.close();
+
+	if(i==0){
+		std::cout<<"No hay recursos asociados a este curso"<<std::endl;
+	}
+	
+	return true;
+}

@@ -10,6 +10,11 @@
 #define USUARIO_USUARIO_H_
 
 #include <string>
+#include <fstream>
+#include <iostream>
+#include "../curso/curso.h"
+#include "../ponente/ponente.h"
+#include <list>
 
 enum class Rol {Empty, Participante, Admin_Cursos, Admin_Recursos};
 std::istream &operator>>(std::istream &stream, Rol &rol);

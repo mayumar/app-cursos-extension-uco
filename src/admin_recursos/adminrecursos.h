@@ -13,6 +13,7 @@
 #include "../recursos/recursos.h"
 #include "../curso/curso.h"
 #include <string>
+#include <list>
 
 class Admin_Recursos: public Usuario {
 
@@ -31,6 +32,7 @@ class Admin_Recursos: public Usuario {
 		bool add_recurso (Recursos recurso);
 		bool mod_recurso(std::string id);
 		bool del_recurso(std::string id);
+		bool ver_lista_recursos(std::string id);
 };
 
 #endif /* ADMIN_RECURSOS_ADMINRECURSOS_H_ */

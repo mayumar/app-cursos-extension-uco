@@ -1,6 +1,6 @@
 R1
 C1
-Aforo
+Aula
 56
 R2
 C3
