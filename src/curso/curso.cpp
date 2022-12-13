@@ -30,9 +30,9 @@ std::istream &operator>>(std::istream &stream, Curso &c){
 	getline(stream, c.nombre_);
 	std::cout<<"Descripcion: ";
 	getline(stream, c.descripcion_);
-	std::cout<<"Fecha de Inicio: ";
+	std::cout<<"Fecha de Inicio(DD/MM/YY): ";
 	stream>>c.fechaInicio_;
-	std::cout<<"Fecha de Finalización: ";
+	std::cout<<"Fecha de Finalización(DD/MM/YY): ";
 	stream>>c.fechaFinal_;
 	std::cout<<"Plazas cubiertas: ";
 	stream>>c.plazasCubiertas_;

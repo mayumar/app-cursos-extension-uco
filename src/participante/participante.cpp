@@ -21,10 +21,45 @@ bool Participante::inscribirse(std::string id_curso){
 	Curso curso;
 	bool encontrado=false;
 	int plazas;
+	struct inscripciones i;
 	std::list<Curso> lista_curso;
 	std::list<Curso>::iterator it;
 
+	//Comprobamos si ya estábamos inscritos a ese curso
+	file_i.open("src/bd/inscripciones.txt", std::fstream::in);
+	if(!file_i){
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+		return 0;
+	}
 
+	while(file_i>>i.id_curso){
+		  file_i>>i.dni;
+		if(i.id_curso==id_curso && i.dni==get_dni()){
+			file_i.close();
+			std::cout<<std::endl<<"Error, ya se ha inscrito a este curso"<<std::endl;
+			return 0;
+		}
+	}
+	file_i.close();
+
+	//Comprobamos si ya estábamos inscritos a ese curso pero en la lista de espera
+	file_i.open("src/bd/listaespera.txt", std::fstream::in);
+	if(!file_i){
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+		return 0;
+	}
+
+	while(file_i>>i.id_curso){
+		  file_i>>i.dni;
+		if(i.id_curso==id_curso && i.dni==get_dni()){
+			file_i.close();
+			std::cout<<std::endl<<"Error, ya se ha inscrito a este curso"<<std::endl;
+			return 0;
+		}
+	}
+	file_i.close();
+
+	//Cargamos los cursos en una lista
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c){
 		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
@@ -100,6 +135,7 @@ bool Participante::inscribirse(std::string id_curso){
 bool Participante::ver_cursos_inscrito(){
 	std::ifstream inscritos;
 	std::ifstream cursos;
+	std::ifstream espera;
 	Curso curso;
 	struct inscripciones inscripcion;
 	std::list<Curso> lista_cursos;
@@ -118,7 +154,6 @@ bool Participante::ver_cursos_inscrito(){
 	}
 	cursos.close();
 
-	std::cout<<std::endl;
 	std::cout<<"-----------------------《 MIS CURSOS 》-----------------------"<<std::endl;
 
 	while(inscritos>>inscripcion.id_curso){
@@ -132,6 +167,28 @@ bool Participante::ver_cursos_inscrito(){
 			}
 		}
 	}
+
+	espera.open("src/bd/listaespera.txt");
+	if(!espera){
+		std::cout<<std::endl<<"Error al acceder a la información de la lista de espera"<<std::endl;
+		return false;
+	}
+
+	std::cout<<std::endl;
+	std::cout<<"-------------------《 EN LISTA DE ESPERA 》-------------------"<<std::endl;
+
+	while(espera>>inscripcion.id_curso){
+		  espera>>inscripcion.dni;
+		if(inscripcion.dni==get_dni()){
+			for(it=lista_cursos.begin(); it!=lista_cursos.end(); it++){
+				if(inscripcion.id_curso==it->get_id()){
+					std::cout<<std::endl;
+					std::cout<<it->get_nombre()<<" ("<<it->get_id()<<")"<<std::endl;
+				}
+			}
+		}
+	}
+
 	std::cout<<std::endl;
 	inscritos.close();
 	return true;
