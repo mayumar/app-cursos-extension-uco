@@ -40,7 +40,6 @@ bool Admin_Recursos::add_recurso(Recursos recurso){
 	while(file_c-c){
 		if(c.get_id()==recurso.get_curso()){
 			found=true;
-			std::cout<<"El curso ha sido encontrado"<<std::endl;
 		}
 	}
 	

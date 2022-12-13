@@ -11,7 +11,11 @@
 
 #include "../usuario/usuario.h"
 #include "../curso/curso.h"
+#include "../ponente/ponente.h"
 #include <list>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 class Admin_Cursos: public Usuario {
 
@@ -35,8 +39,11 @@ class Admin_Cursos: public Usuario {
 		bool del_usuario(std::string dni);
     
 		bool ver_lista_de_inscritos(std::string id);
-
 		bool del_inscripcion(struct inscripciones inscripcion);
+
+		bool add_ponente(Ponente ponente);
+		bool mod_ponente(std::string dni);
+		bool del_ponente(std::string dni);
 };
 
 struct inscripciones{

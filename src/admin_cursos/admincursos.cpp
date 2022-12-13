@@ -6,10 +6,6 @@
  */
 
 #include "admincursos.h"
-#include "../curso/curso.h"
-#include <fstream>
-#include <iostream>
-#include <string>
 
 
 bool Admin_Cursos::add_curso(Curso curso){
@@ -136,6 +132,7 @@ bool Admin_Cursos::del_curso(std::string id){
 	rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
 	return true;
 }
+
 
 bool Admin_Cursos::add_usuario(Usuario usuario){
 	std::fstream file;
@@ -423,5 +420,57 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 	}
 	file_c.close();
 
+	return true;
+}
+
+
+bool Admin_Cursos::add_ponente(Ponente ponente){
+	std::fstream file_p, file_c;
+	Ponente p;
+	Curso c;
+	bool found=false;
+
+	//Buscamos si el ponente ya existe
+	file_p.open("src/bd/ponentes.txt", std::fstream::in);
+	if(!file_p){
+		std::cout<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		return false;
+	}
+
+	while(file_p-p){
+		if(p.get_dni()==ponente.get_dni()){
+			file_p.close();
+			return false;
+		}
+	}
+	file_p.close();
+
+	//Buscamos si el curso que se ha introducido existe
+	file_c.open("src/bd/cursos.txt", std::fstream::in);
+	if(!file_c){
+		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		return false;
+	}
+	
+	while(file_c-c){
+		if(c.get_id()==ponente.get_curso()){
+			found=true;
+		}
+	}
+
+	if(!found){
+		file_c.close();
+		return false;
+	}
+
+	//Añadimos ponente
+	file_p.open("src/bd/ponentes.txt", std::fstream::app);
+	if(!file_p){
+		std::cout<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		return false;
+	}
+	file_p<<ponente;
+
+	file_p.close();
 	return true;
 }

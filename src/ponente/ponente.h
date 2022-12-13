@@ -15,18 +15,18 @@ class Ponente{
 
 	private:
 
-		std::string nombre_;
-		std::string apellidos_;
 		std::string dni_;
 		std::string curso_;
-
+		std::string nombre_;
+		std::string apellidos_;
+		
 	public:
 
-		inline Ponente (std::string nombre="empty",
-						std::string apellidos="empty",
-						std::string dni="empty",
-						std::string curso="empty"):nombre_(nombre), apellidos_(apellidos),
-												   dni_(dni), curso_(curso){}
+		inline Ponente (std::string dni="empty",
+						std::string curso="empty",
+						std::string nombre="empty",
+						std::string apellidos="empty"):dni_(dni), curso_(curso),
+													   nombre_(nombre), apellidos_(apellidos){}
 
 		inline ~Ponente(){}
 
@@ -39,6 +39,12 @@ class Ponente{
 		inline void set_apellidos (std::string apellidos) {apellidos_=apellidos;}
 		inline void set_dni (std::string dni) {dni_=dni;}
 		inline void set_curso (std::string curso) {curso_=curso;}
+
+		Ponente operator=(Ponente &p);
+
+		friend std::istream &operator>>(std::istream &stream, Ponente &p);
+		friend std::istream &operator-(std::istream &stream, Ponente &p);
+		friend std::ostream &operator<<(std::ostream &stream, Ponente &p);
 };
 
 #endif /* PONENTE_PONENTE_H_ */
