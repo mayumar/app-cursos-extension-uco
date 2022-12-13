@@ -55,10 +55,10 @@ Usuario Usuario::operator=(Usuario u){
 std::istream &operator-(std::istream &stream, Usuario &u){
 
 	stream>>u.dni_;
-	stream>>u.correo_;
 	stream.get();
 	getline(stream, u.nombre_);
 	getline(stream, u.apellidos_);
+	stream>>u.correo_;
 	stream>>u.usuario_;
 	stream>>u.contraseña_;
 	stream>>u.rol_;
@@ -69,9 +69,9 @@ std::istream &operator-(std::istream &stream, Usuario &u){
 
 std::ostream &operator<<(std::ostream &stream, Usuario &u){
 	stream<<u.dni_<<std::endl;
-	stream<<u.correo_<<std::endl;
 	stream<<u.nombre_<<std::endl;
 	stream<<u.apellidos_<<std::endl;
+	stream<<u.correo_<<std::endl;
 	stream<<u.usuario_<<std::endl;
 	stream<<u.contraseña_<<std::endl;
 	stream<<int(u.rol_)<<std::endl;
@@ -100,13 +100,13 @@ std::istream &operator>>(std::istream &stream, Usuario &u){
 
 	std::cout<<"DNI: ";
 	stream>>u.dni_;
-	std::cout<<"Correo: ";
-	stream>>u.correo_;
 	stream.get();
 	std::cout<<"Nombre: ";
 	getline(stream, u.nombre_);
 	std::cout<<"Apellidos: ";
 	getline(stream, u.apellidos_);
+	std::cout<<"Correo: ";
+	stream>>u.correo_;
 	std::cout<<"Usuario: ";
 	stream>>u.usuario_;
 	std::cout<<"Contraseña: ";

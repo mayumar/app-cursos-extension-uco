@@ -15,17 +15,17 @@ class Ponente{
 
 	private:
 
-		std::string dni_;
 		std::string curso_;
+		std::string dni_;
 		std::string nombre_;
 		std::string apellidos_;
 		
 	public:
 
-		inline Ponente (std::string dni="empty",
-						std::string curso="empty",
+		inline Ponente (std::string curso="empty",
+						std::string dni="empty",				
 						std::string nombre="empty",
-						std::string apellidos="empty"):dni_(dni), curso_(curso),
+						std::string apellidos="empty"):curso_(curso), dni_(dni),
 													   nombre_(nombre), apellidos_(apellidos){}
 
 		inline ~Ponente(){}

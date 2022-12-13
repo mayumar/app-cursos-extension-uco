@@ -25,7 +25,9 @@ class Admin_Recursos: public Usuario {
 							  std::string contraseña="empty",
 							  std::string usuario="empty"):Usuario(nombre, apellidos, dni, correo,
 																   contraseña, usuario){}
+
 		inline ~Admin_Recursos(){}
+		
 		bool add_recurso (Recursos recurso);
 		bool mod_recurso(std::string id);
 		bool del_recurso(std::string id);

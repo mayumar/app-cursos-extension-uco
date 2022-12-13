@@ -18,26 +18,27 @@ class Usuario {
 
 	private:
 
+		std::string dni_;
 		std::string nombre_;
 		std::string apellidos_;
-		std::string dni_;
 		std::string correo_;
-		std::string contraseña_;
 		std::string usuario_;
+		std::string contraseña_;
 		Rol rol_;
 
 	public:
 
-		inline Usuario (std::string nombre="empty",
+		inline Usuario (std::string dni="empty",
+						std::string nombre="empty",
 					 	std::string apellidos= "empty",
-						std::string dni="empty",
 						std::string correo= "empty",
-						std::string contraseña="empty",
 						std::string usuario="empty",
-						Rol rol=Rol::Empty): nombre_(nombre), apellidos_(apellidos),
-												 dni_(dni), correo_(correo),
-												 contraseña_(contraseña), usuario_(usuario),
-												 rol_(rol){}
+						std::string contraseña="empty",
+						Rol rol=Rol::Empty):dni_(dni), nombre_(nombre),
+											apellidos_(apellidos), correo_(correo),
+											usuario_(usuario), contraseña_(contraseña),
+											rol_(rol){}
+											
 		inline ~Usuario(){}
 
 		inline std::string get_nombre() const {return nombre_;}

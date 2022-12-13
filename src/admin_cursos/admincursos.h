@@ -28,6 +28,7 @@ class Admin_Cursos: public Usuario {
 							std::string contraseña="empty",
 							std::string usuario="empty"):Usuario(nombre, apellidos, dni,
 																 correo, contraseña, usuario){}
+																 
 		inline ~Admin_Cursos(){}
 
 		bool add_curso(Curso curso);

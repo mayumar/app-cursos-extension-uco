@@ -29,14 +29,10 @@ class Visitante {
 		inline ~Visitante(){}
 
 		inline std::string get_ip() const {return ip_;}
-
 		inline void set_ip (std::string ip) {ip_=ip;}
 
 		void ver_lista_de_cursos();
-
-
 		bool registrarse(Usuario usuario);
-
 		Usuario login(std::string user, std::string password);
 
 };

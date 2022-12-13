@@ -17,26 +17,27 @@ class Curso {
 	private:
 
 		std::string id_;
-		std::string descripcion_;
 		std::string nombre_;
+		std::string descripcion_;
 		std::string fechaInicio_; //DD/MM/YY
 		std::string fechaFinal_; //DD/MM/YY
-		float alcance_;
 		int plazasCubiertas_;
 		int plazasMax_;
+		float alcance_;
 
 	public:
 
 		inline Curso(std::string id="empty",
-					 std::string descripcion= "empty",
 					 std::string nombre="empty",
+					 std::string descripcion= "empty",
 					 std::string fechaInicio= "empty",
 					 std::string fechaFinal="empty",
 					 int plazasCubiertas=0,
-					 int plazasMax=0):id_(id), descripcion_(descripcion), nombre_(nombre),
+					 int plazasMax=0):id_(id), nombre_(nombre), descripcion_(descripcion),
 									  fechaInicio_(fechaInicio), fechaFinal_(fechaFinal),
-									  alcance_(0.0), plazasCubiertas_(plazasCubiertas),
-									  plazasMax_(plazasMax){}
+									  plazasCubiertas_(plazasCubiertas), plazasMax_(plazasMax),
+									  alcance_(0.0){}
+									  
 		inline ~Curso(){}
 
 		inline std::string get_id() const {return id_;}

@@ -15,17 +15,18 @@
 class Recursos{
 
 	private:
-		std::string id_;
+	
 		std::string curso_;
+		std::string id_;
 		std::string tipo_;
 		int aforo_;
 
 	public:
 
-		inline Recursos (std::string id="empty",
-						 std::string curso="empty",
+		inline Recursos (std::string curso="empty",
+						 std::string id="empty",
 						 std::string tipo= "empty",
-						 int aforo=0): id_(id), curso_(curso), tipo_(tipo), aforo_(aforo){}
+						 int aforo=0):curso_(curso), id_(id), tipo_(tipo), aforo_(aforo){}
 
 		inline ~Recursos(){}
 
