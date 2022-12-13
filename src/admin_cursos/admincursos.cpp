@@ -452,7 +452,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 		return false;
 	}
 	
-	while(file_c-c){
+	while(file_c-c && !found){
 		if(c.get_id()==ponente.get_curso()){
 			found=true;
 		}
@@ -472,5 +472,108 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	file_p<<ponente;
 
 	file_p.close();
+	return true;
+}
+
+bool Admin_Cursos::mod_ponente(std::string dni){
+	Ponente ponente, ponente_mod;
+	Curso curso;
+	bool found=false;
+	std::ifstream fs, fc;
+	std::ofstream fstemp;
+
+	//Buscamos si se encuentra el ponente en la base de datos
+	fs.open("src/bd/ponentes.txt");
+	if(!fs){
+		std::cout<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		return false;
+	}
+
+	while(fs-ponente && !found){
+		if(ponente.get_dni()==dni){
+			found=true;
+		}
+	}
+
+	if(!found){
+		fs.close();
+		return false;
+	}
+	fs.close();
+
+	std::cout<<"Introduzca los datos modificados: "<<std::endl;
+	std::cin>>ponente_mod;
+
+	//Buscamos que el dni introducido no esté ya en la base de datos
+	if(ponente_mod.get_dni()==dni){
+		fs.open("src/bd/recursos.txt");
+		if(!fs){
+			std::cout<<"El dni introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+			fs.close();
+			return false;
+		}
+		fs.close();
+	}
+
+	//Buscamos si el curso introducido está en la base de datos
+	fc.open("src/bd/cursos.txt");
+	if(!fc){
+		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		return false;
+	}
+
+	while(fc-curso){
+		if(curso.get_id()==ponente.get_curso()){
+			fc.close();
+			return false;
+		}
+	}
+	fc.close();
+
+	//Modificamos el ponente
+	fs.open("src/bd/ponentes.txt");
+	fstemp.open("src/bd/recursostemp.txt");
+	if(!fs || !fstemp){
+		std::cout<<"Error al abrir el archivo"<<std::endl;
+		return false;
+	}
+
+	while(fs-ponente){
+		if(ponente.get_dni()==dni){
+			ponente=ponente_mod;
+		}
+		fstemp<<ponente;
+	}
+
+	fs.close();
+	fstemp.close();
+	remove("src/bd/ponentes.txt");
+	rename("src/bd/ponentestemp.txt", "src/bd/ponentes.txt");
+	return true;
+}
+
+bool Admin_Cursos::del_ponente(std::string dni){
+	Ponente ponente;
+	std::ifstream fs;
+	std::ofstream fstemp;
+	
+	//Eliminamos el ponente
+	fs.open("src/bd/ponentes.txt");
+	fstemp.open("src/bd/recursostemp.txt");
+	if(!fs || !fstemp){
+		std::cout<<"Error al abrir el archivo"<<std::endl;
+		return false;
+	}
+
+	while(fs-ponente){
+		if(ponente.get_dni()!=dni){
+			fstemp<<ponente;
+		}
+	}
+	fs.close();
+	fstemp.close();
+	
+	remove("src/bd/ponentes.txt");
+	rename("src/bd/ponentestemp.txt", "src/bd/ponentes.txt");
 	return true;
 }

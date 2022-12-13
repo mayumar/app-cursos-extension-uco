@@ -109,7 +109,6 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 	//Buscamos si el curso introducido está en la base de datos
 	fc.open("src/bd/cursos.txt");
-
 	if(!fc){
 		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		fc.close();
@@ -118,7 +117,7 @@ bool Admin_Recursos::mod_recurso(std::string id){
 
 	while(fc-curso){
 		if(curso.get_id()==recurso_mod.get_curso()){
-			fs.close();
+			fc.close();
 			return false;
 		}
 	}
@@ -154,7 +153,6 @@ bool Admin_Recursos::del_recurso(std::string id){
 	//Eliminamos el recurso
 	fs.open("src/bd/recursos.txt");
 	fstemp.open("src/bd/recursostemp.txt");
-
 	if(!fs || !fstemp){
 		std::cout<<"Error al abrir el archivo"<<std::endl;
 		return false;
