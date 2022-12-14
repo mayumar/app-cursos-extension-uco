@@ -113,6 +113,7 @@ bool Admin_Cursos::del_curso(std::string id){
 	Curso curso;
 	std::ifstream fs;
 	std::ofstream fstemp;
+	bool found=false;
 
 	//Borramos el curso
 	fs.open("src/bd/cursos.txt");
@@ -125,7 +126,18 @@ bool Admin_Cursos::del_curso(std::string id){
 	while(fs-curso){
 		if(curso.get_id()!=id){
 			fstemp<<curso;
+		}else if(curso.get_id()==id){
+			found=true;
 		}
+	}
+
+	if(!found){
+		std::cout<<std::endl<<"Error, el curso no se encuentra en la base de datos"<<std::endl;
+		fs.close();
+		fstemp.close();
+		remove("src/bd/cursos.txt");
+		rename("src/bd/cursostemp.txt", "src/bd/cursos.txt");
+		return false;
 	}
 
 	fs.close();
@@ -154,13 +166,15 @@ bool Admin_Cursos::add_usuario(Usuario usuario){
 		}
 
 		if(usuario.get_rol()==Rol::Admin_Cursos && u.get_rol()==Rol::Admin_Cursos){
-			std::cout<<std::endl<<"Aviso, ya existe un administrador de cursos, tener varias cuentas podría generar problemas"<<std::endl;
-			std::cout<<"Se recomienda eliminar una"<<std::endl;
+			std::cout<<std::endl<<"》AVISO《"<<std::endl;
+			std::cout<<"Ya existe un administrador de cursos"<<std::endl;
+			std::cout<<"Tener varias cuentas podría generar problemas"<<std::endl;
 		}
 
 		if(usuario.get_rol()==Rol::Admin_Recursos && u.get_rol()==Rol::Admin_Recursos){
-			std::cout<<std::endl<<"Aviso, ya existe un administrador de recursos, tener varias cuentas podría generar problemas"<<std::endl;
-			std::cout<<"Se recomienda eliminar una"<<std::endl;
+			std::cout<<std::endl<<"》AVISO《"<<std::endl;
+			std::cout<<"Ya existe un administrador de cursos"<<std::endl;
+			std::cout<<"Tener varias cuentas podría generar problemas"<<std::endl;
 		}
 	}
 	file.close();
@@ -251,6 +265,7 @@ bool Admin_Cursos::del_usuario(std::string dni){
 	std::ifstream fu;
 	std::ofstream futemp;
 	Usuario usuario;
+	bool found=false;
 
 	//Eliminamos el usuario
 	fu.open("src/bd/usuarios.txt");
@@ -263,7 +278,18 @@ bool Admin_Cursos::del_usuario(std::string dni){
 	while(fu-usuario){
 		if(usuario.get_dni()!=dni){
 			futemp<<usuario;
+		}else if(usuario.get_dni()==dni){
+			found=true;
 		}
+	}
+
+	if(!found){
+		std::cout<<std::endl<<"Error, el usuario no se encuentra en la base de datos"<<std::endl;
+		fu.close();
+		futemp.close();
+		remove("src/bd/usuarios.txt");
+		rename("src/bd/usuariostemp.txt", "src/bd/usuarios.txt");
+		return false;
 	}
 
 	fu.close();
@@ -313,17 +339,46 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 		return false;
 	}
 
-	//Cargamos usuarios.txt en una lista
+	//Cargamos usuarios.txt en una lista ¯
 	while(usuarios-usuario){
 		lista_usuarios.push_back(usuario);
 	}
 	usuarios.close();
 
 	std::cout<<std::endl;
-	std::cout<<"Datos de los alumnos inscritos al curso "<<id<<":"<<std::endl;
+	std::cout<<"INSCRITOS "<<id<<std::endl;
+	std::cout<<"¯¯¯¯¯¯¯¯¯¯¯¯";
 
 	while(inscritos>>inscripcion.id_curso){
 		  inscritos>>inscripcion.dni; //leemos cada registro de inscripciones.txt
+		if(inscripcion.id_curso==id){
+			for(it=lista_usuarios.begin(); it!=lista_usuarios.end(); it++){
+				if(inscripcion.dni==it->get_dni()){
+					std::cout<<std::endl;
+					std::cout<<"Nombre: " <<it->get_nombre()<<std::endl;
+					std::cout<<"Apellidos: " <<it->get_apellidos()<<std::endl;
+					std::cout<<"DNI: "<<it->get_dni()<<std::endl;
+					std::cout<<"Correo: " <<it->get_correo()<<std::endl;
+					std::cout<<"Usuario: " <<it->get_usuario()<<std::endl;
+				}
+			}
+			i++;
+		}
+	}
+	inscritos.close();
+
+	inscritos.open("src/bd/listaespera.txt");
+	if(!inscritos){
+		std::cout << "Error al abrir el archivo" << std::endl;
+		return false;
+	}// 《 》
+
+	std::cout<<std::endl;
+	std::cout<<"EN LISTA DE ESPERA "<<id<<std::endl;
+	std::cout<<"¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯";
+
+	while(inscritos>>inscripcion.id_curso){
+		  inscritos>>inscripcion.dni; //leemos cada registro de listaespera.txt
 		if(inscripcion.id_curso==id){
 			for(it=lista_usuarios.begin(); it!=lista_usuarios.end(); it++){
 				if(inscripcion.dni==it->get_dni()){
@@ -363,7 +418,7 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	file_e.open("src/bd/listaespera.txt", std::fstream::in);
 	if(!file_i || !file_c || !file_e){
-		std::cout<<"Error al abrir el archivo"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
 		return false;
 	}
 
@@ -407,7 +462,7 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 								
 								file_e.open("src/bd/listaespera.txt", std::fstream::out);
 								if(!file_e){
-									std::cout<<"Error, no se ha podido acceder a la informacion de la lista de espera"<<std::endl;
+									std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de la lista de espera"<<std::endl;
 									return false;
 								}
 
@@ -442,13 +497,14 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 	}
 
 	if(!encontrado){
+		std::cout<<std::endl<<"Error, no se ha encontrado la inscripción"<<std::endl;
 		return false;
 	}
 
 	file_i.open("src/bd/inscripciones.txt", std::fstream::out);
 	file_c.open("src/bd/cursos.txt", std::fstream::out);
 	if(!file_i || !file_c){
-		std::cout<<"Error al abrir el archivo"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
 		return false;
 	}
 
@@ -476,12 +532,13 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	//Buscamos si el ponente ya existe
 	file_p.open("src/bd/ponentes.txt", std::fstream::in);
 	if(!file_p){
-		std::cout<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 
 	while(file_p-p){
 		if(p.get_dni()==ponente.get_dni()){
+			std::cout<<std::endl<<"Error, el ponente ya se encuentra en la base de datos"<<std::endl;
 			file_p.close();
 			return false;
 		}
@@ -491,7 +548,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	//Buscamos si el curso que se ha introducido existe
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c){
-		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 	
@@ -502,6 +559,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	}
 
 	if(!found){
+		std::cout<<std::endl<<"Error, ID del curso no es correcto"<<std::endl;
 		file_c.close();
 		return false;
 	}
@@ -509,7 +567,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	//Añadimos ponente
 	file_p.open("src/bd/ponentes.txt", std::fstream::app);
 	if(!file_p){
-		std::cout<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 	file_p<<ponente;
@@ -528,7 +586,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	//Buscamos si se encuentra el ponente en la base de datos
 	fs.open("src/bd/ponentes.txt");
 	if(!fs){
-		std::cout<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 
@@ -539,20 +597,20 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	}
 
 	if(!found){
-		std::cout<<"El ponente no se encuentra en la base de datos"<<std::endl;
+		std::cout<<std::endl<<"Error, el ponente no se encuentra en la base de datos"<<std::endl;
 		fs.close();
 		return false;
 	}
 	fs.close();
 
-	std::cout<<"Introduzca los datos modificados: "<<std::endl;
+	std::cout<<"》Introduzca los datos modificados: "<<std::endl;
 	std::cin>>ponente_mod;
 
 	//Buscamos que el dni introducido no esté ya en la base de datos
 	if(ponente_mod.get_dni()==dni){
 		fs.open("src/bd/ponentes.txt");
 		if(!fs){
-			std::cout<<"El dni introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+			std::cout<<std::endl<<"Error, el dni introducido ya se encuentra en la base de datos"<<std::endl;
 			fs.close();
 			return false;
 		}
@@ -563,7 +621,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	fc.open("src/bd/cursos.txt");
 	found=false;
 	if(!fc){
-		std::cout<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -574,7 +632,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	}
 
 	if(!found){
-		std::cout<<"El ID del curso no es correcto"<<std::endl;
+		std::cout<<std::endl<<"Error, el ID del curso no es correcto"<<std::endl;
 		fs.close();
 		return false;
 	}
@@ -584,7 +642,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	fs.open("src/bd/ponentes.txt");
 	fstemp.open("src/bd/ponentestemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<"Error al abrir el archivo"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 
@@ -606,23 +664,35 @@ bool Admin_Cursos::del_ponente(std::string dni){
 	Ponente ponente;
 	std::ifstream fs;
 	std::ofstream fstemp;
+	bool found=false;
 	
 	//Eliminamos el ponente
 	fs.open("src/bd/ponentes.txt");
 	fstemp.open("src/bd/ponentestemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<"Error al abrir el archivo"<<std::endl;
+		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 
 	while(fs-ponente){
 		if(ponente.get_dni()!=dni){
 			fstemp<<ponente;
+		}else if(ponente.get_dni()==dni){
+			found=true;
 		}
 	}
+
+	if(!found){
+		std::cout<<std::endl<<"Error, el ponente no se encuentra en la base de datos"<<std::endl;
+		fs.close();
+		fstemp.close();
+		remove("src/bd/ponentes.txt");
+		rename("src/bd/ponentestemp.txt", "src/bd/ponentes.txt");
+		return false;
+	}
+
 	fs.close();
 	fstemp.close();
-
 	remove("src/bd/ponentes.txt");
 	rename("src/bd/ponentestemp.txt", "src/bd/ponentes.txt");
 	return true;

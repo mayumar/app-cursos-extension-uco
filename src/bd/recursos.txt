@@ -4,7 +4,7 @@ Aula
 56
 R2
 C3
-Aula
+Proyector
 0
 R3
 C4

@@ -188,7 +188,7 @@ bool Admin_Recursos::ver_lista_recursos(std::string id){
 			std::cout<<std::endl;
 			std::cout<<"ID: "<<recurso.get_id()<<std::endl;
 			std::cout<<"Tipo de recurso: "<<recurso.get_tipo()<<std::endl;
-			if(recurso.get_tipo()=="Aula" || recurso.get_tipo()=="aula"){
+			if(recurso.get_tipo()=="Aula" || recurso.get_tipo()=="aula" || recurso.get_tipo()=="AULA"){
 				std::cout<<"Aforo: "<<recurso.get_aforo()<<std::endl;
 			}
 			i++;

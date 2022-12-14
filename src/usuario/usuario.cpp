@@ -37,6 +37,7 @@ void Usuario:: ver_lista_de_cursos(){
 
 		std::cout<<curso.get_nombre()<<" ("<<curso.get_id()<<")"<<std::endl;
 		std::cout<<curso.get_descripcion()<<std::endl;
+		std::cout<<"Precio: "<<curso.get_precio()<<"€"<<std::endl;
 		std::cout<<"Fecha de Inicio: "<<curso.get_fechaInicio()<<std::endl;
 		std::cout<<"Fecha de finalizacion: "<<curso.get_fechaFinal()<<std::endl;
 		std::cout<<"Plazas cubiertas: "<<curso.get_plazasCubiertas()<<"/"<<curso.get_plazasMax()<<std::endl;

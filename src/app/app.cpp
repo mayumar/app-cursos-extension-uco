@@ -281,20 +281,28 @@ void adminCursosMenu(Admin_Cursos admin){
 		std::cout<<std::endl;
 		std::cout<<"———————————————————《 MODO ADMIN CURSOS 》————————————————————"<<std::endl;
 		std::cout<<std::endl;
-		std::cout<<"Introduzca una opcion:"<<std::endl;
+		std::cout<<"---------------「 Administración de cuentas 」----------------"<<std::endl;
+		std::cout<<std::endl;
 		std::cout<<"1. Ver lista de cursos"<<std::endl;
-		//std::cout<<"——————————————「 Administración de cuentas 」———————————————"<<std::endl;
 		std::cout<<"2. Añadir cuenta al sistema"<<std::endl;
 		std::cout<<"3. Modificar cuenta del sistema"<<std::endl;
 		std::cout<<"4. Eliminar cuenta del sistema"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"----------------「 Administración de cursos 」----------------"<<std::endl;
+		std::cout<<std::endl;
 		std::cout<<"5. Añadir curso al sistema"<<std::endl;
 		std::cout<<"6. Modificar curso del sistema"<<std::endl;
 		std::cout<<"7. Eliminar curso del sistema"<<std::endl;
 		std::cout<<"8. Ver lista de inscritos de algun curso"<<std::endl;
 		std::cout<<"9. Eliminar una inscripcion"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"---------------「 Administración de ponentes 」---------------"<<std::endl;
+		std::cout<<std::endl;
 		std::cout<<"10. Añadir ponente a un curso"<<std::endl;
 		std::cout<<"11. Modificar un ponente"<<std::endl;
 		std::cout<<"12. Eliminar un ponente"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"--------------------------------------------------------------"<<std::endl;
 		std::cout<<"13. Cerrar sesion"<<std::endl<<std::endl;
 		std::cout<<"——————————————————————————————————————————————————————————————"<<std::endl;
 		std::cout<<"》Opcion: ";
@@ -345,7 +353,7 @@ void adminCursosMenu(Admin_Cursos admin){
 				
 				std::cout<<"--------------------《 ELIMINAR CUENTA 》---------------------"<<std::endl<<std::endl;
 				
-				std::cout<<"》Introduzca el dni del curso a eliminar:"<<std::endl;
+				std::cout<<"》Introduzca el dni del usuario a eliminar:"<<std::endl;
 				std::cin>>usuario_dni;
 				if(!admin.del_usuario(usuario_dni)){
 					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
@@ -415,56 +423,68 @@ void adminCursosMenu(Admin_Cursos admin){
 
 			case 9:
 
-				std::cout<<"Indique el dni del estudiante del que desea borrar la inscripcion"<<std::endl;
-				std::cin>>inscripcion.dni;
-				std::cout<<"Indique el id del curso al que pertenece la inscripcion"<<std::endl;
+				std::cout<<"------------------《 ELIMINAR INSCRIPCIÓN 》------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Indique el id del curso al que pertenece la inscripcion"<<std::endl;
 				std::cin>>inscripcion.id_curso;
+				std::cout<<"》Indique el dni del estudiante del que desea borrar la inscripcion"<<std::endl;
+				std::cin>>inscripcion.dni;
 
 				if(!admin.del_inscripcion(inscripcion)){
-					std::cout<<"Error, la inscripcion que se buscaba borrar no ha sido encontrada"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}
 				else{
-					std::cout<<"La inscripcion ha sido eliminada con exito"<<std::endl;
+					std::cout<<std::endl<<"La inscripcion ha sido eliminada con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 10:
 
-				std::cout<<"Introduzca los datos del ponente a añadir"<<std::endl;
+				std::cout<<"---------------------《 AÑADIR PONENTE 》---------------------"<<std::endl<<std::endl;
+
+				std::cout<<"》Introduzca los datos del ponente a añadir"<<std::endl;
 				std::cin>>ponente;
 
 				if(!admin.add_ponente(ponente)){
-					std::cout<<"Error, el ponente que se busca añadir ya se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El ponente ha sido añadidio con exito"<<std::endl;
+					std::cout<<std::endl<<"El ponente ha sido añadido con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 11:
 
-				std::cout<<"Introduzca el dni del ponente a modificar"<<std::endl;
+				std::cout<<"-------------------《 MODIFICAR PONENTE 》--------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el dni del ponente a modificar"<<std::endl;
 				std::cin>>ponente_dni;
 
 				if(!admin.mod_ponente(ponente_dni)){
-					std::cout<<"Error, el ponente que se busca modificar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El ponente ha sido modificado con éxito"<<std::endl;
+					std::cout<<std::endl<<"El ponente ha sido modificado con éxito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 12:
 
-				std::cout<<"Introduzca el dni del ponente a borrar"<<std::endl;
+				std::cout<<"--------------------《 ELIMINAR PONENTE 》--------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el dni del ponente a borrar"<<std::endl;
 				std::cin>>ponente_dni;
 
 				if(!admin.del_ponente(ponente_dni)){
-					std::cout<<"Error, el ponente que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}else{
-					std::cout<<"El ponente ha sido eliminado con exito"<<std::endl;
+					std::cout<<std::endl<<"El ponente ha sido eliminado con exito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
@@ -480,18 +500,22 @@ void adminRecursosMenu(Admin_Recursos admin){
 	std::string recurso_id, curso_id;
 
 	do{
-
 		std::cout<<std::endl;
-		std::cout<<"Se encuentra en modo administrador de recursos"<<std::endl
-				<<std::endl;
-		std::cout<<"Introduzca una opcion"<<std::endl;
+		std::cout<<"———————————————————《 MODO ADMIN RECURSOS 》——————————————————"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"Introduzca una opcion:"<<std::endl;
 		std::cout<<"1. Ver listado de cursos"<<std::endl;
 		std::cout<<"2. Añadir recurso al sistema"<<std::endl;
 		std::cout<<"3. Modificar recurso del sistema"<<std::endl;
 		std::cout<<"4. Eliminar recurso del sistema"<<std::endl;
 		std::cout<<"5. Ver lista de recursos de algun curso"<<std::endl;
 		std::cout<<"6. Cerrar sesion"<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"——————————————————————————————————————————————————————————————"<<std::endl;
+		std::cout<<"》Opcion: ";
 		std::cin>>opt;
+		std::cout<<std::endl;
+		
 
 		if(opt<1 || opt>6){
 			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;

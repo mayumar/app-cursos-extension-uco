@@ -1,6 +1,7 @@
 C1
 Nombre de curso1
 Descripción del curso1
+10
 fechaInicio1
 fechaFinal1
 1
@@ -9,6 +10,7 @@ fechaFinal1
 C2
 Nombre de curso2
 Descripcion del curso2
+20
 fechaInicio2
 fechaFinal2
 22
@@ -17,6 +19,7 @@ fechaFinal2
 C3
 Nombre de curso3
 Descripcion del curso3
+30
 fechaIncio3
 fechaFinal3
 33
@@ -25,6 +28,7 @@ fechaFinal3
 C4
 Nombre de curso4
 Descripcion del curso4
+40
 fechaInicio4
 fechaFinal4
 6
@@ -33,6 +37,7 @@ fechaFinal4
 C5
 Nombre de curso5
 Descripcion del curso5
+50
 fechaInicio5
 fechaFinal5
 2
