@@ -7,6 +7,7 @@ src/app/app.o: ../src/app/app.cpp ../src/app/app.h \
  ../src/app/../participante/../admin_cursos/../usuario/usuario.h \
  ../src/app/../participante/../admin_cursos/../curso/curso.h \
  ../src/app/../participante/../admin_cursos/../ponente/ponente.h \
+ ../src/app/../participante/../admin_cursos/../recursos/recursos.h \
  ../src/app/../participante/../curso/curso.h \
  ../src/app/../admin_cursos/admincursos.h \
  ../src/app/../admin_recursos/adminrecursos.h \
@@ -24,6 +25,7 @@ src/app/app.o: ../src/app/app.cpp ../src/app/app.h \
 ../src/app/../participante/../admin_cursos/../usuario/usuario.h:
 ../src/app/../participante/../admin_cursos/../curso/curso.h:
 ../src/app/../participante/../admin_cursos/../ponente/ponente.h:
+../src/app/../participante/../admin_cursos/../recursos/recursos.h:
 ../src/app/../participante/../curso/curso.h:
 ../src/app/../admin_cursos/admincursos.h:
 ../src/app/../admin_recursos/adminrecursos.h:

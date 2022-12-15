@@ -42,14 +42,20 @@ bool Admin_Cursos::add_curso(Curso curso){
 
 bool Admin_Cursos::mod_curso(std::string id){
 	Curso curso, curso_modif;
+	Ponente p;
+	Recursos r;
 	bool found=false;
-	std::fstream inscripciones, espera;
+	std::fstream inscripciones, espera, ponentes, recursos;
 	std::ifstream fs;
 	std::ofstream fstemp;
 	struct inscripciones i;
 	std::list<struct inscripciones> lista_inscritos;
 	std::list<struct inscripciones> lista_espera;
 	std::list<struct inscripciones>::iterator it;
+	std::list<Recursos> lista_recursos;
+	std::list<Recursos>::iterator it_r;
+	std::list<Ponente> lista_ponentes;
+	std::list<Ponente>::iterator it_p;
 
 	//Buscamos si el curso existe
 	fs.open("src/bd/cursos.txt");
@@ -91,11 +97,23 @@ bool Admin_Cursos::mod_curso(std::string id){
 		}
 		fs.close();
 
-		//Si el id se modifica, se modifica en las inscipciones y la lista de espera también
+		//Si el id se modifica, se modifica todas sus apariciones
 		inscripciones.open("src/bd/inscripciones.txt", std::fstream::in);
 		espera.open("src/bd/listaespera.txt", std::fstream::in);
 		if(!inscripciones || !espera){
 			std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
+			return false;
+		}
+
+		ponentes.open("src/bd/ponentes.txt", std::fstream::in);
+		if(!ponentes){
+			std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
+			return false;
+		}
+
+		recursos.open("src/bd/recursos.txt", std::fstream::in);
+		if(!recursos){
+			std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 			return false;
 		}
 
@@ -111,8 +129,18 @@ bool Admin_Cursos::mod_curso(std::string id){
 			lista_espera.push_back(i);
 		}
 
+		while(ponentes-p){
+			lista_ponentes.push_back(p);
+		}
+
+		while(recursos-r){
+			lista_recursos.push_back(r);
+		}
+
 		inscripciones.close();
 		espera.close();
+		ponentes.close();
+		recursos.close();
 
 		for(it=lista_inscritos.begin(); it!=lista_inscritos.end(); it++){
 			if(it->id_curso==id){
@@ -126,6 +154,18 @@ bool Admin_Cursos::mod_curso(std::string id){
 			}
 		}
 
+		for(it_p=lista_ponentes.begin(); it_p!=lista_ponentes.end(); it_p++){
+			if(it_p->get_curso()==id){
+				it_p->set_curso(curso_modif.get_id());
+			}
+		}
+
+		for(it_r=lista_recursos.begin(); it_r!=lista_recursos.end(); it_r++){
+			if(it_r->get_curso()==id){
+				it_r->set_curso(curso_modif.get_id());
+			}
+		}		
+
 		inscripciones.open("src/bd/inscripciones.txt", std::fstream::out);
 		espera.open("src/bd/listaespera.txt", std::fstream::out);
 		if(!inscripciones || !espera){
@@ -133,18 +173,40 @@ bool Admin_Cursos::mod_curso(std::string id){
 			return false;
 		}
 
-		while(inscripciones<<i.id_curso){
-			  inscripciones<<std::endl;
-			  inscripciones<<i.dni<<std::endl;
+		ponentes.open("src/bd/ponentes.txt", std::fstream::out);
+		if(!ponentes){
+			std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
+			return false;
 		}
 
-		while(espera<<i.id_curso){
-			  espera<<std::endl;
-			  espera<<i.dni<<std::endl;
+		recursos.open("src/bd/recursos.txt", std::fstream::out);
+		if(!recursos){
+			std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
+			return false;
+		}
+
+		for(it=lista_inscritos.begin(); it!=lista_inscritos.end(); it++){
+			inscripciones<<it->id_curso<<std::endl;
+			inscripciones<<it->dni<<std::endl;
+		}
+
+		for(it=lista_espera.begin(); it!=lista_espera.end(); it++){
+			espera<<it->id_curso<<std::endl;
+			espera<<it->dni<<std::endl;
+		}
+
+		for(it_p=lista_ponentes.begin(); it_p!=lista_ponentes.end(); it_p++){
+			ponentes<<*it_p;
+		}
+
+		for(it_r=lista_recursos.begin(); it_r!=lista_recursos.end(); it_r++){
+			recursos<<*it_r;
 		}
 
 		inscripciones.close();
 		espera.close();
+		ponentes.close();
+		recursos.close();
 	}
 
 	//Modificamos el curso
@@ -345,14 +407,14 @@ bool Admin_Cursos::mod_usuario(std::string dni){
 			return false;
 		}
 
-		while(inscripciones<<i.id_curso){
-			  inscripciones<<std::endl;
-			  inscripciones<<i.dni<<std::endl;
+		for(it=lista_inscritos.begin(); it!=lista_inscritos.end(); it++){
+			inscripciones<<it->id_curso<<std::endl;
+			inscripciones<<it->dni<<std::endl;
 		}
 
-		while(espera<<i.id_curso){
-			  espera<<std::endl;
-			  espera<<i.dni<<std::endl;
+		for(it=lista_espera.begin(); it!=lista_espera.end(); it++){
+			espera<<it->id_curso<<std::endl;
+			espera<<it->dni<<std::endl;
 		}
 
 		inscripciones.close();

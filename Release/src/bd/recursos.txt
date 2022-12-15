@@ -18,3 +18,7 @@ r5
 C3
 jdff
 5
+R6
+C2
+Aula
+76

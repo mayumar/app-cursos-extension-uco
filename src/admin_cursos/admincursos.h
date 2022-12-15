@@ -12,6 +12,7 @@
 #include "../usuario/usuario.h"
 #include "../curso/curso.h"
 #include "../ponente/ponente.h"
+#include "../recursos/recursos.h"
 #include <list>
 #include <fstream>
 #include <iostream>
