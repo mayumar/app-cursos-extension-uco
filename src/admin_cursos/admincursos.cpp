@@ -14,7 +14,7 @@ bool Admin_Cursos::add_curso(Curso curso){
 
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -29,7 +29,7 @@ bool Admin_Cursos::add_curso(Curso curso){
 
 	file_c.open("src/bd/cursos.txt", std::fstream::app);
 	if(!file_c.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -43,8 +43,13 @@ bool Admin_Cursos::add_curso(Curso curso){
 bool Admin_Cursos::mod_curso(std::string id){
 	Curso curso, curso_modif;
 	bool found=false;
+	std::fstream inscripciones, espera;
 	std::ifstream fs;
 	std::ofstream fstemp;
+	struct inscripciones i;
+	std::list<struct inscripciones> lista_inscritos;
+	std::list<struct inscripciones> lista_espera;
+	std::list<struct inscripciones>::iterator it;
 
 	//Buscamos si el curso existe
 	fs.open("src/bd/cursos.txt");
@@ -79,19 +84,74 @@ bool Admin_Cursos::mod_curso(std::string id){
 
 		while(fs-curso){
 			if(curso.get_id()==curso_modif.get_id()){
-				std::cout<<std::endl<<"El id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				std::cout<<std::endl<<"Error, el ID ya se encuentra en la base de datos"<<std::endl;
 				fs.close();
 				return false;
 			}
 		}
 		fs.close();
+
+		//Si el id se modifica, se modifica en las inscipciones y la lista de espera también
+		inscripciones.open("src/bd/inscripciones.txt", std::fstream::in);
+		espera.open("src/bd/listaespera.txt", std::fstream::in);
+		if(!inscripciones || !espera){
+			std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
+			return false;
+		}
+
+		while(inscripciones>>i.id_curso){
+			  inscripciones>>i.dni;
+
+			lista_inscritos.push_back(i);
+		}
+
+		while(espera>>i.id_curso){
+			  espera>>i.dni;
+
+			lista_espera.push_back(i);
+		}
+
+		inscripciones.close();
+		espera.close();
+
+		for(it=lista_inscritos.begin(); it!=lista_inscritos.end(); it++){
+			if(it->id_curso==id){
+				it->id_curso=curso_modif.get_id();
+			}
+		}
+
+		for(it=lista_espera.begin(); it!=lista_espera.end(); it++){
+			if(it->id_curso==id){
+				it->id_curso=curso_modif.get_id();
+			}
+		}
+
+		inscripciones.open("src/bd/inscripciones.txt", std::fstream::out);
+		espera.open("src/bd/listaespera.txt", std::fstream::out);
+		if(!inscripciones || !espera){
+			std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
+			return false;
+		}
+
+		while(inscripciones<<i.id_curso){
+			  inscripciones<<std::endl;
+			  inscripciones<<i.dni<<std::endl;
+		}
+
+		while(espera<<i.id_curso){
+			  espera<<std::endl;
+			  espera<<i.dni<<std::endl;
+		}
+
+		inscripciones.close();
+		espera.close();
 	}
 
 	//Modificamos el curso
 	fs.open("src/bd/cursos.txt");
 	fstemp.open("src/bd/cursostemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -119,7 +179,7 @@ bool Admin_Cursos::del_curso(std::string id){
 	fs.open("src/bd/cursos.txt");
 	fstemp.open("src/bd/cursostemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -154,7 +214,7 @@ bool Admin_Cursos::add_usuario(Usuario usuario){
 
 	file.open("src/bd/usuarios.txt", std::fstream::in);
 	if(!file){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -181,7 +241,7 @@ bool Admin_Cursos::add_usuario(Usuario usuario){
 
 	file.open("src/bd/usuarios.txt", std::fstream::app);
 	if(!file){
-		std::cout<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		std::cout<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -194,13 +254,18 @@ bool Admin_Cursos::add_usuario(Usuario usuario){
 bool Admin_Cursos::mod_usuario(std::string dni){
 	std::ifstream fu;
 	std::ofstream futemp;
+	std::fstream inscripciones, espera;
 	Usuario usuario, usuario_mod;
 	bool found=false;
+	std::list<struct inscripciones> lista_inscritos;
+	std::list<struct inscripciones> lista_espera;
+	std::list<struct inscripciones>::iterator it;
+	struct inscripciones i;
 
 	//Buscamos si el usuario existe
 	fu.open("src/bd/usuarios.txt");
 	if(!fu){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -225,25 +290,81 @@ bool Admin_Cursos::mod_usuario(std::string dni){
 		fu.open("src/bd/usuarios.txt");
 		found=false;
 		if(!fu){
-			std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+			std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 			return false;
 		}
 
 		while(fu-usuario){
 			if(usuario.get_dni()==usuario_mod.get_dni()){
-				std::cout<<std::endl<<"El dni que se intenta introducir ya se encuentra en la base de datos"<<std::endl;
+				std::cout<<std::endl<<"Error, el DNI ya se encuentra en la base de datos"<<std::endl;
 				fu.close();
 				return false;
 			}
 		}
 		fu.close();
+
+		//Si el dni se modifica, se modifica en las inscipciones y la lista de espera también
+		inscripciones.open("src/bd/inscripciones.txt", std::fstream::in);
+		espera.open("src/bd/listaespera.txt", std::fstream::in);
+		if(!inscripciones || !espera){
+			std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
+			return false;
+		}
+
+		while(inscripciones>>i.id_curso){
+			  inscripciones>>i.dni;
+
+			lista_inscritos.push_back(i);
+		}
+
+		while(espera>>i.id_curso){
+			  espera>>i.dni;
+
+			lista_espera.push_back(i);
+		}
+
+		inscripciones.close();
+		espera.close();
+
+		for(it=lista_inscritos.begin(); it!=lista_inscritos.end(); it++){
+			if(it->dni==dni){
+				it->dni=usuario_mod.get_dni();
+			}
+		}
+
+		for(it=lista_espera.begin(); it!=lista_espera.end(); it++){
+			if(it->dni==dni){
+				it->dni=usuario_mod.get_dni();
+			}
+		}
+
+		inscripciones.open("src/bd/inscripciones.txt", std::fstream::out);
+		espera.open("src/bd/listaespera.txt", std::fstream::out);
+		if(!inscripciones || !espera){
+			std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
+			return false;
+		}
+
+		while(inscripciones<<i.id_curso){
+			  inscripciones<<std::endl;
+			  inscripciones<<i.dni<<std::endl;
+		}
+
+		while(espera<<i.id_curso){
+			  espera<<std::endl;
+			  espera<<i.dni<<std::endl;
+		}
+
+		inscripciones.close();
+		espera.close();
+
 	}
 
 	//Modificamos el usuario
 	fu.open("src/bd/usuarios.txt");
 	futemp.open("src/bd/usuariostemp.txt");
 	if(!fu || !futemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -271,7 +392,7 @@ bool Admin_Cursos::del_usuario(std::string dni){
 	fu.open("src/bd/usuarios.txt");
 	futemp.open("src/bd/usuariostemp.txt");
 	if(!fu || !futemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los usuarios"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -315,7 +436,7 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 
 	cursos.open("src/bd/cursos.txt");
 	if(!cursos){
-		std::cout<<std::endl<<"Error, se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return 0;
 	}
 
@@ -335,7 +456,7 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 	inscritos.open("src/bd/inscripciones.txt");
 	usuarios.open("src/bd/usuarios.txt");
 	if(!inscritos || !usuarios){
-		std::cout << "Error al abrir el archivo" << std::endl;
+		std::cout << "Error al acceder a la información de las inscripciones" << std::endl;
 		return false;
 	}
 
@@ -369,7 +490,7 @@ bool Admin_Cursos::ver_lista_de_inscritos(std::string id){
 
 	inscritos.open("src/bd/listaespera.txt");
 	if(!inscritos){
-		std::cout << "Error al abrir el archivo" << std::endl;
+		std::cout << "Error al acceder a la información de las inscripciones" << std::endl;
 		return false;
 	}// 《 》
 
@@ -418,7 +539,7 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	file_e.open("src/bd/listaespera.txt", std::fstream::in);
 	if(!file_i || !file_c || !file_e){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
 		return false;
 	}
 
@@ -462,7 +583,7 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 								
 								file_e.open("src/bd/listaespera.txt", std::fstream::out);
 								if(!file_e){
-									std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de la lista de espera"<<std::endl;
+									std::cout<<std::endl<<"Error al acceder a la información de la lista de espera"<<std::endl;
 									return false;
 								}
 
@@ -504,7 +625,7 @@ bool Admin_Cursos::del_inscripcion(struct inscripciones inscripcion){
 	file_i.open("src/bd/inscripciones.txt", std::fstream::out);
 	file_c.open("src/bd/cursos.txt", std::fstream::out);
 	if(!file_i || !file_c){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
 		return false;
 	}
 
@@ -532,7 +653,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	//Buscamos si el ponente ya existe
 	file_p.open("src/bd/ponentes.txt", std::fstream::in);
 	if(!file_p){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 
@@ -548,7 +669,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	//Buscamos si el curso que se ha introducido existe
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 	
@@ -567,7 +688,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	//Añadimos ponente
 	file_p.open("src/bd/ponentes.txt", std::fstream::app);
 	if(!file_p){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 	file_p<<ponente;
@@ -586,7 +707,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	//Buscamos si se encuentra el ponente en la base de datos
 	fs.open("src/bd/ponentes.txt");
 	if(!fs){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 
@@ -610,14 +731,14 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	if(ponente_mod.get_dni()!=dni){
 		fs.open("src/bd/ponentes.txt");
 		if(!fs){
-			std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+			std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
 			fs.close();
 			return false;
 		}
 
 		while(fs-ponente){
 			if(ponente.get_dni()==ponente_mod.get_dni()){
-				std::cout<<std::endl<<"Error, el dni introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				std::cout<<std::endl<<"Error, el DNI ya se encuentra en la base de datos"<<std::endl;
 				fs.close();
 				return false;
 			}
@@ -629,7 +750,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	fc.open("src/bd/cursos.txt");
 	found=false;
 	if(!fc){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -650,7 +771,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	fs.open("src/bd/ponentes.txt");
 	fstemp.open("src/bd/ponentestemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 
@@ -678,7 +799,7 @@ bool Admin_Cursos::del_ponente(std::string dni){
 	fs.open("src/bd/ponentes.txt");
 	fstemp.open("src/bd/ponentestemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los ponentes"<<std::endl;
 		return false;
 	}
 

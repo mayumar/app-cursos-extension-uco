@@ -22,7 +22,7 @@ void Usuario:: ver_lista_de_cursos(){
 	fichero.open("src/bd/cursos.txt"); //abre el fichero en modo lectura
 	ponentes.open("src/bd/ponentes.txt");
 	if(fichero.fail() || !ponentes){
-		std::cout<<std::endl<< "Error, no se pudo acceder a la base de datos"<<std::endl;
+		std::cout<<std::endl<< "Error al acceder a la información de los cursos"<<std::endl;
 		exit(-1);
 	}
 

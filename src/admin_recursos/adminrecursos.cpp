@@ -18,7 +18,7 @@ bool Admin_Recursos::add_recurso(Recursos recurso){
 	//Buscamos si el recurso ya existe
 	file_r.open("src/bd/recursos.txt", std::fstream::in);
 	if(!file_r.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de los recursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
 
@@ -34,7 +34,7 @@ bool Admin_Recursos::add_recurso(Recursos recurso){
 	//Buscamos si el curso que se ha introducido existe
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -53,7 +53,7 @@ bool Admin_Recursos::add_recurso(Recursos recurso){
 	//Añadimos recurso
 	file_r.open("src/bd/recursos.txt", std::fstream::app);
 	if(!file_r.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de los recursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
 	file_r<<recurso;
@@ -72,7 +72,7 @@ bool Admin_Recursos::mod_recurso(std::string id){
 	//Buscamos si se encuentra el recurso en la base de datos
 	fs.open("src/bd/recursos.txt");
 	if(!fs){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los recursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
 
@@ -96,13 +96,13 @@ bool Admin_Recursos::mod_recurso(std::string id){
 	if(recurso_mod.get_id()!=id){
 		fs.open("src/bd/recursos.txt");
 		if(!fs){
-			std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los recursos"<<std::endl;
+			std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 			return false;
 		}
 
 		while(fs-recurso){
 			if(recurso.get_id()==recurso_mod.get_id()){
-				std::cout<<std::endl<<"Error, el id introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				std::cout<<std::endl<<"Error, el ID del recurso ya se encuentra en la base de datos"<<std::endl;
 				fs.close();
 				return false;
 			}
@@ -114,7 +114,7 @@ bool Admin_Recursos::mod_recurso(std::string id){
 	fc.open("src/bd/cursos.txt");
 	found=false;
 	if(!fc){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		fc.close();
 		return false;
 	}
@@ -136,7 +136,7 @@ bool Admin_Recursos::mod_recurso(std::string id){
 	fs.open("src/bd/recursos.txt");
 	fstemp.open("src/bd/recursostemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los recursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
 
@@ -164,7 +164,7 @@ bool Admin_Recursos::del_recurso(std::string id){
 	fs.open("src/bd/recursos.txt");
 	fstemp.open("src/bd/recursostemp.txt");
 	if(!fs || !fstemp){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los recursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
 		
@@ -199,7 +199,7 @@ bool Admin_Recursos::ver_lista_recursos(std::string id){
 
 	recursos.open("src/bd/recursos.txt");
 	if(!recursos){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los recursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los recursos"<<std::endl;
 		return false;
 	}
 

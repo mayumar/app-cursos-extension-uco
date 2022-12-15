@@ -19,7 +19,7 @@ void Visitante:: ver_lista_de_cursos(){
 	Curso curso;
 	fichero.open("src/bd/cursos.txt"); //abre el fichero en modo lectura
 	if(fichero.fail()){
-		std::cout<< "No se pudo abrir la lista de los cursos actuales"<<std::endl;
+		std::cout<<std::endl<< "Error al acceder a la información de los cursos"<<std::endl;
 		exit(-1);
 	}
 
@@ -42,7 +42,7 @@ bool Visitante:: registrarse(Usuario usuario){
 
 	file_v.open("src/bd/usuarios.txt", std::fstream::in);
 	if(!file_v.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder para su registro"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -60,7 +60,7 @@ bool Visitante:: registrarse(Usuario usuario){
 	if(usuario.get_rol()==Rol::Admin_Cursos){
 		file_v.open("src/bd/usuarios.txt", std::fstream::in);
 		if(!file_v){
-			std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
+			std::cout<<std::endl<<"Error al acceder a la informacion de los usuarios"<<std::endl;
 			return false;
 		}
 
@@ -79,7 +79,7 @@ bool Visitante:: registrarse(Usuario usuario){
 	if(usuario.get_rol()==Rol::Admin_Recursos){
 		file_v.open("src/bd/usuarios.txt", std::fstream::in);
 		if(!file_v){
-			std::cout<<std::endl<<"Error, no se ha podido acceder a la informacion de los usuarios"<<std::endl;
+			std::cout<<std::endl<<"Error al acceder a la informacion de los usuarios"<<std::endl;
 			return false;
 		}
 
@@ -96,7 +96,7 @@ bool Visitante:: registrarse(Usuario usuario){
 
 	file_v.open("src/bd/usuarios.txt", std::fstream::app);
 	if(!file_v.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder para su registro"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return false;
 	}
 
@@ -115,7 +115,7 @@ Usuario Visitante::login(std::string user, std::string password){
 
 	fichero.open("src/bd/usuarios.txt");
 	if(!fichero.is_open()){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información del sistema"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los usuarios"<<std::endl;
 		return usuarioerror;
 	}
 

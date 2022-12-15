@@ -28,7 +28,7 @@ bool Participante::inscribirse(std::string id_curso){
 	//Comprobamos si ya estábamos inscritos a ese curso
 	file_i.open("src/bd/inscripciones.txt", std::fstream::in);
 	if(!file_i){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
 		return 0;
 	}
 
@@ -45,7 +45,7 @@ bool Participante::inscribirse(std::string id_curso){
 	//Comprobamos si ya estábamos inscritos a ese curso pero en la lista de espera
 	file_i.open("src/bd/listaespera.txt", std::fstream::in);
 	if(!file_i){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
 		return 0;
 	}
 
@@ -62,7 +62,7 @@ bool Participante::inscribirse(std::string id_curso){
 	//Cargamos los cursos en una lista
 	file_c.open("src/bd/cursos.txt", std::fstream::in);
 	if(!file_c){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -84,7 +84,7 @@ bool Participante::inscribirse(std::string id_curso){
 				plazas=it->get_plazasMax();
 				file_l.open("src/bd/listaespera.txt", std::fstream::app);
 				if(!file_l){
-					std::cout<<std::endl<<"Error, no se ha podido acceder a la información de la lista de espera"<<std::endl;
+					std::cout<<std::endl<<"Error al acceder a la información de la lista de espera"<<std::endl;
 					return false;
 				}
 
@@ -96,7 +96,7 @@ bool Participante::inscribirse(std::string id_curso){
 				
 				file_i.open("src/bd/inscripciones.txt", std::fstream::app);
 				if(!file_i){
-					std::cout<<std::endl<<"Error, no se ha podido acceder a la información de las inscripciones"<<std::endl;
+					std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
 					return false;
 				}
 
@@ -121,7 +121,7 @@ bool Participante::inscribirse(std::string id_curso){
 	//Volvemos a cargar la lista al fichero
 	file_c.open("src/bd/cursos.txt", std::fstream::out);
 	if(!file_c){
-		std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los cursos"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de los cursos"<<std::endl;
 		return false;
 	}
 
@@ -144,7 +144,7 @@ bool Participante::ver_cursos_inscrito(){
 	inscritos.open("src/bd/inscripciones.txt");
 	cursos.open("src/bd/cursos.txt");
 	if(!inscritos || !cursos){
-		std::cout<<std::endl<<"Error al abrir el archivo"<<std::endl;
+		std::cout<<std::endl<<"Error al acceder a la información de las inscripciones"<<std::endl;
 		return false;
 	}
 
