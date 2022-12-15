@@ -559,7 +559,7 @@ bool Admin_Cursos::add_ponente(Ponente ponente){
 	}
 
 	if(!found){
-		std::cout<<std::endl<<"Error, ID del curso no es correcto"<<std::endl;
+		std::cout<<std::endl<<"Error, el ID del curso no es correcto"<<std::endl;
 		file_c.close();
 		return false;
 	}
@@ -607,12 +607,20 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	std::cin>>ponente_mod;
 
 	//Buscamos que el dni introducido no esté ya en la base de datos
-	if(ponente_mod.get_dni()==dni){
+	if(ponente_mod.get_dni()!=dni){
 		fs.open("src/bd/ponentes.txt");
 		if(!fs){
-			std::cout<<std::endl<<"Error, el dni introducido ya se encuentra en la base de datos"<<std::endl;
+			std::cout<<std::endl<<"Error, no se ha podido acceder a la información de los ponentes"<<std::endl;
 			fs.close();
 			return false;
+		}
+
+		while(fs-ponente){
+			if(ponente.get_dni()==ponente_mod.get_dni()){
+				std::cout<<std::endl<<"Error, el dni introducido ya se encuentra en la base de datos, pruebe otro"<<std::endl;
+				fs.close();
+				return false;
+			}
 		}
 		fs.close();
 	}

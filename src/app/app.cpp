@@ -518,63 +518,76 @@ void adminRecursosMenu(Admin_Recursos admin){
 		
 
 		if(opt<1 || opt>6){
-			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl;
+			std::cout<<"Error: introduzca una de las opciones disponibles"<<std::endl<<std::endl;
 		}
 
 		switch(opt){
 			case 1:
-				std::cout<<std::endl<<"Listado de cursos: "<<std::endl<<std::endl;
+				std::cout<<"-------------------------《 CURSOS 》-------------------------"<<std::endl<<std::endl;
 				admin.ver_lista_de_cursos();
 			break;
 
 			case 2:
 
-				std::cout<<"Introduzca los datos del recurso a añadir"<<std::endl;
+				std::cout<<"---------------------《 AÑADIR RECURSO 》---------------------"<<std::endl<<std::endl;
+
+				std::cout<<"》Introduzca los datos del recurso a añadir"<<std::endl;
 				std::cin>>recurso;
 
 				if(!admin.add_recurso(recurso)){
-					std::cout<<"Error, el recurso que se busca añadir ya se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}
 				else{
-					std::cout<<"El recurso ha sido añadido con éxito"<<std::endl;
+					std::cout<<std::endl<<"El recurso ha sido añadido con éxito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 3:
 
-				std::cout<<"Introduzca el id del recurso a modificar"<<std::endl;
+				std::cout<<"-------------------《 MODIFICAR RECURSO 》--------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el id del recurso a modificar"<<std::endl;
 				std::cin>>recurso_id;
 
 				if(!admin.mod_recurso(recurso_id)){
-					std::cout<<"Error, el recurso que se busca modificar no se encuentra en la base de datos o el id del curso es incorrecto"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}
 				else{
-					std::cout<<"El recurso se ha modificado con éxito"<<std::endl;
+					std::cout<<std::endl<<"El recurso se ha modificado con éxito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 4:
 
-				std::cout<<"Introduzca el id del recurso a eliminar"<<std::endl;
+				std::cout<<"--------------------《 ELIMINAR RECURSO 》--------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el id del recurso a eliminar"<<std::endl;
 				std::cin>>recurso_id;
 
 				if(!admin.del_recurso(recurso_id)){
-					std::cout<<"Error, el recurso que se busca eliminar no se encuentra en la base de datos"<<std::endl;
+					std::cout<<std::endl<<"Ha ocurrido un error, vuelva a intentarlo"<<std::endl;
 				}
 				else{
-					std::cout<<"El recurso ha sido eliminado con éxito"<<std::endl;
+					std::cout<<std::endl<<"El recurso ha sido eliminado con éxito"<<std::endl;
 				}
+				std::cout<<std::endl;
 
 			break;
 
 			case 5:
-				std::cout<<"Introduzca el id del curso: "<<std::endl;
+
+				std::cout<<"------------------------《 RECURSOS 》------------------------"<<std::endl<<std::endl;
+				
+				std::cout<<"》Introduzca el id del curso: "<<std::endl;
 				std::cin>>curso_id;
 
 				admin.ver_lista_recursos(curso_id);
 				
+				std::cout<<std::endl;
 			break;
 
 		}
