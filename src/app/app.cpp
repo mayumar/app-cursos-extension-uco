@@ -188,6 +188,7 @@ int main(){
 				ver_info_contacto();
 			break;
 			//Debug mode
+			/*
 			case -1:
 				participanteMenu(participante);
 			break;
@@ -199,7 +200,7 @@ int main(){
 			case -3:
 				adminRecursosMenu(admin_r);
 			break;
-
+			*/
 		}
 
 	}while(opt!=5);

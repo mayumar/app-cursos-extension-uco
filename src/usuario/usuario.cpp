@@ -45,7 +45,7 @@ void Usuario:: ver_lista_de_cursos(){
 		std::cout<<"Ponentes: "<<std::endl;
 		for(it=lista_ponentes.begin(); it!=lista_ponentes.end(); it++){
 			if(it->get_curso()==curso.get_id()){
-				std::cout<<it->get_nombre()<<" "<<it->get_apellidos()<<std::endl;
+				std::cout<<it->get_nombre()<<" "<<it->get_apellidos()<<" ("<<it->get_dni()<<")"<<std::endl;
 			}
 		}
 		std::cout<<std::endl;
