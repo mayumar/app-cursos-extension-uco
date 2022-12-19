@@ -27,4 +27,4 @@ Esta aplicación sólo está disponible para el sistema operativo Linux.
 
 ## Vídeo tutorial
 
-URL:
+URL: https://youtu.be/rqOIinl6izs
