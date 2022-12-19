@@ -20,3 +20,11 @@ Contraseña: password2
 Usuario: user3
 Contraseña: password3
 ```
+
+## Especificaciones
+
+Esta aplicación sólo está disponible para el sistema operativo Linux.
+
+## Vídeo tutorial
+
+URL:
