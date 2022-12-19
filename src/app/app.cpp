@@ -125,6 +125,7 @@ int main(){
 				std::cin>>usuario;
 				if(!visitante.registrarse(usuario)){
 					std::cout<<std::endl<<"Error, no se ha podido realizar el registro"<<std::endl<<std::endl;
+					break;
 				}else{
 					std::cout<<std::endl<<"El registro ha sido realizado con éxito"<<std::endl<<std::endl;
 				}
