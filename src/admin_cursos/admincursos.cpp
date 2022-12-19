@@ -817,7 +817,7 @@ bool Admin_Cursos::mod_ponente(std::string dni){
 	}
 
 	while(fc-curso && !found){
-		if(curso.get_id()==ponente.get_curso()){
+		if(curso.get_id()==ponente_mod.get_curso()){
 			found=true;
 		}
 	}
